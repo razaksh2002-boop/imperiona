@@ -6,439 +6,338 @@
 <title>IMPERIONA — Event Management Studio</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,900;1,400;1,700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet"/>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
-<!-- EmailJS -->
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 <style>
-:root{
-  --gold:#c9a03d;
-  --gold-light:#e2bf6a;
-  --gold-dark:#8a6820;
-  --bg:#080808;
-  --bg2:#0f0f0f;
-  --bg3:#161616;
-  --bg4:#1e1e1e;
-  --text:#e8e2d9;
-  --text-muted:#9a9080;
-  --text-dim:#5a5248;
-  --border:rgba(201,160,61,0.18);
-  --border-hover:rgba(201,160,61,0.55);
-  --transition:0.35s cubic-bezier(0.25,0.46,0.45,0.94);
-}
+:root{--gold:#c9a03d;--gold-light:#e2bf6a;--gold-dark:#8a6820;--bg:#080808;--bg2:#0f0f0f;--bg3:#161616;--bg4:#1e1e1e;--text:#e8e2d9;--text-muted:#9a9080;--text-dim:#5a5248;--border:rgba(201,160,61,0.18);--border-hover:rgba(201,160,61,0.55);--tr:0.35s cubic-bezier(0.25,0.46,0.45,0.94)}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{background:var(--bg);color:var(--text);font-family:'Montserrat',sans-serif;font-weight:300;overflow-x:hidden;line-height:1.7}
 ::selection{background:var(--gold);color:#000}
-::-webkit-scrollbar{width:5px}
-::-webkit-scrollbar-track{background:var(--bg)}
-::-webkit-scrollbar-thumb{background:var(--gold-dark);border-radius:3px}
-
-body::before{
-  content:'';position:fixed;inset:0;
-  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-  opacity:0.4;pointer-events:none;z-index:0
-}
-
+::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--gold-dark);border-radius:3px}
 h1,h2,h3,h4{font-family:'Playfair Display',serif;font-weight:700;line-height:1.15;letter-spacing:-0.02em}
-
-.section-title{position:relative;display:inline-block;margin-bottom:0.4em}
+.section-title{position:relative;display:inline-block}
 .section-title::after{content:'';display:block;width:56px;height:2px;background:linear-gradient(90deg,var(--gold),transparent);margin-top:14px}
-
 .container{max-width:1240px;margin:0 auto;padding:0 40px}
 section{position:relative;z-index:1}
+.fade-up{opacity:0;transform:translateY(36px);transition:opacity .7s ease,transform .7s ease}
+.fade-up.visible{opacity:1;transform:none}
+.fade-up:nth-child(2){transition-delay:.1s}.fade-up:nth-child(3){transition-delay:.2s}.fade-up:nth-child(4){transition-delay:.3s}.fade-up:nth-child(5){transition-delay:.4s}.fade-up:nth-child(6){transition-delay:.5s}
 
-.fade-up{opacity:0;transform:translateY(40px);transition:opacity 0.7s ease,transform 0.7s ease}
-.fade-up.visible{opacity:1;transform:translateY(0)}
-.fade-up:nth-child(2){transition-delay:.1s}
-.fade-up:nth-child(3){transition-delay:.2s}
-.fade-up:nth-child(4){transition-delay:.3s}
-.fade-up:nth-child(5){transition-delay:.4s}
-.fade-up:nth-child(6){transition-delay:.5s}
-
-/* ══ HEADER ══ */
-header{position:fixed;top:0;left:0;right:0;z-index:1000;padding:24px 0;transition:background var(--transition),padding var(--transition),box-shadow var(--transition)}
-header.scrolled{background:rgba(8,8,8,0.97);padding:14px 0;box-shadow:0 2px 40px rgba(0,0,0,0.8);border-bottom:1px solid var(--border)}
-header .container{display:flex;align-items:center;justify-content:space-between;gap:40px}
-
-.logo{text-decoration:none;display:flex;flex-direction:column;line-height:1}
-.logo-name{font-family:'Playfair Display',serif;font-size:1.55rem;font-weight:900;letter-spacing:0.18em;background:linear-gradient(135deg,var(--gold-light) 0%,var(--gold) 50%,var(--gold-dark) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.logo-sub{font-size:0.52rem;letter-spacing:0.35em;color:var(--text-muted);text-transform:uppercase;font-weight:500;margin-top:2px}
-
-nav{display:flex;align-items:center;gap:36px}
-nav a{text-decoration:none;color:var(--text-muted);font-size:0.72rem;letter-spacing:0.2em;text-transform:uppercase;font-weight:500;position:relative;transition:color var(--transition)}
-nav a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;background:var(--gold);transition:width var(--transition)}
-nav a:hover{color:var(--gold)}
-nav a:hover::after{width:100%}
-
-.btn-outline{padding:9px 22px;border:1px solid var(--gold);color:var(--gold);text-decoration:none;font-size:0.68rem;letter-spacing:0.2em;text-transform:uppercase;font-weight:500;transition:all var(--transition);cursor:pointer;background:transparent;font-family:inherit}
+/* HEADER */
+header{position:fixed;top:0;left:0;right:0;z-index:1000;padding:22px 0;transition:background var(--tr),padding var(--tr),box-shadow var(--tr)}
+header.scrolled{background:rgba(8,8,8,0.97);padding:12px 0;box-shadow:0 2px 40px rgba(0,0,0,0.8);border-bottom:1px solid var(--border)}
+header .container{display:flex;align-items:center;justify-content:space-between;gap:20px}
+.logo{text-decoration:none;display:flex;flex-direction:column;line-height:1;flex-shrink:0}
+.logo-name{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:900;letter-spacing:0.18em;background:linear-gradient(135deg,var(--gold-light),var(--gold),var(--gold-dark));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.logo-sub{font-size:0.5rem;letter-spacing:0.3em;color:var(--text-muted);text-transform:uppercase;font-weight:500;margin-top:3px}
+nav{display:flex;align-items:center;gap:28px}
+nav a{text-decoration:none;color:var(--text-muted);font-size:0.7rem;letter-spacing:0.18em;text-transform:uppercase;font-weight:500;position:relative;transition:color var(--tr);white-space:nowrap}
+nav a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;background:var(--gold);transition:width var(--tr)}
+nav a:hover{color:var(--gold)}nav a:hover::after{width:100%}
+.btn-outline{padding:8px 18px;border:1px solid var(--gold);color:var(--gold);font-size:0.65rem;letter-spacing:0.18em;text-transform:uppercase;font-weight:500;transition:all var(--tr);cursor:pointer;background:transparent;font-family:inherit;white-space:nowrap;text-decoration:none}
 .btn-outline:hover{background:var(--gold);color:#000}
-
-.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none}
-.hamburger span{display:block;width:26px;height:1.5px;background:var(--gold);transition:all 0.3s}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none;flex-shrink:0}
+.hamburger span{display:block;width:24px;height:1.5px;background:var(--gold);transition:all .3s}
 .hamburger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
 .hamburger.open span:nth-child(2){opacity:0}
 .hamburger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
-
-.mobile-menu{display:none;position:fixed;inset:0;z-index:999;background:rgba(8,8,8,0.98);flex-direction:column;align-items:center;justify-content:center;gap:32px}
+.mobile-menu{display:none;position:fixed;inset:0;z-index:999;background:rgba(8,8,8,0.98);flex-direction:column;align-items:center;justify-content:center;gap:28px}
 .mobile-menu.open{display:flex}
-.mobile-menu a{font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;color:var(--text);text-decoration:none;transition:color var(--transition)}
+.mobile-menu a{font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;color:var(--text);text-decoration:none;transition:color var(--tr)}
 .mobile-menu a:hover{color:var(--gold)}
 
-/* ══ HERO ══ */
-#hero{min-height:100vh;display:flex;align-items:center;position:relative;overflow:hidden;background:var(--bg)}
-.hero-bg{position:absolute;inset:0;z-index:0;background:radial-gradient(ellipse 70% 60% at 70% 50%,rgba(201,160,61,0.07) 0%,transparent 70%),radial-gradient(ellipse 40% 40% at 20% 80%,rgba(201,160,61,0.05) 0%,transparent 60%),linear-gradient(160deg,#080808 0%,#0d0b08 100%)}
-.hero-line{position:absolute;border:1px solid rgba(201,160,61,0.08);border-radius:50%;animation:spin linear infinite}
-.hero-line:nth-child(1){width:600px;height:600px;top:50%;right:-10%;transform:translateY(-50%);animation-duration:60s}
-.hero-line:nth-child(2){width:900px;height:900px;top:50%;right:-25%;transform:translateY(-50%);animation-duration:90s;border-color:rgba(201,160,61,0.04)}
-.hero-line:nth-child(3){width:400px;height:400px;top:50%;right:2%;transform:translateY(-50%);animation-duration:40s;animation-direction:reverse}
-@keyframes spin{from{transform:translateY(-50%) rotate(0deg)}to{transform:translateY(-50%) rotate(360deg)}}
-.particles{position:absolute;inset:0;overflow:hidden}
-.particle{position:absolute;width:2px;height:2px;background:var(--gold);border-radius:50%;opacity:0;animation:float-up linear infinite}
-@keyframes float-up{0%{opacity:0;transform:translateY(100vh) scale(0)}10%{opacity:0.6}90%{opacity:0.3}100%{opacity:0;transform:translateY(-100px) scale(1.5)}}
-
-.hero-content{position:relative;z-index:2;max-width:780px;padding:120px 40px 80px}
-.hero-eyebrow{font-size:0.65rem;letter-spacing:0.45em;text-transform:uppercase;color:var(--gold);font-weight:500;margin-bottom:28px;display:flex;align-items:center;gap:14px}
-.hero-eyebrow::before{content:'';display:block;width:40px;height:1px;background:var(--gold)}
-h1.hero-title{font-size:clamp(2.4rem,5.5vw,4.8rem);margin-bottom:28px;color:#fff;text-shadow:0 4px 40px rgba(0,0,0,0.8)}
+/* HERO */
+#hero{min-height:100vh;min-height:100dvh;display:flex;align-items:center;position:relative;overflow:hidden;background:var(--bg)}
+.hero-bg{position:absolute;inset:0;z-index:0;background:radial-gradient(ellipse 70% 60% at 70% 50%,rgba(201,160,61,0.07) 0%,transparent 70%),linear-gradient(160deg,#080808,#0d0b08)}
+.hero-line{position:absolute;border:1px solid rgba(201,160,61,0.07);border-radius:50%;animation:spin linear infinite}
+.hero-line:nth-child(1){width:600px;height:600px;top:50%;right:-10%;animation-duration:60s;transform:translateY(-50%)}
+.hero-line:nth-child(2){width:900px;height:900px;top:50%;right:-25%;animation-duration:90s;transform:translateY(-50%);border-color:rgba(201,160,61,0.03)}
+.hero-line:nth-child(3){width:400px;height:400px;top:50%;right:2%;animation-duration:40s;transform:translateY(-50%);animation-direction:reverse}
+@keyframes spin{from{transform:translateY(-50%) rotate(0)}to{transform:translateY(-50%) rotate(360deg)}}
+.particles{position:absolute;inset:0;overflow:hidden;pointer-events:none}
+.particle{position:absolute;border-radius:50%;background:var(--gold);opacity:0;animation:float-up linear infinite}
+@keyframes float-up{0%{opacity:0;transform:translateY(100vh) scale(0)}10%{opacity:.5}90%{opacity:.2}100%{opacity:0;transform:translateY(-100px) scale(1.5)}}
+.hero-content{position:relative;z-index:2;max-width:780px;padding:120px 40px 130px}
+.hero-eyebrow{font-size:0.62rem;letter-spacing:0.4em;text-transform:uppercase;color:var(--gold);font-weight:500;margin-bottom:22px;display:flex;align-items:center;gap:12px}
+.hero-eyebrow::before{content:'';display:block;width:36px;height:1px;background:var(--gold);flex-shrink:0}
+h1.hero-title{font-size:clamp(1.9rem,5.5vw,4.6rem);margin-bottom:22px;color:#fff;text-shadow:0 4px 40px rgba(0,0,0,0.8)}
 h1.hero-title span{background:linear-gradient(135deg,var(--gold-light),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.hero-subtitle{font-family:'Cormorant Garamond',serif;font-size:clamp(1rem,2vw,1.3rem);color:var(--text-muted);font-weight:300;max-width:580px;margin-bottom:48px;line-height:1.8}
-.hero-cta{display:flex;gap:16px;flex-wrap:wrap}
-
-.btn-gold{padding:15px 36px;background:linear-gradient(135deg,var(--gold-light),var(--gold),var(--gold-dark));color:#000;font-weight:600;font-size:0.72rem;letter-spacing:0.2em;text-transform:uppercase;text-decoration:none;cursor:pointer;border:none;font-family:inherit;position:relative;overflow:hidden;transition:all var(--transition)}
-.btn-gold::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,var(--gold-dark),var(--gold),var(--gold-light));opacity:0;transition:opacity var(--transition)}
+.hero-subtitle{font-family:'Cormorant Garamond',serif;font-size:clamp(0.95rem,2vw,1.28rem);color:var(--text-muted);font-weight:300;max-width:580px;margin-bottom:38px;line-height:1.8}
+.hero-cta{display:flex;gap:12px;flex-wrap:wrap}
+.btn-gold{padding:14px 30px;background:linear-gradient(135deg,var(--gold-light),var(--gold),var(--gold-dark));color:#000;font-weight:600;font-size:0.7rem;letter-spacing:0.18em;text-transform:uppercase;cursor:pointer;border:none;font-family:inherit;position:relative;overflow:hidden;transition:all var(--tr);display:inline-flex;align-items:center;justify-content:center;gap:8px;text-decoration:none}
+.btn-gold::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,var(--gold-dark),var(--gold),var(--gold-light));opacity:0;transition:opacity var(--tr)}
 .btn-gold:hover::before{opacity:1}
-.btn-gold:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(201,160,61,0.4)}
+.btn-gold:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(201,160,61,0.4)}
 .btn-gold span{position:relative;z-index:1}
-
-.btn-ghost{padding:15px 36px;border:1px solid rgba(201,160,61,0.4);color:var(--text-muted);font-size:0.72rem;letter-spacing:0.2em;text-transform:uppercase;text-decoration:none;cursor:pointer;background:transparent;font-family:inherit;font-weight:500;transition:all var(--transition)}
+.btn-ghost{padding:14px 30px;border:1px solid rgba(201,160,61,0.4);color:var(--text-muted);font-size:0.7rem;letter-spacing:0.18em;text-transform:uppercase;cursor:pointer;background:transparent;font-family:inherit;font-weight:500;transition:all var(--tr)}
 .btn-ghost:hover{border-color:var(--gold);color:var(--gold);transform:translateY(-2px)}
-
-.scroll-indicator{position:absolute;bottom:140px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;color:var(--text-dim);font-size:0.6rem;letter-spacing:0.3em;text-transform:uppercase;animation:pulse-down 2s ease infinite}
-.scroll-indicator i{font-size:1rem;color:var(--gold)}
-@keyframes pulse-down{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(8px)}}
-
-.hero-stats{position:absolute;bottom:0;right:0;left:0;z-index:2;background:linear-gradient(90deg,rgba(201,160,61,0.03) 0%,rgba(201,160,61,0.08) 50%,rgba(201,160,61,0.03) 100%);border-top:1px solid var(--border);display:flex;justify-content:center}
-.stats-inner{max-width:1240px;width:100%;padding:24px 40px;display:flex;gap:0;justify-content:space-around}
-.stat-item{text-align:center;padding:0 24px;border-right:1px solid var(--border)}
+.scroll-ind{position:absolute;bottom:130px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:7px;color:var(--text-dim);font-size:0.58rem;letter-spacing:0.28em;text-transform:uppercase;animation:pdwn 2s ease infinite}
+.scroll-ind i{font-size:.9rem;color:var(--gold)}
+@keyframes pdwn{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(8px)}}
+.hero-stats{position:absolute;bottom:0;left:0;right:0;z-index:2;background:linear-gradient(90deg,rgba(201,160,61,0.02),rgba(201,160,61,0.07),rgba(201,160,61,0.02));border-top:1px solid var(--border)}
+.stats-inner{max-width:1240px;margin:0 auto;padding:18px 40px;display:flex;justify-content:space-around;flex-wrap:wrap}
+.stat-item{text-align:center;padding:10px 16px;border-right:1px solid var(--border);flex:1 1 auto}
 .stat-item:last-child{border-right:none}
-.stat-num{font-family:'Playfair Display',serif;font-size:1.9rem;font-weight:900;background:linear-gradient(135deg,var(--gold-light),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:block}
-.stat-label{font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--text-muted);margin-top:2px}
+.stat-num{font-family:'Playfair Display',serif;font-size:1.75rem;font-weight:900;background:linear-gradient(135deg,var(--gold-light),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:block}
+.stat-label{font-size:0.57rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--text-muted)}
 
-/* ══ SECTION COMMON ══ */
-.section-header{text-align:center;margin-bottom:70px}
-.section-header .section-title{font-size:clamp(1.8rem,4vw,3rem)}
+/* SECTION HEADER */
+.section-header{text-align:center;margin-bottom:60px}
+.section-header .section-title{font-size:clamp(1.6rem,4vw,2.9rem)}
 .section-header .section-title::after{margin:14px auto 0}
-.section-header p{font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--text-muted);max-width:540px;margin:24px auto 0;font-weight:300}
+.section-header p{font-family:'Cormorant Garamond',serif;font-size:1.05rem;color:var(--text-muted);max-width:520px;margin:18px auto 0;font-weight:300}
 
-/* ══ SERVICES ══ */
-#services{padding:120px 0;background:var(--bg)}
+/* SERVICES */
+#services{padding:100px 0;background:var(--bg)}
 .services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;border:1px solid var(--border)}
-.service-card{padding:0;background:var(--bg2);border-right:1px solid var(--border);border-bottom:1px solid var(--border);position:relative;overflow:hidden;transition:all var(--transition);cursor:default}
+.service-card{background:var(--bg2);border-right:1px solid var(--border);border-bottom:1px solid var(--border);position:relative;overflow:hidden;transition:all var(--tr)}
 .service-card:nth-child(3n){border-right:none}
 .service-card:nth-child(n+4){border-bottom:none}
-.service-card::after{content:'';position:absolute;top:0;left:0;width:0;height:2px;background:linear-gradient(90deg,var(--gold),transparent);transition:width 0.5s ease}
+.service-card::after{content:'';position:absolute;top:0;left:0;width:0;height:2px;background:linear-gradient(90deg,var(--gold),transparent);transition:width .5s}
 .service-card:hover::after{width:100%}
-.service-card:hover{transform:translateY(-4px);box-shadow:0 20px 60px rgba(0,0,0,0.5)}
+.service-card:hover{transform:translateY(-3px);box-shadow:0 16px 48px rgba(0,0,0,0.5)}
+.svc-photo{width:100%;height:185px;overflow:hidden;position:relative}
+.svc-photo img{width:100%;height:100%;object-fit:cover;filter:brightness(.6) saturate(.7);transition:transform .7s,filter .5s;display:block}
+.service-card:hover .svc-photo img{transform:scale(1.06);filter:brightness(.8) saturate(.85)}
+.svc-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,transparent 40%,var(--bg2) 100%)}
+.svc-badge{position:absolute;bottom:-19px;left:26px;width:44px;height:44px;background:var(--bg2);border:1px solid var(--gold);display:flex;align-items:center;justify-content:center;font-size:.95rem;color:var(--gold);transition:all var(--tr);z-index:2}
+.service-card:hover .svc-badge{background:var(--gold);color:#000}
+.svc-body{padding:30px 26px 26px}
+.service-card h3{font-size:.98rem;margin-bottom:9px;color:var(--text);margin-top:4px}
+.service-card p{font-size:.79rem;color:var(--text-muted);line-height:1.75}
 
-/* Photo area in service card */
-.service-photo{
-  width:100%;height:200px;overflow:hidden;position:relative
-}
-.service-photo img{
-  width:100%;height:100%;object-fit:cover;
-  filter:brightness(0.65) saturate(0.7);
-  transition:transform 0.7s ease,filter 0.5s ease
-}
-.service-card:hover .service-photo img{transform:scale(1.06);filter:brightness(0.8) saturate(0.85)}
-.service-photo-overlay{
-  position:absolute;inset:0;
-  background:linear-gradient(to bottom,transparent 40%,var(--bg2) 100%)
-}
-
-/* Ornamental icon badge */
-.service-badge{
-  position:absolute;bottom:-20px;left:32px;
-  width:48px;height:48px;
-  background:var(--bg2);
-  border:1px solid var(--gold);
-  display:flex;align-items:center;justify-content:center;
-  font-size:1.1rem;color:var(--gold);
-  transition:all var(--transition);
-  z-index:2
-}
-.service-card:hover .service-badge{background:var(--gold);color:#000}
-
-.service-body{padding:36px 32px 32px}
-.service-card h3{font-size:1.05rem;margin-bottom:10px;color:var(--text);margin-top:4px}
-.service-card p{font-size:0.81rem;color:var(--text-muted);line-height:1.75}
-
-/* ══ ABOUT ══ */
-#about{padding:120px 0;background:var(--bg2);position:relative}
-#about::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
-#about::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
-
-.about-inner{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start}
-.about-text h2{font-size:clamp(1.8rem,3.5vw,2.8rem);margin-bottom:24px}
+/* ABOUT */
+#about{padding:100px 0;background:var(--bg2);position:relative}
+#about::before,#about::after{content:'';position:absolute;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+#about::before{top:0}#about::after{bottom:0}
+.about-inner{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start}
+.about-text h2{font-size:clamp(1.6rem,3.5vw,2.7rem);margin-bottom:18px}
 .about-text h2::after{content:'';display:block;width:56px;height:2px;background:linear-gradient(90deg,var(--gold),transparent);margin-top:14px}
-.about-text p{font-size:0.88rem;color:var(--text-muted);margin-bottom:16px;line-height:1.85}
-.about-text .tagline{font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-style:italic;color:var(--gold-light);margin:28px 0;border-left:2px solid var(--gold);padding-left:20px;font-weight:300}
+.about-text p{font-size:.85rem;color:var(--text-muted);margin-bottom:13px;line-height:1.85}
+.tagline{font-family:'Cormorant Garamond',serif;font-size:1.18rem;font-style:italic;color:var(--gold-light);margin:22px 0;border-left:2px solid var(--gold);padding-left:16px;font-weight:300}
+.proj-list{list-style:none;display:flex;flex-direction:column;gap:8px;margin-top:20px}
+.proj-list li{display:flex;align-items:flex-start;gap:10px;font-size:.79rem;color:var(--text-muted);line-height:1.6}
+.proj-list li::before{content:'◈';color:var(--gold);font-size:.62rem;flex-shrink:0;margin-top:4px}
+.port-grid{display:flex;flex-direction:column;gap:12px}
+.port-item{position:relative;overflow:hidden;aspect-ratio:16/9;border:1px solid var(--border);transition:border-color var(--tr)}
+.port-item:hover{border-color:var(--border-hover)}
+.port-item img{width:100%;height:100%;object-fit:cover;filter:brightness(.6) saturate(.75);transition:transform .7s,filter .5s;display:block}
+.port-item:hover img{transform:scale(1.04);filter:brightness(.78) saturate(.9)}
+.port-cap{position:absolute;bottom:0;left:0;right:0;padding:14px 16px;background:linear-gradient(to top,rgba(0,0,0,0.9),transparent);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;font-weight:500;color:var(--text-muted)}
+.port-cap i{color:var(--gold);margin-right:5px}
 
-.projects-list{list-style:none;display:flex;flex-direction:column;gap:10px;margin-top:28px}
-.projects-list li{display:flex;align-items:flex-start;gap:12px;font-size:0.82rem;color:var(--text-muted);line-height:1.6}
-.projects-list li::before{content:'◈';color:var(--gold);font-size:0.7rem;flex-shrink:0;margin-top:4px}
-
-/* Portfolio photos */
-.portfolio-grid{display:flex;flex-direction:column;gap:16px}
-.portfolio-item{position:relative;overflow:hidden;aspect-ratio:16/9;border:1px solid var(--border);transition:border-color var(--transition)}
-.portfolio-item:hover{border-color:var(--border-hover)}
-.portfolio-item img{width:100%;height:100%;object-fit:cover;filter:brightness(0.6) saturate(0.7);transition:transform 0.7s ease,filter 0.5s ease;display:block}
-.portfolio-item:hover img{transform:scale(1.04);filter:brightness(0.75) saturate(0.85)}
-.portfolio-caption{position:absolute;bottom:0;left:0;right:0;padding:18px 20px;background:linear-gradient(to top,rgba(0,0,0,0.9) 0%,transparent 100%);font-size:0.74rem;letter-spacing:0.1em;text-transform:uppercase;font-weight:500;color:var(--text-muted)}
-.portfolio-caption i{color:var(--gold);margin-right:6px}
-
-/* ══ CLIENTS ══ */
-#clients{padding:120px 0;background:var(--bg)}
-.clients-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
-.client-card{padding:36px 24px;background:var(--bg2);border:1px solid var(--border);text-align:center;transition:all var(--transition);cursor:default;position:relative;overflow:hidden}
-.client-card::before{content:'';position:absolute;bottom:0;left:0;right:0;height:0;background:linear-gradient(to top,rgba(201,160,61,0.06),transparent);transition:height 0.4s ease}
-.client-card:hover{border-color:var(--border-hover);transform:translateY(-4px)}
+/* CLIENTS */
+#clients{padding:100px 0;background:var(--bg)}
+.clients-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:13px}
+.client-card{padding:30px 18px;background:var(--bg2);border:1px solid var(--border);text-align:center;transition:all var(--tr);position:relative;overflow:hidden}
+.client-card::before{content:'';position:absolute;bottom:0;left:0;right:0;height:0;background:linear-gradient(to top,rgba(201,160,61,0.06),transparent);transition:height .4s}
+.client-card:hover{border-color:var(--border-hover);transform:translateY(-3px)}
 .client-card:hover::before{height:100%}
+.cli-img{width:64px;height:64px;border-radius:50%;overflow:hidden;margin:0 auto 13px;border:1px solid var(--border);transition:border-color var(--tr)}
+.client-card:hover .cli-img{border-color:var(--gold)}
+.cli-img img{width:100%;height:100%;object-fit:cover;filter:brightness(.7) saturate(.5) grayscale(.3);transition:filter .4s;display:block}
+.client-card:hover .cli-img img{filter:brightness(.85) saturate(.8)}
+.client-card h4{font-size:.78rem;letter-spacing:.06em;color:var(--text);margin-bottom:6px;font-family:'Playfair Display',serif;font-weight:500}
+.client-card p{font-size:.7rem;color:var(--text-dim);line-height:1.6}
 
-/* Client photo circle */
-.client-img{
-  width:72px;height:72px;border-radius:50%;overflow:hidden;
-  margin:0 auto 16px;
-  border:1px solid var(--border);
-  transition:border-color var(--transition)
-}
-.client-card:hover .client-img{border-color:var(--gold)}
-.client-img img{width:100%;height:100%;object-fit:cover;filter:brightness(0.7) saturate(0.5) grayscale(0.3);transition:filter 0.4s}
-.client-card:hover .client-img img{filter:brightness(0.85) saturate(0.8)}
-
-.client-card h4{font-size:0.82rem;letter-spacing:0.08em;color:var(--text);margin-bottom:8px;font-family:'Playfair Display',serif;font-weight:500}
-.client-card p{font-size:0.73rem;color:var(--text-dim);line-height:1.6}
-
-/* ══ PARTNERS ══ */
-#partners{padding:100px 0;background:var(--bg2);position:relative}
+/* PARTNERS */
+#partners{padding:90px 0;background:var(--bg2);position:relative}
 #partners::before,#partners::after{content:'';position:absolute;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
-#partners::before{top:0}
-#partners::after{bottom:0}
-.partners-desc{text-align:center;max-width:600px;margin:0 auto 56px;font-family:'Cormorant Garamond',serif;font-size:1.05rem;color:var(--text-muted);font-style:italic}
-.partners-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:16px}
-.partner-item{padding:28px 16px;border:1px solid var(--border);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;text-align:center;transition:all var(--transition);background:var(--bg3)}
+#partners::before{top:0}#partners::after{bottom:0}
+.partners-desc{text-align:center;max-width:560px;margin:0 auto 44px;font-family:'Cormorant Garamond',serif;font-size:1rem;color:var(--text-muted);font-style:italic}
+.partners-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:13px}
+.partner-item{padding:22px 12px;border:1px solid var(--border);display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center;transition:all var(--tr);background:var(--bg3)}
 .partner-item:hover{border-color:var(--border-hover)}
-.partner-item i{font-size:1.5rem;color:var(--gold)}
-.partner-item span{font-size:0.65rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-dim);font-weight:500}
+.partner-item i{font-size:1.35rem;color:var(--gold)}
+.partner-item span{font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-dim);font-weight:500}
 
-/* ══ WHY ══ */
-#why{padding:120px 0;background:var(--bg)}
-.why-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:0;border:1px solid var(--border)}
-.why-item{padding:44px 28px;border-right:1px solid var(--border);position:relative;overflow:hidden;transition:all var(--transition)}
+/* WHY — крупные символы доверия */
+#why{padding:100px 0;background:var(--bg)}
+.why-grid{display:grid;grid-template-columns:repeat(5,1fr);border:1px solid var(--border)}
+.why-item{padding:38px 22px;border-right:1px solid var(--border);position:relative;overflow:hidden;transition:all var(--tr)}
 .why-item:last-child{border-right:none}
-.why-item::after{content:'';position:absolute;bottom:0;left:0;right:0;height:0;background:linear-gradient(to top,rgba(201,160,61,0.05),transparent);transition:height 0.4s ease}
+.why-item::after{content:'';position:absolute;bottom:0;left:0;right:0;height:0;background:linear-gradient(to top,rgba(201,160,61,0.06),transparent);transition:height .4s}
 .why-item:hover::after{height:100%}
 .why-item:hover{background:var(--bg2)}
+.why-roman{font-family:'Playfair Display',serif;font-size:2.8rem;font-weight:900;background:linear-gradient(135deg,var(--gold-light),var(--gold-dark));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:block;margin-bottom:18px;line-height:1}
+/* Символ с двойной рамкой */
+.why-sym{width:54px;height:54px;border:1px solid var(--gold);display:flex;align-items:center;justify-content:center;margin-bottom:16px;position:relative;transition:all var(--tr)}
+.why-sym::before{content:'';position:absolute;inset:-5px;border:1px solid rgba(201,160,61,0.22);transition:all var(--tr)}
+.why-item:hover .why-sym{background:rgba(201,160,61,0.09);border-color:var(--gold-light)}
+.why-item:hover .why-sym::before{inset:-8px;border-color:rgba(201,160,61,0.38)}
+.why-sym svg{width:26px;height:26px;fill:none;stroke:var(--gold);stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round;transition:stroke var(--tr)}
+.why-item:hover .why-sym svg{stroke:var(--gold-light)}
+.why-item h4{font-size:.88rem;margin-bottom:9px;color:var(--text);line-height:1.3}
+.why-item p{font-size:.73rem;color:var(--text-dim);line-height:1.75}
 
-/* Creative ornament instead of checkmark */
-.why-ornament{
-  font-family:'Playfair Display',serif;
-  font-size:2.2rem;font-weight:900;
-  color:var(--gold);opacity:0.18;
-  line-height:1;margin-bottom:14px;
-  display:block;letter-spacing:-0.05em
-}
-.why-icon-wrap{
-  width:44px;height:44px;
-  border:1px solid var(--border);
-  display:flex;align-items:center;justify-content:center;
-  font-size:1rem;color:var(--gold);
-  margin-bottom:16px;
-  transition:all var(--transition)
-}
-.why-item:hover .why-icon-wrap{border-color:var(--gold);background:rgba(201,160,61,0.08)}
-.why-item h4{font-size:0.88rem;margin-bottom:10px;color:var(--text);line-height:1.3}
-.why-item p{font-size:0.75rem;color:var(--text-dim);line-height:1.7}
-
-/* ══ CONTACTS ══ */
-#contacts{padding:120px 0;background:var(--bg2);position:relative}
+/* CONTACTS */
+#contacts{padding:100px 0;background:var(--bg2);position:relative}
 #contacts::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
-.contacts-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start}
-.contacts-info h2{font-size:clamp(1.8rem,3vw,2.6rem);margin-bottom:36px}
+.contacts-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start}
+.contacts-info h2{font-size:clamp(1.6rem,3vw,2.5rem);margin-bottom:28px}
 .contacts-info h2::after{content:'';display:block;width:56px;height:2px;background:linear-gradient(90deg,var(--gold),transparent);margin-top:14px}
-.contact-item{display:flex;align-items:flex-start;gap:18px;margin-bottom:28px;padding-bottom:28px;border-bottom:1px solid var(--border)}
-.contact-item:last-of-type{border-bottom:none}
-.contact-ico{width:44px;height:44px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--gold);font-size:1rem;flex-shrink:0;transition:all var(--transition);text-decoration:none}
-.contact-ico:hover{border-color:var(--gold);background:rgba(201,160,61,0.08)}
-.contact-label{font-size:0.62rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--text-dim);margin-bottom:4px;font-weight:500}
-.contact-val{font-size:0.9rem;color:var(--text)}
-.contact-val a{color:var(--text);text-decoration:none;transition:color var(--transition)}
-.contact-val a:hover{color:var(--gold)}
-.map-container{margin-top:32px;border:1px solid var(--border);overflow:hidden;transition:border-color var(--transition)}
-.map-container:hover{border-color:var(--border-hover)}
-.map-container iframe{display:block;filter:invert(0.92) hue-rotate(180deg) saturate(0.5) brightness(0.85)}
-
-/* Form */
-.contacts-form h3{font-size:1.4rem;margin-bottom:36px}
+.ci{display:flex;align-items:flex-start;gap:14px;margin-bottom:22px;padding-bottom:22px;border-bottom:1px solid var(--border)}
+.ci:last-of-type{border-bottom:none}
+.ci-ico{width:40px;height:40px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--gold);font-size:.9rem;flex-shrink:0;transition:all var(--tr);text-decoration:none}
+.ci-ico:hover{border-color:var(--gold);background:rgba(201,160,61,0.08)}
+.ci-lbl{font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:var(--text-dim);margin-bottom:3px;font-weight:500}
+.ci-val{font-size:.86rem;color:var(--text)}
+.ci-val a{color:var(--text);text-decoration:none;transition:color var(--tr)}
+.ci-val a:hover{color:var(--gold)}
+.map-wrap{margin-top:24px;border:1px solid var(--border);overflow:hidden}
+.map-wrap iframe{display:block;filter:invert(.92) hue-rotate(180deg) saturate(.5) brightness(.85)}
+.contacts-form h3{font-size:1.3rem;margin-bottom:28px}
 .contacts-form h3::after{content:'';display:block;width:40px;height:2px;background:linear-gradient(90deg,var(--gold),transparent);margin-top:10px}
-.form-group{margin-bottom:20px}
-.form-group label{display:block;font-size:0.62rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--text-dim);margin-bottom:8px;font-weight:500}
-.form-group input,.form-group textarea{width:100%;padding:14px 18px;background:var(--bg3);border:1px solid var(--border);color:var(--text);font-family:inherit;font-size:0.88rem;font-weight:300;transition:border-color var(--transition),background var(--transition);outline:none;resize:none}
-.form-group input:focus,.form-group textarea:focus{border-color:var(--gold);background:var(--bg4)}
-.form-group input.error,.form-group textarea.error{border-color:#c0392b}
-.form-group textarea{height:130px}
-.form-note{font-size:0.72rem;color:var(--text-dim);margin-top:10px;line-height:1.5}
+.fg{margin-bottom:16px}
+.fg label{display:block;font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:var(--text-dim);margin-bottom:7px;font-weight:500}
+.fg input,.fg textarea{width:100%;padding:12px 15px;background:var(--bg3);border:1px solid var(--border);color:var(--text);font-family:inherit;font-size:16px;font-weight:300;transition:border-color var(--tr),background var(--tr);outline:none;resize:none;-webkit-appearance:none;border-radius:0;appearance:none}
+.fg input:focus,.fg textarea:focus{border-color:var(--gold);background:var(--bg4)}
+.fg input.err,.fg textarea.err{border-color:#c0392b}
+.fg textarea{height:115px}
+.form-note{font-size:.68rem;color:var(--text-dim);margin-top:9px;line-height:1.5}
+#form-status{display:none;margin-top:12px;padding:12px 15px;font-size:.79rem}
+#form-status.ok{background:rgba(201,160,61,0.09);border:1px solid var(--gold);color:var(--gold-light)}
+#form-status.er{background:rgba(192,57,43,0.1);border:1px solid #c0392b;color:#e74c3c}
 
-/* Send status */
-#form-status{display:none;margin-top:16px;padding:14px 18px;font-size:0.82rem;letter-spacing:0.05em}
-#form-status.success{background:rgba(201,160,61,0.1);border:1px solid var(--gold);color:var(--gold-light)}
-#form-status.error-msg{background:rgba(192,57,43,0.1);border:1px solid #c0392b;color:#e74c3c}
+/* FOOTER */
+footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 0 24px}
+.fi{display:flex;align-items:center;justify-content:space-between;gap:20px;padding-bottom:24px;border-bottom:1px solid var(--border);margin-bottom:20px;flex-wrap:wrap}
+.fsoc{display:flex;gap:9px}
+.sb{width:34px;height:34px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--text-muted);text-decoration:none;font-size:.8rem;transition:all var(--tr)}
+.sb:hover{border-color:var(--gold);color:var(--gold)}
+.fb{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}
+.fcopy{font-size:.68rem;color:var(--text-dim)}
+.flinks{display:flex;gap:18px;flex-wrap:wrap}
+.flinks a{font-size:.68rem;color:var(--text-dim);text-decoration:none;transition:color var(--tr)}
+.flinks a:hover{color:var(--gold)}
+#btt{position:fixed;bottom:22px;right:22px;z-index:900;width:40px;height:40px;border:1px solid var(--gold);background:var(--bg);color:var(--gold);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:.8rem;opacity:0;transform:translateY(20px);transition:all var(--tr);text-decoration:none}
+#btt.on{opacity:1;transform:none}
+#btt:hover{background:var(--gold);color:#000}
 
-/* ══ FOOTER ══ */
-footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 0 32px}
-.footer-inner{display:flex;align-items:center;justify-content:space-between;gap:32px;padding-bottom:32px;border-bottom:1px solid var(--border);margin-bottom:28px}
-.footer-socials{display:flex;gap:12px}
-.social-btn{width:38px;height:38px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--text-muted);text-decoration:none;font-size:0.85rem;transition:all var(--transition)}
-.social-btn:hover{border-color:var(--gold);color:var(--gold)}
-.footer-bottom{display:flex;align-items:center;justify-content:space-between;gap:20px}
-.footer-copy{font-size:0.72rem;color:var(--text-dim)}
-.footer-links{display:flex;gap:24px}
-.footer-links a{font-size:0.72rem;color:var(--text-dim);text-decoration:none;transition:color var(--transition)}
-.footer-links a:hover{color:var(--gold)}
-
-/* Back to top */
-#back-top{position:fixed;bottom:32px;right:32px;z-index:900;width:44px;height:44px;border:1px solid var(--gold);background:var(--bg);color:var(--gold);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:0.85rem;opacity:0;transform:translateY(20px);transition:all var(--transition);text-decoration:none}
-#back-top.visible{opacity:1;transform:translateY(0)}
-#back-top:hover{background:var(--gold);color:#000}
-
-/* ══ RESPONSIVE ══ */
+/* ═══════════════════════════════
+   RESPONSIVE — MOBILE FIRST
+═══════════════════════════════ */
 @media(max-width:1100px){
   .why-grid{grid-template-columns:repeat(3,1fr)}
   .why-item:nth-child(3){border-right:none}
-  .why-item:nth-child(4){border-top:1px solid var(--border)}
-  .why-item:nth-child(5){border-top:1px solid var(--border);border-right:none}
+  .why-item:nth-child(n+4){border-top:1px solid var(--border)}
+  .why-item:nth-child(5){border-right:none}
   .partners-grid{grid-template-columns:repeat(3,1fr)}
   .clients-grid{grid-template-columns:repeat(2,1fr)}
 }
 @media(max-width:900px){
-  .container{padding:0 24px}
+  .container{padding:0 20px}
+  nav,.btn-outline-nav{display:none}
+  .hamburger{display:flex}
+  .hero-content{padding:90px 20px 120px}
+  .hero-line{display:none}
+  .scroll-ind{bottom:115px}
+  .stats-inner{padding:12px 20px;justify-content:center}
+  .stat-item{flex:1 1 44%;border-bottom:1px solid var(--border)}
+  .stat-item:nth-child(2n){border-right:none}
+  .stat-item:last-child{border-bottom:none}
+  .stat-num{font-size:1.5rem}
+  #services,#about,#clients,#why,#contacts{padding:70px 0}
+  #partners{padding:60px 0}
   .services-grid{grid-template-columns:repeat(2,1fr)}
   .service-card:nth-child(2n){border-right:none}
-  .service-card:nth-child(3n){border-right:1px solid var(--border)}
+  .service-card:nth-child(3){border-right:1px solid var(--border)}
   .service-card:nth-child(n+5){border-bottom:none}
-  .about-inner{grid-template-columns:1fr;gap:48px}
-  .contacts-grid{grid-template-columns:1fr;gap:48px}
-  .footer-inner{flex-direction:column;text-align:center}
-  .footer-bottom{flex-direction:column;text-align:center}
-  nav{display:none}
-  .hamburger{display:flex}
-  .btn-outline-nav{display:none}
-  .stats-inner{flex-wrap:wrap}
-  .stat-item{flex:1 1 40%;padding:16px;border-bottom:1px solid var(--border)}
-  .stat-item:nth-child(2n){border-right:none}
+  .about-inner{grid-template-columns:1fr;gap:40px}
+  .why-grid{grid-template-columns:repeat(2,1fr)}
+  .why-item:nth-child(2n){border-right:none}
+  .why-item:nth-child(3){border-right:1px solid var(--border)}
+  .why-item:nth-child(n+3){border-top:1px solid var(--border)}
+  .why-item:nth-child(5){border-right:none;grid-column:span 2}
+  .contacts-grid{grid-template-columns:1fr;gap:40px}
+  .section-header{margin-bottom:40px}
+  .fi{justify-content:center;text-align:center}
+  .fb{justify-content:center;text-align:center}
 }
 @media(max-width:640px){
+  .container{padding:0 16px}
+  h1.hero-title{font-size:1.8rem}
+  .hero-subtitle{font-size:.94rem}
+  .hero-cta{flex-direction:column;gap:10px}
+  .btn-gold,.btn-ghost{width:100%;text-align:center}
+  .stats-inner{flex-direction:column;gap:0}
+  .stat-item{width:100%;border-right:none;border-bottom:1px solid var(--border);padding:10px 16px}
+  .stat-item:last-child{border-bottom:none}
   .services-grid{grid-template-columns:1fr}
   .service-card{border-right:none!important}
-  .service-card:last-child{border-bottom:none}
+  .service-card:not(:last-child){border-bottom:1px solid var(--border)!important}
+  .service-card:last-child{border-bottom:none!important}
+  .svc-photo{height:155px}
   .clients-grid{grid-template-columns:1fr 1fr}
   .partners-grid{grid-template-columns:repeat(2,1fr)}
   .why-grid{grid-template-columns:1fr}
-  .why-item{border-right:none!important;border-bottom:1px solid var(--border)}
-  .why-item:last-child{border-bottom:none}
-  .hero-content{padding:120px 24px 100px}
-  .section-header{margin-bottom:44px}
-  .service-photo{height:160px}
+  .why-item{border-right:none!important;border-top:none!important}
+  .why-item:not(:last-child){border-bottom:1px solid var(--border)!important}
+  .why-item:nth-child(5){grid-column:auto}
+  .why-roman{font-size:2.2rem}
+  .section-header .section-title{font-size:1.5rem}
+  .section-header p{font-size:.9rem}
+  #btt{bottom:14px;right:14px;width:36px;height:36px}
 }
 @media(max-width:400px){
   .clients-grid{grid-template-columns:1fr}
-  .partners-grid{grid-template-columns:1fr}
-  .stats-inner{flex-direction:column}
-  .stat-item{border-right:none!important;width:100%}
-  h1.hero-title{font-size:2rem}
+  .logo-name{font-size:1.2rem}
+  h1.hero-title{font-size:1.6rem}
 }
 @media(max-width:320px){
-  .container{padding:0 16px}
-  .logo-name{font-size:1.2rem}
-  .hero-cta{flex-direction:column}
-  .btn-gold,.btn-ghost{width:100%;text-align:center}
+  .container{padding:0 12px}
+  .partners-grid{grid-template-columns:1fr}
+}
+@media(hover:none){
+  .service-card:hover,.client-card:hover,.btn-gold:hover,.btn-ghost:hover{transform:none}
 }
 </style>
 </head>
 <body>
 
-<!-- MOBILE MENU -->
-<div class="mobile-menu" id="mobileMenu" role="dialog" aria-label="Навигация">
-  <a href="#services" class="mobile-link">Услуги</a>
-  <a href="#about" class="mobile-link">О нас</a>
-  <a href="#clients" class="mobile-link">Клиенты</a>
-  <a href="#contacts" class="mobile-link">Контакты</a>
+<div class="mobile-menu" id="mob" role="dialog" aria-label="Навигация">
+  <a href="#services" class="ml">Услуги</a>
+  <a href="#about" class="ml">О нас</a>
+  <a href="#clients" class="ml">Клиенты</a>
+  <a href="#contacts" class="ml">Контакты</a>
 </div>
 
-<!-- HEADER -->
-<header id="header">
+<header id="hdr">
   <div class="container">
-    <a href="#hero" class="logo">
-      <span class="logo-name">IMPERIONA</span>
-      <span class="logo-sub">Event Management Studio</span>
-    </a>
-    <nav aria-label="Основная навигация">
-      <a href="#services">Услуги</a>
-      <a href="#about">О нас</a>
-      <a href="#clients">Клиенты</a>
-      <a href="#contacts">Контакты</a>
+    <a href="#hero" class="logo"><span class="logo-name">IMPERIONA</span><span class="logo-sub">Event Management Studio</span></a>
+    <nav>
+      <a href="#services">Услуги</a><a href="#about">О нас</a><a href="#clients">Клиенты</a><a href="#contacts">Контакты</a>
     </nav>
     <button class="btn-outline btn-outline-nav" onclick="document.getElementById('contacts').scrollIntoView({behavior:'smooth'})">Обсудить проект</button>
-    <button class="hamburger" id="hamburger" aria-label="Открыть меню" aria-expanded="false">
-      <span></span><span></span><span></span>
-    </button>
+    <button class="hamburger" id="hbg" aria-label="Меню" aria-expanded="false"><span></span><span></span><span></span></button>
   </div>
 </header>
 
-<!-- HERO -->
 <section id="hero">
-  <div class="hero-bg">
-    <div class="hero-line"></div>
-    <div class="hero-line"></div>
-    <div class="hero-line"></div>
-  </div>
-  <div class="particles" id="particles"></div>
+  <div class="hero-bg"><div class="hero-line"></div><div class="hero-line"></div><div class="hero-line"></div></div>
+  <div class="particles" id="ptcl"></div>
   <div class="hero-content">
     <div class="hero-eyebrow">Event Management Studio</div>
     <h1 class="hero-title"><span>IMPERIONA</span> — Режиссура момента, который становится историей</h1>
     <p class="hero-subtitle">Организуем корпоративные события, частные церемонии, спортивные мероприятия, концерты и форумы любого масштаба. Каждое событие — произведение.</p>
     <div class="hero-cta">
       <button class="btn-gold" onclick="document.getElementById('contacts').scrollIntoView({behavior:'smooth'})"><span>Обсудить проект</span></button>
-      <button class="btn-ghost" onclick="alert('Шоурил доступен по запросу. Свяжитесь с нами: +7 925 766 4998')"><i class="fa-solid fa-play" style="margin-right:8px"></i>Смотреть шоурил</button>
+      <button class="btn-ghost" onclick="alert('Шоурил доступен по запросу. Свяжитесь: +7 925 766 4998')"><i class="fa-solid fa-play" style="margin-right:7px"></i>Смотреть шоурил</button>
     </div>
   </div>
-  <div class="scroll-indicator" aria-hidden="true">
-    <span>Листать вниз</span>
-    <i class="fa-solid fa-chevron-down"></i>
-  </div>
+  <div class="scroll-ind" aria-hidden="true"><span>Листать вниз</span><i class="fa-solid fa-chevron-down"></i></div>
   <div class="hero-stats">
     <div class="stats-inner">
-      <div class="stat-item fade-up">
-        <span class="stat-num">200+</span>
-        <span class="stat-label">Реализованных проектов</span>
-      </div>
-      <div class="stat-item fade-up">
-        <span class="stat-num">15+</span>
-        <span class="stat-label">Лет совокупного опыта</span>
-      </div>
-      <div class="stat-item fade-up">
-        <span class="stat-num">50 000+</span>
-        <span class="stat-label">Гостей на мероприятиях</span>
-      </div>
-      <div class="stat-item fade-up">
-        <span class="stat-num">8</span>
-        <span class="stat-label">Федеральных проектов</span>
-      </div>
+      <div class="stat-item fade-up"><span class="stat-num">200+</span><span class="stat-label">Реализованных проектов</span></div>
+      <div class="stat-item fade-up"><span class="stat-num">15+</span><span class="stat-label">Лет совокупного опыта</span></div>
+      <div class="stat-item fade-up"><span class="stat-num">50 000+</span><span class="stat-label">Гостей на мероприятиях</span></div>
+      <div class="stat-item fade-up"><span class="stat-num">8</span><span class="stat-label">Федеральных проектов</span></div>
     </div>
   </div>
 </section>
 
-<!-- SERVICES -->
 <section id="services">
   <div class="container">
     <div class="section-header fade-up">
@@ -446,90 +345,34 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 0 32
       <p>Полный цикл создания события — от концепции до финального аккорда. Без компромиссов.</p>
     </div>
     <div class="services-grid">
-
-      <!-- 1. Corporate -->
       <div class="service-card fade-up">
-        <div class="service-photo">
-          <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=700&q=80&auto=format&fit=crop" alt="Корпоративные мероприятия" loading="lazy"/>
-          <div class="service-photo-overlay"></div>
-          <div class="service-badge"><i class="fa-solid fa-chess-king"></i></div>
-        </div>
-        <div class="service-body">
-          <h3>Корпоративные мероприятия</h3>
-          <p>Разрабатываем уникальный концепт, созвучный ДНК вашей компании. Стратегические сессии, тимбилдинги и корпоративы — с точным попаданием в ценности бренда и безупречным исполнением каждой детали.</p>
-        </div>
+        <div class="svc-photo"><img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=700&q=80&auto=format&fit=crop" alt="Корпоративные мероприятия" loading="lazy"/><div class="svc-overlay"></div><div class="svc-badge"><i class="fa-solid fa-chess-king"></i></div></div>
+        <div class="svc-body"><h3>Корпоративные мероприятия</h3><p>Разрабатываем уникальный концепт, созвучный ДНК вашей компании. Стратегические сессии, тимбилдинги и корпоративы — с точным попаданием в ценности бренда.</p></div>
       </div>
-
-      <!-- 2. VIP -->
       <div class="service-card fade-up">
-        <div class="service-photo">
-          <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=700&q=80&auto=format&fit=crop" alt="VIP-события" loading="lazy"/>
-          <div class="service-photo-overlay"></div>
-          <div class="service-badge"><i class="fa-solid fa-crown"></i></div>
-        </div>
-        <div class="service-body">
-          <h3>VIP-вечеринки и юбилеи</h3>
-          <p>Закрытые события для взыскательной аудитории. Эксклюзивные локации, haute cuisine, авторские шоу-программы. Каждая деталь — на уровне world-class. Ограниченное число проектов в год.</p>
-        </div>
+        <div class="svc-photo"><img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=700&q=80&auto=format&fit=crop" alt="VIP" loading="lazy"/><div class="svc-overlay"></div><div class="svc-badge"><i class="fa-solid fa-crown"></i></div></div>
+        <div class="svc-body"><h3>VIP-вечеринки и юбилеи</h3><p>Закрытые события для взыскательной аудитории. Эксклюзивные локации, haute cuisine, авторские шоу-программы. Каждая деталь — на уровне world-class.</p></div>
       </div>
-
-      <!-- 3. Wedding -->
       <div class="service-card fade-up">
-        <div class="service-photo">
-          <img src="https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=700&q=80&auto=format&fit=crop" alt="Boutique-свадьбы" loading="lazy"/>
-          <div class="service-photo-overlay"></div>
-          <div class="service-badge"><i class="fa-solid fa-rings-wedding"></i></div>
-        </div>
-        <div class="service-body">
-          <h3>Boutique-свадьбы</h3>
-          <p>Индивидуальный режиссёрский сценарий для каждой пары. Полное погружение, абсолютная конфиденциальность, безупречная эстетика. Ваша история — наша премьера.</p>
-        </div>
+        <div class="svc-photo"><img src="https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=700&q=80&auto=format&fit=crop" alt="Свадьбы" loading="lazy"/><div class="svc-overlay"></div><div class="svc-badge"><i class="fa-solid fa-rings-wedding"></i></div></div>
+        <div class="svc-body"><h3>Boutique-свадьбы</h3><p>Индивидуальный режиссёрский сценарий для каждой пары. Абсолютная конфиденциальность, безупречная эстетика. Ваша история — наша премьера.</p></div>
       </div>
-
-      <!-- 4. Forum -->
       <div class="service-card fade-up">
-        <div class="service-photo">
-          <img src="https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?w=700&q=80&auto=format&fit=crop" alt="Конференции и форумы" loading="lazy"/>
-          <div class="service-photo-overlay"></div>
-          <div class="service-badge"><i class="fa-solid fa-microphone-lines"></i></div>
-        </div>
-        <div class="service-body">
-          <h3>Конференции и форумы</h3>
-          <p>Комплексные решения для phygital и hybrid-форматов. Синхронизируем онлайн- и офлайн-аудитории в единое пространство. Опыт международных форумов с тысячами участников.</p>
-        </div>
+        <div class="svc-photo"><img src="https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?w=700&q=80&auto=format&fit=crop" alt="Форумы" loading="lazy"/><div class="svc-overlay"></div><div class="svc-badge"><i class="fa-solid fa-microphone-lines"></i></div></div>
+        <div class="svc-body"><h3>Конференции и форумы</h3><p>Комплексные решения для phygital и hybrid-форматов. Синхронизируем онлайн- и офлайн-аудитории в единое пространство событийного масштаба.</p></div>
       </div>
-
-      <!-- 5. Sport -->
       <div class="service-card fade-up">
-        <div class="service-photo">
-          <img src="https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=700&q=80&auto=format&fit=crop" alt="Спортивные мероприятия" loading="lazy"/>
-          <div class="service-photo-overlay"></div>
-          <div class="service-badge"><i class="fa-solid fa-trophy"></i></div>
-        </div>
-        <div class="service-body">
-          <h3>Спортивные мероприятия</h3>
-          <p>Организация федеральных соревнований, турниров и масштабных фестивалей. Полная ивент-инфраструктура: от разметки арены до церемонии награждения.</p>
-        </div>
+        <div class="svc-photo"><img src="https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=700&q=80&auto=format&fit=crop" alt="Спорт" loading="lazy"/><div class="svc-overlay"></div><div class="svc-badge"><i class="fa-solid fa-trophy"></i></div></div>
+        <div class="svc-body"><h3>Спортивные мероприятия</h3><p>Организация федеральных соревнований, турниров и масштабных фестивалей. Полная ивент-инфраструктура: от разметки арены до церемонии награждения.</p></div>
       </div>
-
-      <!-- 6. Concert -->
       <div class="service-card fade-up">
-        <div class="service-photo">
-          <img src="https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=700&q=80&auto=format&fit=crop" alt="Концерты и шоу-программы" loading="lazy"/>
-          <div class="service-photo-overlay"></div>
-          <div class="service-badge"><i class="fa-solid fa-music"></i></div>
-        </div>
-        <div class="service-body">
-          <h3>Концерты и шоу-программы</h3>
-          <p>Продакшн от камерных площадок до Государственного Кремлёвского Дворца и Крокус Сити Холла. Полный цикл: концепт, технический райдер, свет, звук, безопасность, логистика.</p>
-        </div>
+        <div class="svc-photo"><img src="https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=700&q=80&auto=format&fit=crop" alt="Концерты" loading="lazy"/><div class="svc-overlay"></div><div class="svc-badge"><i class="fa-solid fa-music"></i></div></div>
+        <div class="svc-body"><h3>Концерты и шоу-программы</h3><p>Продакшн от камерных площадок до Государственного Кремлёвского Дворца и Крокус Сити Холла. Полный цикл: концепт, райдер, свет, звук, безопасность.</p></div>
       </div>
-
     </div>
   </div>
 </section>
 
-<!-- ABOUT -->
 <section id="about">
   <div class="container">
     <div class="about-inner">
@@ -537,131 +380,67 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 0 32
         <h2>О компании</h2>
         <p>IMPERIONA — студия event-режиссуры, созданная командой экспертов с многолетним опытом в ведущих event-агентствах и проектных командах страны. Каждый из нас прошёл путь от ассистента до арт-директора знаковых федеральных событий.</p>
         <div class="tagline">«Мы не организуем мероприятия. Мы ставим спектакли, в которых ваши гости — главные герои.»</div>
-        <p>В основе нашей работы — авторская методология WOW-эффекта: точное попадание в эмоцию, выверенная режиссура каждого момента и виральный контент, который остаётся в памяти и медиапространстве ещё долгие годы после события.</p>
-        <p>Принцип «режиссура момента» означает управление не только программой, но и восприятием: светом, звуком, ритмом, паузой, неожиданностью. Так момент становится историей.</p>
-        <h4 style="font-family:'Playfair Display',serif;font-size:0.85rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);margin:32px 0 16px">Ключевые проекты</h4>
-        <ul class="projects-list">
+        <p>В основе нашей работы — авторская методология WOW-эффекта: точное попадание в эмоцию, выверенная режиссура каждого момента и виральный контент, который остаётся в памяти ещё долгие годы после события.</p>
+        <h4 style="font-family:'Playfair Display',serif;font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin:24px 0 12px">Ключевые проекты</h4>
+        <ul class="proj-list">
           <li>Концерты в Государственном Кремлёвском Дворце</li>
           <li>Концерты в Крокус Сити Холле</li>
-          <li>Федеральный спортивный турнир «Спорт. Путь к единству»</li>
+          <li>Федеральный турнир «Спорт. Путь к единству»</li>
           <li>Спортивный фестиваль «Играй и кайфуй»</li>
           <li>Форум «Волга Форум»</li>
           <li>Петербургский межрелигиозный международный форум</li>
           <li>Московский международный Сабантуй Дружбы и Единства</li>
           <li>Региональные национальные праздники «Сабантуй»</li>
           <li>Частные VIP-события и boutique-свадьбы</li>
-          <li>Съёмки музыкальных клипов (продакшн и постпродакшн)</li>
+          <li>Съёмки музыкальных клипов</li>
         </ul>
       </div>
-      <div class="about-right fade-up">
-        <div class="portfolio-grid">
-          <!-- Concert / Kremlin -->
-          <div class="portfolio-item">
-            <img src="https://images.unsplash.com/photo-1540039155733-5bb30b53aa14?w=800&q=80&auto=format&fit=crop" alt="Концертный зал" loading="lazy"/>
-            <div class="portfolio-caption"><i class="fa-solid fa-location-dot"></i>Государственный Кремлёвский Дворец</div>
+      <div class="fade-up">
+        <div class="port-grid">
+          <!-- ГКД: ночной концерт, огни сцены, архитектура -->
+          <div class="port-item">
+            <img src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=800&q=80&auto=format&fit=crop" alt="Концерт ГКД" loading="lazy"/>
+            <div class="port-cap"><i class="fa-solid fa-location-dot"></i>Государственный Кремлёвский Дворец</div>
           </div>
-          <!-- Forum / Conference -->
-          <div class="portfolio-item">
-            <img src="https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=800&q=80&auto=format&fit=crop" alt="Международный форум" loading="lazy"/>
-            <div class="portfolio-caption"><i class="fa-solid fa-location-dot"></i>Форум «Волга Форум» — 5000+ участников</div>
+          <!-- Волга Форум: деловой зал, флаги, делегаты -->
+          <div class="port-item">
+            <img src="https://images.unsplash.com/photo-1559223607-a43c990c692c?w=800&q=80&auto=format&fit=crop" alt="Волга Форум" loading="lazy"/>
+            <div class="port-cap"><i class="fa-solid fa-location-dot"></i>Форум «Волга Форум» — 5000+ участников</div>
           </div>
-          <!-- Festival / Sabantuy -->
-          <div class="portfolio-item">
-            <img src="https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?w=800&q=80&auto=format&fit=crop" alt="Народный праздник" loading="lazy"/>
-            <div class="portfolio-caption"><i class="fa-solid fa-location-dot"></i>Сабантуй Дружбы и Единства, Москва</div>
+          <!-- Сабантуй: яркий народный праздник, национальный колорит -->
+          <div class="port-item">
+            <img src="https://images.unsplash.com/photo-1531685250784-7569952593d2?w=800&q=80&auto=format&fit=crop" alt="Сабантуй" loading="lazy"/>
+            <div class="port-cap"><i class="fa-solid fa-location-dot"></i>Сабантуй Дружбы и Единства, Москва</div>
           </div>
         </div>
-        <p style="font-size:0.72rem;color:var(--text-dim);margin-top:14px;text-align:center;letter-spacing:0.05em">
-          <i class="fa-regular fa-image" style="margin-right:6px;color:var(--gold-dark)"></i>Полное портфолио предоставляется по запросу
-        </p>
+        <p style="font-size:.68rem;color:var(--text-dim);margin-top:11px;text-align:center;letter-spacing:.05em"><i class="fa-regular fa-image" style="margin-right:5px;color:var(--gold-dark)"></i>Полное портфолио предоставляется по запросу</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- CLIENTS -->
 <section id="clients">
   <div class="container">
     <div class="section-header fade-up">
       <h2 class="section-title">Наши клиенты</h2>
-      <p>Работаем с государственными структурами, крупным бизнесом и частными лицами — везде обеспечивая один стандарт: безупречность.</p>
+      <p>Работаем с государственными структурами, крупным бизнесом и частными лицами — один стандарт: безупречность.</p>
     </div>
     <div class="clients-grid">
-
-      <div class="client-card fade-up">
-        <div class="client-img">
-          <img src="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=200&q=80&auto=format&fit=crop" alt="Государственные структуры" loading="lazy"/>
-        </div>
-        <h4>Государственные структуры</h4>
-        <p>Федеральные и региональные органы власти. Протокольные события, национальные праздники, межрелигиозные форумы.</p>
-      </div>
-
-      <div class="client-card fade-up">
-        <div class="client-img">
-          <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=200&q=80&auto=format&fit=crop" alt="Частные компании" loading="lazy"/>
-        </div>
-        <h4>Частные компании</h4>
-        <p>FinTech, корпоративный B2B, технологические лидеры. Корпоративные события, конференции, презентации продуктов.</p>
-      </div>
-
-      <div class="client-card fade-up">
-        <div class="client-img">
-          <img src="https://images.unsplash.com/photo-1501167786227-4cba60f6d58f?w=200&q=80&auto=format&fit=crop" alt="Банки" loading="lazy"/>
-        </div>
-        <h4>Банки и финансовые институты</h4>
-        <p>Деловые форумы, VIP-приёмы. Высочайшие требования к безопасности и репутационной составляющей.</p>
-      </div>
-
-      <div class="client-card fade-up">
-        <div class="client-img">
-          <img src="https://images.unsplash.com/photo-1552674605-db6ffd4facb5?w=200&q=80&auto=format&fit=crop" alt="Спортивные организации" loading="lazy"/>
-        </div>
-        <h4>Спортивные организации</h4>
-        <p>Федерации, лиги, комитеты. Соревнования и мероприятия федерального уровня с многотысячной аудиторией.</p>
-      </div>
-
-      <div class="client-card fade-up">
-        <div class="client-img">
-          <img src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=200&q=80&auto=format&fit=crop" alt="VIP клиенты" loading="lazy"/>
-        </div>
-        <h4>Частные лица (VIP)</h4>
-        <p>Состоятельные клиенты, публичные персоны. Boutique-свадьбы, юбилеи — с абсолютной конфиденциальностью.</p>
-      </div>
-
-      <div class="client-card fade-up">
-        <div class="client-img">
-          <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=200&q=80&auto=format&fit=crop" alt="Молодёжные организации" loading="lazy"/>
-        </div>
-        <h4>Молодёжь и студенты</h4>
-        <p>Форумы, фестивали, спортивные активации. Форматы с максимальным вовлечением и вирусным потенциалом.</p>
-      </div>
-
-      <div class="client-card fade-up">
-        <div class="client-img">
-          <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?w=200&q=80&auto=format&fit=crop" alt="НКО" loading="lazy"/>
-        </div>
-        <h4>НКО и фонды</h4>
-        <p>Смысловые события с ESG-повесткой и виральным контентом. Благотворительные гала, межкультурный диалог.</p>
-      </div>
-
-      <div class="client-card fade-up">
-        <div class="client-img">
-          <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=200&q=80&auto=format&fit=crop" alt="Международные организации" loading="lazy"/>
-        </div>
-        <h4>Международные организации</h4>
-        <p>Дипломатические приёмы, межкультурные конференции. Мультиязычные форматы с высоким протокольным стандартом.</p>
-      </div>
-
+      <div class="client-card fade-up"><div class="cli-img"><img src="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=200&q=80&auto=format&fit=crop" alt="" loading="lazy"/></div><h4>Государственные структуры</h4><p>Федеральные органы власти. Протокольные события, национальные праздники, форумы.</p></div>
+      <div class="client-card fade-up"><div class="cli-img"><img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=200&q=80&auto=format&fit=crop" alt="" loading="lazy"/></div><h4>Частные компании</h4><p>FinTech, корпоративный B2B. Корпоративные события, конференции, презентации.</p></div>
+      <div class="client-card fade-up"><div class="cli-img"><img src="https://images.unsplash.com/photo-1501167786227-4cba60f6d58f?w=200&q=80&auto=format&fit=crop" alt="" loading="lazy"/></div><h4>Банки и финансовые институты</h4><p>Деловые форумы, VIP-приёмы. Высочайшие требования к безопасности и репутации.</p></div>
+      <div class="client-card fade-up"><div class="cli-img"><img src="https://images.unsplash.com/photo-1552674605-db6ffd4facb5?w=200&q=80&auto=format&fit=crop" alt="" loading="lazy"/></div><h4>Спортивные организации</h4><p>Федерации, лиги, комитеты. Соревнования федерального уровня.</p></div>
+      <div class="client-card fade-up"><div class="cli-img"><img src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=200&q=80&auto=format&fit=crop" alt="" loading="lazy"/></div><h4>Частные лица (VIP)</h4><p>Состоятельные клиенты, публичные персоны. Boutique-события с абсолютной конфиденциальностью.</p></div>
+      <div class="client-card fade-up"><div class="cli-img"><img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=200&q=80&auto=format&fit=crop" alt="" loading="lazy"/></div><h4>Молодёжь и студенты</h4><p>Форумы, фестивали, активации. Форматы с максимальным вовлечением.</p></div>
+      <div class="client-card fade-up"><div class="cli-img"><img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?w=200&q=80&auto=format&fit=crop" alt="" loading="lazy"/></div><h4>НКО и фонды</h4><p>Смысловые события с ESG-повесткой. Благотворительные гала, межкультурный диалог.</p></div>
+      <div class="client-card fade-up"><div class="cli-img"><img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=200&q=80&auto=format&fit=crop" alt="" loading="lazy"/></div><h4>Международные организации</h4><p>Дипломатические приёмы, межкультурные конференции. Мультиязычный протокол.</p></div>
     </div>
   </div>
 </section>
 
-<!-- PARTNERS -->
 <section id="partners">
   <div class="container">
-    <div class="section-header fade-up">
-      <h2 class="section-title">Надёжные партнёры и площадки</h2>
-    </div>
+    <div class="section-header fade-up"><h2 class="section-title">Надёжные партнёры и площадки</h2></div>
     <p class="partners-desc fade-up">IMPERIONA сотрудничает исключительно с партнёрами, прошедшими строгий отбор по стандартам качества, надёжности и профессиональной репутации.</p>
     <div class="partners-grid">
       <div class="partner-item fade-up"><i class="fa-solid fa-landmark-flag"></i><span>Госструктуры</span></div>
@@ -674,7 +453,6 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 0 32
   </div>
 </section>
 
-<!-- WHY -->
 <section id="why">
   <div class="container">
     <div class="section-header fade-up">
@@ -682,47 +460,50 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 0 32
       <p>Пять принципов, по которым нас выбирают для самых значимых событий.</p>
     </div>
     <div class="why-grid">
-
       <div class="why-item fade-up">
-        <span class="why-ornament">I</span>
-        <div class="why-icon-wrap"><i class="fa-solid fa-fingerprint"></i></div>
+        <span class="why-roman">I</span>
+        <div class="why-sym">
+          <svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="3"/><path d="M16 7a9 9 0 0 1 9 9"/><path d="M16 5a11 11 0 0 1 11 11"/><path d="M16 3a13 13 0 0 1 13 13"/><path d="M7 16a9 9 0 0 1 9-9"/><path d="M5 16a11 11 0 0 1 11-11"/><path d="M16 25a9 9 0 0 1-9-9"/><path d="M20 22c0 2.5-1.8 4-4 4s-4-1.5-4-4"/></svg>
+        </div>
         <h4>Гиперперсонализация</h4>
         <p>Каждый проект создаётся с нуля под ДНК клиента. Никаких шаблонов — только авторская режиссура, отражающая уникальность вашего события.</p>
       </div>
-
       <div class="why-item fade-up">
-        <span class="why-ornament">II</span>
-        <div class="why-icon-wrap"><i class="fa-solid fa-vr-cardboard"></i></div>
+        <span class="why-roman">II</span>
+        <div class="why-sym">
+          <svg viewBox="0 0 32 32"><polygon points="16,4 28,10 16,16 4,10"/><polyline points="4,16 16,22 28,16"/><polyline points="4,22 16,28 28,22"/></svg>
+        </div>
         <h4>Phygital-форматы</h4>
-        <p>Интеграция онлайн и офлайн в единое пространство: +15–25% к вовлечённости и многократное расширение аудитории без потери качества.</p>
+        <p>Интеграция онлайн и офлайн в единое пространство: +15–25% к вовлечённости и расширение аудитории без потери качества.</p>
       </div>
-
       <div class="why-item fade-up">
-        <span class="why-ornament">III</span>
-        <div class="why-icon-wrap"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+        <span class="why-roman">III</span>
+        <div class="why-sym">
+          <svg viewBox="0 0 32 32"><polygon points="16,3 19.5,12.5 30,12.5 21.5,18.5 24.5,29 16,23 7.5,29 10.5,18.5 2,12.5 12.5,12.5"/></svg>
+        </div>
         <h4>WOW-эффект и виральность</h4>
-        <p>Авторская методология создания моментов, которые гости фиксируют и транслируют сами. Органическое распространение контента с каждого события.</p>
+        <p>Авторская методология создания моментов, которые гости фиксируют и транслируют сами. Органическое распространение с каждого события.</p>
       </div>
-
       <div class="why-item fade-up">
-        <span class="why-ornament">IV</span>
-        <div class="why-icon-wrap"><i class="fa-solid fa-leaf"></i></div>
+        <span class="why-roman">IV</span>
+        <div class="why-sym">
+          <svg viewBox="0 0 32 32"><path d="M6 26C6 26 8 14 20 10C28 7 28 7 28 7C28 7 26 18 16 22C10 25 6 26 6 26Z"/><path d="M6 26L14 18"/></svg>
+        </div>
         <h4>ESG и смысловые форматы</h4>
         <p>Создаём события с устойчивым смыслом: экологичные решения, социальные послания, культурный диалог. Ваш бренд получает глубину.</p>
       </div>
-
       <div class="why-item fade-up">
-        <span class="why-ornament">V</span>
-        <div class="why-icon-wrap"><i class="fa-solid fa-shield-halved"></i></div>
+        <span class="why-roman">V</span>
+        <div class="why-sym">
+          <svg viewBox="0 0 32 32"><path d="M16 3L28 8L28 17C28 23 22 28 16 30C10 28 4 23 4 17L4 8Z"/><polyline points="11,16 15,20 21,13"/></svg>
+        </div>
         <h4>Опыт сложных объектов</h4>
-        <p>Кремль, Крокус Сити Холл, федеральные соревнования. Умеем работать там, где цена ошибки — репутация. Безупречная логистика под любым давлением.</p>
+        <p>Кремль, Крокус Сити Холл, федеральные соревнования. Там, где цена ошибки — репутация. Безупречная логистика под любым давлением.</p>
       </div>
-
     </div>
   </div>
 </section>
 
-<!-- CONTACTS -->
 <section id="contacts">
   <div class="container">
     <div class="section-header fade-up">
@@ -730,240 +511,111 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 0 32
       <p>Оставьте заявку — мы свяжемся в течение рабочего дня и подготовим первичную концепцию.</p>
     </div>
     <div class="contacts-grid">
-
       <div class="contacts-info fade-up">
         <h2>Контакты</h2>
-        <div class="contact-item">
-          <a href="tel:+79257664998" class="contact-ico"><i class="fa-solid fa-phone"></i></a>
-          <div>
-            <div class="contact-label">Телефон</div>
-            <div class="contact-val"><a href="tel:+79257664998">+7 925 766 4998</a></div>
-          </div>
-        </div>
-        <div class="contact-item">
-          <a href="mailto:khus-ab@yandex.ru" class="contact-ico"><i class="fa-solid fa-envelope"></i></a>
-          <div>
-            <div class="contact-label">Электронная почта</div>
-            <div class="contact-val"><a href="mailto:khus-ab@yandex.ru">khus-ab@yandex.ru</a></div>
-          </div>
-        </div>
-        <div class="contact-item">
-          <div class="contact-ico"><i class="fa-solid fa-location-dot"></i></div>
-          <div>
-            <div class="contact-label">Адрес</div>
-            <div class="contact-val">Москва, ул. Ракетный бульвар 16</div>
-          </div>
-        </div>
-        <div class="map-container">
-          <iframe
-            src="https://yandex.ru/map-widget/v1/?ll=37.640%2C55.835&z=16&pt=37.640%2C55.835,pm2rdm"
-            width="100%" height="240" frameborder="0" allowfullscreen
-            title="Расположение IMPERIONA" loading="lazy">
-          </iframe>
-        </div>
+        <div class="ci"><a href="tel:+79257664998" class="ci-ico"><i class="fa-solid fa-phone"></i></a><div><div class="ci-lbl">Телефон</div><div class="ci-val"><a href="tel:+79257664998">+7 925 766 4998</a></div></div></div>
+        <div class="ci"><a href="mailto:khus-ab@yandex.ru" class="ci-ico"><i class="fa-solid fa-envelope"></i></a><div><div class="ci-lbl">Электронная почта</div><div class="ci-val"><a href="mailto:khus-ab@yandex.ru">khus-ab@yandex.ru</a></div></div></div>
+        <div class="ci"><div class="ci-ico"><i class="fa-solid fa-location-dot"></i></div><div><div class="ci-lbl">Адрес</div><div class="ci-val">Москва, ул. Ракетный бульвар 16</div></div></div>
+        <div class="map-wrap"><iframe src="https://yandex.ru/map-widget/v1/?ll=37.640%2C55.835&z=16&pt=37.640%2C55.835,pm2rdm" width="100%" height="210" frameborder="0" allowfullscreen title="Карта" loading="lazy"></iframe></div>
       </div>
-
       <div class="contacts-form fade-up">
         <h3>Оставить заявку</h3>
-        <form id="contactForm" novalidate>
-          <div class="form-group">
-            <label for="name">Ваше имя *</label>
-            <input type="text" id="name" name="from_name" placeholder="Александр Иванов" autocomplete="name"/>
-          </div>
-          <div class="form-group">
-            <label for="contact">Телефон или Email *</label>
-            <input type="text" id="contact" name="reply_to" placeholder="+7 900 000 0000 или name@mail.ru" autocomplete="email"/>
-          </div>
-          <div class="form-group">
-            <label for="message">Расскажите о вашем проекте *</label>
-            <textarea id="message" name="message" placeholder="Тип мероприятия, дата, количество гостей, ваши ожидания..."></textarea>
-          </div>
-          <button type="submit" id="submitBtn" class="btn-gold" style="width:100%;justify-content:center;display:flex;align-items:center;gap:10px">
-            <span id="submitText">Отправить заявку</span>
-            <i class="fa-solid fa-paper-plane"></i>
-          </button>
+        <form id="cf" novalidate>
+          <div class="fg"><label for="fn">Ваше имя *</label><input type="text" id="fn" name="from_name" placeholder="Александр Иванов" autocomplete="name"/></div>
+          <div class="fg"><label for="fc">Телефон или Email *</label><input type="text" id="fc" name="reply_to" placeholder="+7 900 000 0000 или name@mail.ru" autocomplete="email"/></div>
+          <div class="fg"><label for="fm">Расскажите о вашем проекте *</label><textarea id="fm" name="message" placeholder="Тип мероприятия, дата, количество гостей, ваши ожидания..."></textarea></div>
+          <button type="submit" id="sb" class="btn-gold" style="width:100%"><span id="st">Отправить заявку</span><i class="fa-solid fa-paper-plane"></i></button>
           <div id="form-status"></div>
           <p class="form-note">Нажимая кнопку, вы соглашаетесь на обработку персональных данных в соответствии с <a href="#" style="color:var(--gold-dark)">политикой конфиденциальности</a>.</p>
         </form>
       </div>
-
     </div>
   </div>
 </section>
 
-<!-- FOOTER -->
 <footer>
   <div class="container">
-    <div class="footer-inner">
-      <a href="#hero" class="logo footer-logo">
-        <span class="logo-name">IMPERIONA</span>
-        <span class="logo-sub">Event Management Studio</span>
-      </a>
-      <div class="footer-socials">
-        <a href="#" class="social-btn" aria-label="ВКонтакте"><i class="fa-brands fa-vk"></i></a>
-        <a href="#" class="social-btn" aria-label="Telegram"><i class="fa-brands fa-telegram"></i></a>
-        <a href="#" class="social-btn" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
-        <a href="#" class="social-btn" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+    <div class="fi">
+      <a href="#hero" class="logo"><span class="logo-name">IMPERIONA</span><span class="logo-sub">Event Management Studio</span></a>
+      <div class="fsoc">
+        <a href="#" class="sb2" aria-label="ВКонтакте" style="width:34px;height:34px;border:1px solid rgba(201,160,61,0.18);display:flex;align-items:center;justify-content:center;color:#9a9080;text-decoration:none;font-size:.8rem;transition:all .35s"><i class="fa-brands fa-vk"></i></a>
+        <a href="#" class="sb2" aria-label="Telegram" style="width:34px;height:34px;border:1px solid rgba(201,160,61,0.18);display:flex;align-items:center;justify-content:center;color:#9a9080;text-decoration:none;font-size:.8rem;transition:all .35s"><i class="fa-brands fa-telegram"></i></a>
+        <a href="#" class="sb2" aria-label="Instagram" style="width:34px;height:34px;border:1px solid rgba(201,160,61,0.18);display:flex;align-items:center;justify-content:center;color:#9a9080;text-decoration:none;font-size:.8rem;transition:all .35s"><i class="fa-brands fa-instagram"></i></a>
+        <a href="#" class="sb2" aria-label="YouTube" style="width:34px;height:34px;border:1px solid rgba(201,160,61,0.18);display:flex;align-items:center;justify-content:center;color:#9a9080;text-decoration:none;font-size:.8rem;transition:all .35s"><i class="fa-brands fa-youtube"></i></a>
       </div>
     </div>
-    <div class="footer-bottom">
-      <p class="footer-copy">© 2025 IMPERIONA. Все права защищены.</p>
-      <div class="footer-links">
-        <a href="#">Политика конфиденциальности</a>
-        <a href="#">Реквизиты</a>
-      </div>
-    </div>
+    <div class="fb"><p class="fcopy">&#169; 2025 IMPERIONA. Все права защищены.</p><div class="flinks"><a href="#">Политика конфиденциальности</a><a href="#">Реквизиты</a></div></div>
   </div>
 </footer>
 
-<!-- BACK TO TOP -->
-<a href="#hero" id="back-top" aria-label="Наверх"><i class="fa-solid fa-chevron-up"></i></a>
+<a href="#hero" id="btt" aria-label="Наверх"><i class="fa-solid fa-chevron-up"></i></a>
 
 <script>
-/* ─── EmailJS INIT ───────────────────────────────────────────
-   ЗАМЕНИ эти три значения после регистрации на emailjs.com:
-   1. YOUR_PUBLIC_KEY  → Account → API Keys → Public Key
-   2. YOUR_SERVICE_ID  → Email Services → Service ID
-   3. YOUR_TEMPLATE_ID → Email Templates → Template ID
-──────────────────────────────────────────────────────────── */
-const EMAILJS_PUBLIC_KEY  = 'YOUR_PUBLIC_KEY';
-const EMAILJS_SERVICE_ID  = 'YOUR_SERVICE_ID';
-const EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID';
+const EJS_KEY='YOUR_PUBLIC_KEY',EJS_SVC='YOUR_SERVICE_ID',EJS_TPL='YOUR_TEMPLATE_ID';
+if(EJS_KEY!=='YOUR_PUBLIC_KEY') emailjs.init(EJS_KEY);
 
-(function(){
-  if(EMAILJS_PUBLIC_KEY !== 'YOUR_PUBLIC_KEY'){
-    emailjs.init(EMAILJS_PUBLIC_KEY);
-  }
-})();
+/* Particles */
+(function(){const c=document.getElementById('ptcl');for(let i=0;i<18;i++){const p=document.createElement('div');p.className='particle';p.style.cssText=`left:${Math.random()*100}%;animation-duration:${9+Math.random()*16}s;animation-delay:${-Math.random()*20}s;width:${1+Math.random()*2}px;height:${1+Math.random()*2}px`;c.appendChild(p);}})();
 
-/* ─── PARTICLES ─── */
-(function(){
-  const c=document.getElementById('particles');
-  for(let i=0;i<24;i++){
-    const p=document.createElement('div');
-    p.className='particle';
-    p.style.cssText=`left:${Math.random()*100}%;animation-duration:${8+Math.random()*18}s;animation-delay:${-Math.random()*20}s;width:${1+Math.random()*2}px;height:${1+Math.random()*2}px`;
-    c.appendChild(p);
-  }
-})();
+/* Header */
+const hdr=document.getElementById('hdr');
+window.addEventListener('scroll',()=>hdr.classList.toggle('scrolled',scrollY>60),{passive:true});
 
-/* ─── HEADER ─── */
-const header=document.getElementById('header');
-window.addEventListener('scroll',()=>{
-  header.classList.toggle('scrolled',window.scrollY>60);
-},{passive:true});
+/* Hamburger */
+const hbg=document.getElementById('hbg'),mob=document.getElementById('mob');
+function close_menu(){mob.classList.remove('open');hbg.classList.remove('open');hbg.setAttribute('aria-expanded','false');document.body.style.overflow='';}
+hbg.addEventListener('click',()=>{const o=mob.classList.toggle('open');hbg.classList.toggle('open',o);hbg.setAttribute('aria-expanded',o);document.body.style.overflow=o?'hidden':'';});
+document.querySelectorAll('.ml').forEach(a=>a.addEventListener('click',close_menu));
+mob.addEventListener('click',e=>{if(e.target===mob)close_menu();});
 
-/* ─── HAMBURGER ─── */
-const hamburger=document.getElementById('hamburger');
-const mobileMenu=document.getElementById('mobileMenu');
-hamburger.addEventListener('click',()=>{
-  const open=mobileMenu.classList.toggle('open');
-  hamburger.classList.toggle('open',open);
-  hamburger.setAttribute('aria-expanded',open);
-  document.body.style.overflow=open?'hidden':'';
-});
-document.querySelectorAll('.mobile-link').forEach(a=>{
-  a.addEventListener('click',()=>{
-    mobileMenu.classList.remove('open');
-    hamburger.classList.remove('open');
-    hamburger.setAttribute('aria-expanded','false');
-    document.body.style.overflow='';
-  });
-});
-mobileMenu.addEventListener('click',e=>{
-  if(e.target===mobileMenu){
-    mobileMenu.classList.remove('open');
-    hamburger.classList.remove('open');
-    hamburger.setAttribute('aria-expanded','false');
-    document.body.style.overflow='';
-  }
-});
-
-/* ─── INTERSECTION OBSERVER ─── */
-const io=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target)}});
-},{threshold:0.12,rootMargin:'0px 0px -40px 0px'});
+/* Intersection Observer */
+const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target);}});},{threshold:0.08,rootMargin:'0px 0px -20px 0px'});
 document.querySelectorAll('.fade-up').forEach(el=>io.observe(el));
 
-/* ─── BACK TO TOP ─── */
-const backTop=document.getElementById('back-top');
-window.addEventListener('scroll',()=>{
-  backTop.classList.toggle('visible',window.scrollY>400);
-},{passive:true});
+/* Back to top */
+const btt=document.getElementById('btt');
+window.addEventListener('scroll',()=>btt.classList.toggle('on',scrollY>400),{passive:true});
 
-/* ─── SMOOTH SCROLL ─── */
+/* Smooth scroll */
 document.querySelectorAll('a[href^="#"]').forEach(a=>{
-  a.addEventListener('click',function(e){
-    const id=this.getAttribute('href');
-    if(id==='#'||id==='')return;
-    const target=document.querySelector(id);
-    if(target){e.preventDefault();target.scrollIntoView({behavior:'smooth',block:'start'})}
-  });
+  a.addEventListener('click',function(e){const id=this.getAttribute('href');if(!id||id==='#')return;const t=document.querySelector(id);if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'});}});
 });
 
-/* ─── FORM ─── */
-document.getElementById('contactForm').addEventListener('submit',async function(e){
+/* Social hover */
+document.querySelectorAll('.sb2').forEach(b=>{
+  b.addEventListener('mouseenter',()=>{b.style.borderColor='var(--gold)';b.style.color='var(--gold)';});
+  b.addEventListener('mouseleave',()=>{b.style.borderColor='rgba(201,160,61,0.18)';b.style.color='#9a9080';});
+});
+
+/* Form */
+document.getElementById('cf').addEventListener('submit',async function(e){
   e.preventDefault();
-  const nameEl=document.getElementById('name');
-  const contactEl=document.getElementById('contact');
-  const messageEl=document.getElementById('message');
-  const status=document.getElementById('form-status');
-  const btn=document.getElementById('submitBtn');
-  const btnText=document.getElementById('submitText');
-
-  [nameEl,contactEl,messageEl].forEach(f=>f.classList.remove('error'));
-  let valid=true;
-  if(!nameEl.value.trim()){nameEl.classList.add('error');valid=false}
-  if(!contactEl.value.trim()||contactEl.value.trim().length<5){contactEl.classList.add('error');valid=false}
-  if(!messageEl.value.trim()){messageEl.classList.add('error');valid=false}
-  if(!valid){
-    status.style.display='block';
-    status.className='error-msg';
-    status.textContent='Пожалуйста, заполните все обязательные поля.';
-    return;
+  const fn=document.getElementById('fn'),fc=document.getElementById('fc'),fm=document.getElementById('fm');
+  const st=document.getElementById('form-status'),sb=document.getElementById('sb'),stxt=document.getElementById('st');
+  [fn,fc,fm].forEach(f=>f.classList.remove('err'));
+  let ok=true;
+  if(!fn.value.trim()){fn.classList.add('err');ok=false;}
+  if(!fc.value.trim()||fc.value.trim().length<5){fc.classList.add('err');ok=false;}
+  if(!fm.value.trim()){fm.classList.add('err');ok=false;}
+  if(!ok){st.style.display='block';st.className='er';st.textContent='Пожалуйста, заполните все обязательные поля.';return;}
+  const v=fc.value.trim();
+  if(!v.includes('@')&&!/\d{5,}/.test(v)){fc.classList.add('err');st.style.display='block';st.className='er';st.textContent='Укажите корректный телефон или email.';return;}
+  sb.disabled=true;stxt.textContent='Отправка...';st.style.display='none';
+  if(EJS_KEY==='YOUR_PUBLIC_KEY'){
+    await new Promise(r=>setTimeout(r,800));
+    st.style.display='block';st.className='ok';
+    st.textContent='✦ Спасибо! Ваша заявка принята. Мы свяжемся с вами в ближайшее время.';
+    this.reset();sb.disabled=false;stxt.textContent='Отправить заявку';return;
   }
-
-  const val=contactEl.value.trim();
-  if(!val.includes('@')&&!/\d{5,}/.test(val)){
-    contactEl.classList.add('error');
-    status.style.display='block';
-    status.className='error-msg';
-    status.textContent='Укажите корректный телефон или email.';
-    return;
-  }
-
-  // Send via EmailJS
-  btn.disabled=true;
-  btnText.textContent='Отправка...';
-  status.style.display='none';
-
-  if(EMAILJS_PUBLIC_KEY==='YOUR_PUBLIC_KEY'){
-    // Demo mode — EmailJS not yet configured
-    await new Promise(r=>setTimeout(r,1000));
-    status.style.display='block';
-    status.className='success';
-    status.textContent='✦ Спасибо! Ваша заявка принята. Мы свяжемся с вами в ближайшее время. (EmailJS не настроен — см. инструкцию ниже)';
-    this.reset();
-    btn.disabled=false;
-    btnText.textContent='Отправить заявку';
-    return;
-  }
-
   try{
-    await emailjs.sendForm(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, this);
-    status.style.display='block';
-    status.className='success';
-    status.textContent='✦ Спасибо! Ваша заявка отправлена. Мы свяжемся с вами в ближайшее время.';
+    await emailjs.sendForm(EJS_SVC,EJS_TPL,this);
+    st.style.display='block';st.className='ok';
+    st.textContent='✦ Спасибо! Ваша заявка отправлена. Мы свяжемся с вами в ближайшее время.';
     this.reset();
   }catch(err){
-    status.style.display='block';
-    status.className='error-msg';
-    status.textContent='Ошибка отправки. Позвоните нам: +7 925 766 4998';
-    console.error('EmailJS error:',err);
-  }finally{
-    btn.disabled=false;
-    btnText.textContent='Отправить заявку';
-  }
+    st.style.display='block';st.className='er';
+    st.textContent='Ошибка отправки. Позвоните: +7 925 766 4998';
+  }finally{sb.disabled=false;stxt.textContent='Отправить заявку';}
 });
 </script>
 </body>
