@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="description" content="IMPERIONA — студия event-режиссуры. Организуем корпоративные события, концерты, форумы, спортивные мероприятия и boutique-свадьбы любого масштаба. Москва."/>
 <title>IMPERIONA — Event Management Studio</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
@@ -10,378 +11,540 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 <style>
-:root{--gold:#c9a03d;--gold-light:#e2bf6a;--gold-dark:#8a6820;--bg:#080808;--bg2:#0f0f0f;--bg3:#161616;--bg4:#1e1e1e;--text:#e8e2d9;--text-muted:#9a9080;--text-dim:#5a5248;--border:rgba(201,160,61,0.18);--border-hover:rgba(201,160,61,0.55);--tr:0.35s cubic-bezier(0.25,0.46,0.45,0.94)}
+:root{--gold:#c9a03d;--gold-light:#e2bf6a;--gold-dark:#8a6820;--bg:#080808;--bg2:#0f0f0f;--bg3:#161616;--bg4:#1e1e1e;--text:#e8e2d9;--text-muted:#9a9080;--text-dim:#5a5248;--border:rgba(201,160,61,0.18);--border-h:rgba(201,160,61,0.55);--tr:0.35s cubic-bezier(0.25,0.46,0.45,0.94)}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{background:var(--bg);color:var(--text);font-family:'Montserrat',sans-serif;font-weight:300;overflow-x:hidden;line-height:1.7}
 ::selection{background:var(--gold);color:#000}
-::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--gold-dark);border-radius:3px}
+::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--gold-dark);border-radius:2px}
 h1,h2,h3,h4{font-family:'Playfair Display',serif;font-weight:700;line-height:1.15;letter-spacing:-0.02em}
 .section-title{position:relative;display:inline-block}
 .section-title::after{content:'';display:block;width:56px;height:2px;background:linear-gradient(90deg,var(--gold),transparent);margin-top:14px}
 .container{max-width:1240px;margin:0 auto;padding:0 40px}
 section{position:relative;z-index:1}
-.fade-up{opacity:0;transform:translateY(36px);transition:opacity .7s ease,transform .7s ease}
+.fade-up{opacity:0;transform:translateY(32px);transition:opacity .65s ease,transform .65s ease}
 .fade-up.visible{opacity:1;transform:none}
-.fade-up:nth-child(2){transition-delay:.1s}.fade-up:nth-child(3){transition-delay:.2s}.fade-up:nth-child(4){transition-delay:.3s}.fade-up:nth-child(5){transition-delay:.4s}.fade-up:nth-child(6){transition-delay:.5s}
+.fade-up:nth-child(2){transition-delay:.1s}.fade-up:nth-child(3){transition-delay:.18s}.fade-up:nth-child(4){transition-delay:.26s}.fade-up:nth-child(5){transition-delay:.34s}.fade-up:nth-child(6){transition-delay:.42s}
 
-/* HEADER */
-header{position:fixed;top:0;left:0;right:0;z-index:1000;padding:22px 0;transition:background var(--tr),padding var(--tr),box-shadow var(--tr)}
-header.scrolled{background:rgba(8,8,8,0.97);padding:12px 0;box-shadow:0 2px 40px rgba(0,0,0,0.8);border-bottom:1px solid var(--border)}
-header .container{display:flex;align-items:center;justify-content:space-between;gap:20px}
+/* ── HEADER ── */
+header{position:fixed;top:0;left:0;right:0;z-index:1000;padding:20px 0;transition:background var(--tr),padding var(--tr),box-shadow var(--tr)}
+header.scrolled{background:rgba(8,8,8,0.97);padding:11px 0;box-shadow:0 2px 40px rgba(0,0,0,0.85);border-bottom:1px solid var(--border)}
+header .container{display:flex;align-items:center;justify-content:space-between;gap:16px}
 .logo{text-decoration:none;display:flex;flex-direction:column;line-height:1;flex-shrink:0}
-.logo-name{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:900;letter-spacing:0.18em;background:linear-gradient(135deg,var(--gold-light),var(--gold),var(--gold-dark));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.logo-sub{font-size:0.5rem;letter-spacing:0.3em;color:var(--text-muted);text-transform:uppercase;font-weight:500;margin-top:3px}
-nav{display:flex;align-items:center;gap:28px}
-nav a{text-decoration:none;color:var(--text-muted);font-size:0.7rem;letter-spacing:0.18em;text-transform:uppercase;font-weight:500;position:relative;transition:color var(--tr);white-space:nowrap}
+.logo-name{font-family:'Playfair Display',serif;font-size:1.45rem;font-weight:900;letter-spacing:0.18em;background:linear-gradient(135deg,var(--gold-light),var(--gold),var(--gold-dark));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.logo-sub{font-size:0.48rem;letter-spacing:0.3em;color:var(--text-muted);text-transform:uppercase;font-weight:500;margin-top:3px}
+nav{display:flex;align-items:center;gap:24px}
+nav a{text-decoration:none;color:var(--text-muted);font-size:0.68rem;letter-spacing:0.16em;text-transform:uppercase;font-weight:500;position:relative;transition:color var(--tr);white-space:nowrap}
 nav a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;background:var(--gold);transition:width var(--tr)}
 nav a:hover{color:var(--gold)}nav a:hover::after{width:100%}
-.btn-outline{padding:8px 18px;border:1px solid var(--gold);color:var(--gold);font-size:0.65rem;letter-spacing:0.18em;text-transform:uppercase;font-weight:500;transition:all var(--tr);cursor:pointer;background:transparent;font-family:inherit;white-space:nowrap;text-decoration:none}
-.btn-outline:hover{background:var(--gold);color:#000}
+.h-cta{padding:9px 20px;border:1px solid var(--gold);color:var(--gold);font-size:0.64rem;letter-spacing:0.16em;text-transform:uppercase;font-weight:500;transition:all var(--tr);cursor:pointer;background:transparent;font-family:inherit;white-space:nowrap;flex-shrink:0}
+.h-cta:hover{background:var(--gold);color:#000}
 .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none;flex-shrink:0}
-.hamburger span{display:block;width:24px;height:1.5px;background:var(--gold);transition:all .3s}
+.hamburger span{display:block;width:22px;height:1.5px;background:var(--gold);transition:all .3s}
 .hamburger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
 .hamburger.open span:nth-child(2){opacity:0}
 .hamburger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
-.mobile-menu{display:none;position:fixed;inset:0;z-index:999;background:rgba(8,8,8,0.98);flex-direction:column;align-items:center;justify-content:center;gap:28px}
-.mobile-menu.open{display:flex}
-.mobile-menu a{font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;color:var(--text);text-decoration:none;transition:color var(--tr)}
-.mobile-menu a:hover{color:var(--gold)}
+.mob-menu{display:none;position:fixed;inset:0;z-index:999;background:rgba(8,8,8,0.98);flex-direction:column;align-items:center;justify-content:center;gap:26px}
+.mob-menu.open{display:flex}
+.mob-menu a{font-family:'Playfair Display',serif;font-size:1.9rem;font-weight:700;color:var(--text);text-decoration:none;transition:color var(--tr)}
+.mob-menu a:hover{color:var(--gold)}
 
-/* HERO */
+/* ── HERO ── */
 #hero{min-height:100vh;min-height:100dvh;display:flex;align-items:center;position:relative;overflow:hidden;background:var(--bg)}
-.hero-bg{position:absolute;inset:0;z-index:0;background:radial-gradient(ellipse 70% 60% at 70% 50%,rgba(201,160,61,0.07) 0%,transparent 70%),linear-gradient(160deg,#080808,#0d0b08)}
-.hero-line{position:absolute;border:1px solid rgba(201,160,61,0.07);border-radius:50%;animation:spin linear infinite}
-.hero-line:nth-child(1){width:600px;height:600px;top:50%;right:-10%;animation-duration:60s;transform:translateY(-50%)}
-.hero-line:nth-child(2){width:900px;height:900px;top:50%;right:-25%;animation-duration:90s;transform:translateY(-50%);border-color:rgba(201,160,61,0.03)}
-.hero-line:nth-child(3){width:400px;height:400px;top:50%;right:2%;animation-duration:40s;transform:translateY(-50%);animation-direction:reverse}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 80% 70% at 65% 50%,rgba(201,160,61,0.08) 0%,transparent 65%),linear-gradient(160deg,#080808,#0d0b08)}
+.hero-ring{position:absolute;border:1px solid rgba(201,160,61,0.06);border-radius:50%;animation:spin linear infinite}
+.hero-ring:nth-child(1){width:580px;height:580px;top:50%;right:-8%;animation-duration:55s;transform:translateY(-50%)}
+.hero-ring:nth-child(2){width:860px;height:860px;top:50%;right:-22%;animation-duration:85s;border-color:rgba(201,160,61,0.03);transform:translateY(-50%)}
+.hero-ring:nth-child(3){width:380px;height:380px;top:50%;right:4%;animation-duration:38s;animation-direction:reverse;transform:translateY(-50%)}
 @keyframes spin{from{transform:translateY(-50%) rotate(0)}to{transform:translateY(-50%) rotate(360deg)}}
-.particles{position:absolute;inset:0;overflow:hidden;pointer-events:none}
-.particle{position:absolute;border-radius:50%;background:var(--gold);opacity:0;animation:float-up linear infinite}
-@keyframes float-up{0%{opacity:0;transform:translateY(100vh) scale(0)}10%{opacity:.5}90%{opacity:.2}100%{opacity:0;transform:translateY(-100px) scale(1.5)}}
-.hero-content{position:relative;z-index:2;max-width:780px;padding:120px 40px 130px}
-.hero-eyebrow{font-size:0.62rem;letter-spacing:0.4em;text-transform:uppercase;color:var(--gold);font-weight:500;margin-bottom:22px;display:flex;align-items:center;gap:12px}
-.hero-eyebrow::before{content:'';display:block;width:36px;height:1px;background:var(--gold);flex-shrink:0}
-h1.hero-title{font-size:clamp(1.9rem,5.5vw,4.6rem);margin-bottom:22px;color:#fff;text-shadow:0 4px 40px rgba(0,0,0,0.8)}
-h1.hero-title span{background:linear-gradient(135deg,var(--gold-light),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.hero-subtitle{font-family:'Cormorant Garamond',serif;font-size:clamp(0.95rem,2vw,1.28rem);color:var(--text-muted);font-weight:300;max-width:580px;margin-bottom:38px;line-height:1.8}
-.hero-cta{display:flex;gap:12px;flex-wrap:wrap}
-.btn-gold{padding:14px 30px;background:linear-gradient(135deg,var(--gold-light),var(--gold),var(--gold-dark));color:#000;font-weight:600;font-size:0.7rem;letter-spacing:0.18em;text-transform:uppercase;cursor:pointer;border:none;font-family:inherit;position:relative;overflow:hidden;transition:all var(--tr);display:inline-flex;align-items:center;justify-content:center;gap:8px;text-decoration:none}
-.btn-gold::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,var(--gold-dark),var(--gold),var(--gold-light));opacity:0;transition:opacity var(--tr)}
-.btn-gold:hover::before{opacity:1}
-.btn-gold:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(201,160,61,0.4)}
-.btn-gold span{position:relative;z-index:1}
-.btn-ghost{padding:14px 30px;border:1px solid rgba(201,160,61,0.4);color:var(--text-muted);font-size:0.7rem;letter-spacing:0.18em;text-transform:uppercase;cursor:pointer;background:transparent;font-family:inherit;font-weight:500;transition:all var(--tr)}
-.btn-ghost:hover{border-color:var(--gold);color:var(--gold);transform:translateY(-2px)}
-.scroll-ind{position:absolute;bottom:130px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:7px;color:var(--text-dim);font-size:0.58rem;letter-spacing:0.28em;text-transform:uppercase;animation:pdwn 2s ease infinite}
-.scroll-ind i{font-size:.9rem;color:var(--gold)}
-@keyframes pdwn{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(8px)}}
-.hero-stats{position:absolute;bottom:0;left:0;right:0;z-index:2;background:linear-gradient(90deg,rgba(201,160,61,0.02),rgba(201,160,61,0.07),rgba(201,160,61,0.02));border-top:1px solid var(--border)}
-.stats-inner{max-width:1240px;margin:0 auto;padding:18px 40px;display:flex;justify-content:space-around;flex-wrap:wrap}
-.stat-item{text-align:center;padding:10px 16px;border-right:1px solid var(--border);flex:1 1 auto}
-.stat-item:last-child{border-right:none}
-.stat-num{font-family:'Playfair Display',serif;font-size:1.75rem;font-weight:900;background:linear-gradient(135deg,var(--gold-light),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:block}
-.stat-label{font-size:0.57rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--text-muted)}
+.ptcl{position:absolute;inset:0;overflow:hidden;pointer-events:none}
+.ptcl div{position:absolute;border-radius:50%;background:var(--gold);opacity:0;animation:fup linear infinite}
+@keyframes fup{0%{opacity:0;transform:translateY(100vh) scale(0)}10%{opacity:.45}90%{opacity:.15}100%{opacity:0;transform:translateY(-80px) scale(1.4)}}
+.hero-content{position:relative;z-index:2;max-width:820px;padding:118px 40px 140px}
+.hero-tag{font-size:0.6rem;letter-spacing:0.45em;text-transform:uppercase;color:var(--gold);font-weight:500;margin-bottom:20px;display:flex;align-items:center;gap:12px}
+.hero-tag::before{content:'';display:block;width:34px;height:1px;background:var(--gold);flex-shrink:0}
+h1.ht{font-size:clamp(1.85rem,5.2vw,4.5rem);margin-bottom:20px;color:#fff;text-shadow:0 4px 40px rgba(0,0,0,0.8)}
+h1.ht span{background:linear-gradient(135deg,var(--gold-light),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-sub{font-family:'Cormorant Garamond',serif;font-size:clamp(.92rem,1.8vw,1.25rem);color:var(--text-muted);font-weight:300;max-width:560px;margin-bottom:36px;line-height:1.85}
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap}
+.btn-g{padding:13px 28px;background:linear-gradient(135deg,var(--gold-light),var(--gold),var(--gold-dark));color:#000;font-weight:600;font-size:0.68rem;letter-spacing:0.16em;text-transform:uppercase;cursor:pointer;border:none;font-family:inherit;position:relative;overflow:hidden;transition:all var(--tr);display:inline-flex;align-items:center;justify-content:center;gap:7px}
+.btn-g::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,var(--gold-dark),var(--gold),var(--gold-light));opacity:0;transition:opacity var(--tr)}
+.btn-g:hover::before{opacity:1}.btn-g:hover{transform:translateY(-2px);box-shadow:0 8px 26px rgba(201,160,61,0.4)}
+.btn-g span{position:relative;z-index:1}
+.btn-o{padding:13px 28px;border:1px solid rgba(201,160,61,0.4);color:var(--text-muted);font-size:0.68rem;letter-spacing:0.16em;text-transform:uppercase;cursor:pointer;background:transparent;font-family:inherit;font-weight:500;transition:all var(--tr)}
+.btn-o:hover{border-color:var(--gold);color:var(--gold);transform:translateY(-2px)}
+.scroll-hint{position:absolute;bottom:145px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:7px;color:var(--text-dim);font-size:0.56rem;letter-spacing:0.28em;text-transform:uppercase;animation:bounce 2s ease infinite}
+.scroll-hint i{color:var(--gold);font-size:.85rem}
+@keyframes bounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(7px)}}
+/* Stats bar */
+.hero-stats{position:absolute;bottom:0;left:0;right:0;z-index:2;border-top:1px solid var(--border);background:rgba(8,8,8,0.6);backdrop-filter:blur(12px)}
+.stats-row{max-width:1240px;margin:0 auto;padding:16px 40px;display:flex;justify-content:space-around;flex-wrap:wrap}
+.si{text-align:center;padding:10px 14px;border-right:1px solid var(--border);flex:1 1 auto}
+.si:last-child{border-right:none}
+.si-n{font-family:'Playfair Display',serif;font-size:1.7rem;font-weight:900;background:linear-gradient(135deg,var(--gold-light),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:block}
+.si-l{font-size:0.56rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--text-muted)}
 
-/* SECTION HEADER */
-.section-header{text-align:center;margin-bottom:60px}
-.section-header .section-title{font-size:clamp(1.6rem,4vw,2.9rem)}
-.section-header .section-title::after{margin:14px auto 0}
-.section-header p{font-family:'Cormorant Garamond',serif;font-size:1.05rem;color:var(--text-muted);max-width:520px;margin:18px auto 0;font-weight:300}
+/* ── TICKER ── */
+.ticker-wrap{background:var(--gold);padding:11px 0;overflow:hidden;position:relative;z-index:2}
+.ticker-inner{display:flex;width:max-content;animation:ticker 28s linear infinite}
+.ticker-inner:hover{animation-play-state:paused}
+.ticker-item{white-space:nowrap;padding:0 40px;font-size:0.65rem;letter-spacing:0.22em;text-transform:uppercase;font-weight:600;color:#000;display:flex;align-items:center;gap:16px}
+.ticker-item::after{content:'◆';opacity:0.4;font-size:0.5rem}
+@keyframes ticker{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 
-/* SERVICES */
-#services{padding:100px 0;background:var(--bg)}
-.services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;border:1px solid var(--border)}
-.service-card{background:var(--bg2);border-right:1px solid var(--border);border-bottom:1px solid var(--border);position:relative;overflow:hidden;transition:all var(--tr)}
-.service-card:nth-child(3n){border-right:none}
-.service-card:nth-child(n+4){border-bottom:none}
-.service-card::after{content:'';position:absolute;top:0;left:0;width:0;height:2px;background:linear-gradient(90deg,var(--gold),transparent);transition:width .5s}
-.service-card:hover::after{width:100%}
-.service-card:hover{transform:translateY(-3px);box-shadow:0 16px 48px rgba(0,0,0,0.5)}
-.svc-photo{width:100%;height:185px;overflow:hidden;position:relative}
-.svc-photo img{width:100%;height:100%;object-fit:cover;filter:brightness(.6) saturate(.7);transition:transform .7s,filter .5s;display:block}
-.service-card:hover .svc-photo img{transform:scale(1.06);filter:brightness(.8) saturate(.85)}
-.svc-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,transparent 40%,var(--bg2) 100%)}
-.svc-badge{position:absolute;bottom:-19px;left:26px;width:44px;height:44px;background:var(--bg2);border:1px solid var(--gold);display:flex;align-items:center;justify-content:center;font-size:.95rem;color:var(--gold);transition:all var(--tr);z-index:2}
-.service-card:hover .svc-badge{background:var(--gold);color:#000}
-.svc-body{padding:30px 26px 26px}
-.service-card h3{font-size:.98rem;margin-bottom:9px;color:var(--text);margin-top:4px}
-.service-card p{font-size:.79rem;color:var(--text-muted);line-height:1.75}
+/* ── SECTION COMMON ── */
+.sec-hd{text-align:center;margin-bottom:58px}
+.sec-hd .section-title{font-size:clamp(1.55rem,3.8vw,2.8rem)}
+.sec-hd .section-title::after{margin:14px auto 0}
+.sec-hd p{font-family:'Cormorant Garamond',serif;font-size:1.02rem;color:var(--text-muted);max-width:500px;margin:16px auto 0;font-weight:300}
 
-/* ABOUT */
-#about{padding:100px 0;background:var(--bg2);position:relative}
+/* ── SERVICES ── */
+#services{padding:96px 0;background:var(--bg)}
+.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;border:1px solid var(--border)}
+.svc-card{background:var(--bg2);border-right:1px solid var(--border);border-bottom:1px solid var(--border);position:relative;overflow:hidden;transition:all var(--tr)}
+.svc-card:nth-child(3n){border-right:none}.svc-card:nth-child(n+4){border-bottom:none}
+.svc-card::after{content:'';position:absolute;top:0;left:0;width:0;height:2px;background:linear-gradient(90deg,var(--gold),transparent);transition:width .5s}
+.svc-card:hover::after{width:100%}
+.svc-card:hover{transform:translateY(-3px);box-shadow:0 14px 44px rgba(0,0,0,0.55)}
+.svc-img{width:100%;height:180px;overflow:hidden;position:relative}
+.svc-img img{width:100%;height:100%;object-fit:cover;filter:brightness(.58) saturate(.65);transition:transform .7s,filter .5s;display:block}
+.svc-card:hover .svc-img img{transform:scale(1.06);filter:brightness(.78) saturate(.85)}
+.svc-ov{position:absolute;inset:0;background:linear-gradient(to bottom,transparent 40%,var(--bg2) 100%)}
+.svc-ico{position:absolute;bottom:-18px;left:24px;width:42px;height:42px;background:var(--bg2);border:1px solid var(--gold);display:flex;align-items:center;justify-content:center;font-size:.9rem;color:var(--gold);transition:all var(--tr);z-index:2}
+.svc-card:hover .svc-ico{background:var(--gold);color:#000}
+.svc-body{padding:28px 24px 24px}
+.svc-card h3{font-size:.95rem;margin-bottom:8px;color:var(--text);margin-top:2px}
+.svc-card p{font-size:.77rem;color:var(--text-muted);line-height:1.75}
+
+/* ── HOW WE WORK ── */
+#process{padding:96px 0;background:var(--bg2);position:relative}
+#process::before,#process::after{content:'';position:absolute;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+#process::before{top:0}#process::after{bottom:0}
+.process-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid var(--border);margin-top:0}
+.proc-item{padding:40px 28px;border-right:1px solid var(--border);position:relative;overflow:hidden;transition:background var(--tr)}
+.proc-item:last-child{border-right:none}
+.proc-item:hover{background:var(--bg3)}
+.proc-num{font-family:'Playfair Display',serif;font-size:4rem;font-weight:900;line-height:1;color:rgba(201,160,61,0.08);position:absolute;top:16px;right:20px;transition:color var(--tr)}
+.proc-item:hover .proc-num{color:rgba(201,160,61,0.13)}
+.proc-ico{width:48px;height:48px;border:1px solid var(--gold);display:flex;align-items:center;justify-content:center;color:var(--gold);font-size:1.1rem;margin-bottom:18px;transition:all var(--tr)}
+.proc-item:hover .proc-ico{background:rgba(201,160,61,0.09)}
+.proc-item h4{font-size:.92rem;margin-bottom:10px;color:var(--text)}
+.proc-item p{font-size:.75rem;color:var(--text-dim);line-height:1.75}
+.proc-arrow{position:absolute;top:50%;right:-1px;transform:translateY(-50%);width:20px;height:20px;border-top:1px solid var(--gold);border-right:1px solid var(--gold);rotate:45deg;background:var(--bg2);z-index:2;transition:background var(--tr)}
+.proc-item:hover .proc-arrow{background:var(--bg3)}
+.proc-item:last-child .proc-arrow{display:none}
+
+/* ── PORTFOLIO ── */
+#portfolio{padding:96px 0;background:var(--bg)}
+.pf-filters{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:36px}
+.pf-btn{padding:7px 18px;border:1px solid var(--border);color:var(--text-muted);font-size:0.64rem;letter-spacing:0.16em;text-transform:uppercase;cursor:pointer;background:transparent;font-family:inherit;font-weight:500;transition:all var(--tr)}
+.pf-btn:hover,.pf-btn.active{border-color:var(--gold);color:var(--gold)}
+.pf-btn.active{background:rgba(201,160,61,0.07)}
+.pf-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.pf-item{position:relative;overflow:hidden;aspect-ratio:4/3;cursor:pointer;border:1px solid var(--border);transition:border-color var(--tr)}
+.pf-item:hover{border-color:var(--border-h)}
+.pf-item.hidden{display:none}
+.pf-item img{width:100%;height:100%;object-fit:cover;filter:brightness(.6) saturate(.7);transition:transform .7s,filter .5s;display:block}
+.pf-item:hover img{transform:scale(1.06);filter:brightness(.8) saturate(.9)}
+.pf-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.85) 0%,transparent 60%);opacity:0;transition:opacity .4s;display:flex;flex-direction:column;justify-content:flex-end;padding:20px}
+.pf-item:hover .pf-overlay{opacity:1}
+.pf-cat{font-size:0.58rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:4px;font-weight:500}
+.pf-title{font-family:'Playfair Display',serif;font-size:1rem;color:#fff}
+
+/* ── ABOUT ── */
+#about{padding:96px 0;background:var(--bg2);position:relative}
 #about::before,#about::after{content:'';position:absolute;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
 #about::before{top:0}#about::after{bottom:0}
-.about-inner{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start}
-.about-text h2{font-size:clamp(1.6rem,3.5vw,2.7rem);margin-bottom:18px}
-.about-text h2::after{content:'';display:block;width:56px;height:2px;background:linear-gradient(90deg,var(--gold),transparent);margin-top:14px}
-.about-text p{font-size:.85rem;color:var(--text-muted);margin-bottom:13px;line-height:1.85}
-.tagline{font-family:'Cormorant Garamond',serif;font-size:1.18rem;font-style:italic;color:var(--gold-light);margin:22px 0;border-left:2px solid var(--gold);padding-left:16px;font-weight:300}
-.proj-list{list-style:none;display:flex;flex-direction:column;gap:8px;margin-top:20px}
-.proj-list li{display:flex;align-items:flex-start;gap:10px;font-size:.79rem;color:var(--text-muted);line-height:1.6}
-.proj-list li::before{content:'◈';color:var(--gold);font-size:.62rem;flex-shrink:0;margin-top:4px}
-.port-grid{display:flex;flex-direction:column;gap:12px}
-.port-item{position:relative;overflow:hidden;aspect-ratio:16/9;border:1px solid var(--border);transition:border-color var(--tr)}
-.port-item:hover{border-color:var(--border-hover)}
-.port-item img{width:100%;height:100%;object-fit:cover;filter:brightness(.6) saturate(.75);transition:transform .7s,filter .5s;display:block}
-.port-item:hover img{transform:scale(1.04);filter:brightness(.78) saturate(.9)}
-.port-cap{position:absolute;bottom:0;left:0;right:0;padding:14px 16px;background:linear-gradient(to top,rgba(0,0,0,0.9),transparent);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;font-weight:500;color:var(--text-muted)}
-.port-cap i{color:var(--gold);margin-right:5px}
+.about-wrap{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start}
+.ab-text h2{font-size:clamp(1.55rem,3.2vw,2.6rem);margin-bottom:16px}
+.ab-text h2::after{content:'';display:block;width:56px;height:2px;background:linear-gradient(90deg,var(--gold),transparent);margin-top:14px}
+.ab-text p{font-size:.83rem;color:var(--text-muted);margin-bottom:12px;line-height:1.85}
+.ab-quote{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-style:italic;color:var(--gold-light);margin:20px 0;border-left:2px solid var(--gold);padding-left:15px;font-weight:300}
+.proj-list{list-style:none;display:flex;flex-direction:column;gap:8px;margin-top:18px}
+.proj-list li{display:flex;align-items:flex-start;gap:10px;font-size:.77rem;color:var(--text-muted);line-height:1.6}
+.proj-list li::before{content:'◈';color:var(--gold);font-size:.6rem;flex-shrink:0;margin-top:4px}
+/* Counters */
+.counters{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;border:1px solid var(--border);margin-bottom:24px}
+.counter-item{padding:24px 20px;background:var(--bg3);text-align:center;border-right:1px solid var(--border);border-bottom:1px solid var(--border)}
+.counter-item:nth-child(2n){border-right:none}.counter-item:nth-child(n+3){border-bottom:none}
+.c-num{font-family:'Playfair Display',serif;font-size:2rem;font-weight:900;background:linear-gradient(135deg,var(--gold-light),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:block;line-height:1}
+.c-lbl{font-size:0.6rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--text-dim);margin-top:5px;display:block}
 
-/* CLIENTS */
-#clients{padding:100px 0;background:var(--bg)}
-.clients-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:13px}
-.client-card{padding:30px 18px;background:var(--bg2);border:1px solid var(--border);text-align:center;transition:all var(--tr);position:relative;overflow:hidden}
-.client-card::before{content:'';position:absolute;bottom:0;left:0;right:0;height:0;background:linear-gradient(to top,rgba(201,160,61,0.06),transparent);transition:height .4s}
-.client-card:hover{border-color:var(--border-hover);transform:translateY(-3px)}
-.client-card:hover::before{height:100%}
-.cli-img{width:64px;height:64px;border-radius:50%;overflow:hidden;margin:0 auto 13px;border:1px solid var(--border);transition:border-color var(--tr)}
-.client-card:hover .cli-img{border-color:var(--gold)}
-.cli-img img{width:100%;height:100%;object-fit:cover;filter:brightness(.7) saturate(.5) grayscale(.3);transition:filter .4s;display:block}
-.client-card:hover .cli-img img{filter:brightness(.85) saturate(.8)}
-.client-card h4{font-size:.78rem;letter-spacing:.06em;color:var(--text);margin-bottom:6px;font-family:'Playfair Display',serif;font-weight:500}
-.client-card p{font-size:.7rem;color:var(--text-dim);line-height:1.6}
+/* ── TEAM ── */
+#team{padding:96px 0;background:var(--bg)}
+.team-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.team-card{background:var(--bg2);border:1px solid var(--border);overflow:hidden;transition:all var(--tr);position:relative}
+.team-card:hover{border-color:var(--border-h);transform:translateY(-3px)}
+.team-photo{width:100%;aspect-ratio:3/4;overflow:hidden;position:relative}
+.team-photo img{width:100%;height:100%;object-fit:cover;filter:grayscale(.5) brightness(.7);transition:filter .5s,transform .6s;display:block}
+.team-card:hover .team-photo img{filter:grayscale(.2) brightness(.85);transform:scale(1.04)}
+.team-info{padding:18px 16px}
+.team-name{font-family:'Playfair Display',serif;font-size:1rem;margin-bottom:4px;color:var(--text)}
+.team-role{font-size:0.65rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold);font-weight:500}
 
-/* PARTNERS */
-#partners{padding:90px 0;background:var(--bg2);position:relative}
-#partners::before,#partners::after{content:'';position:absolute;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
-#partners::before{top:0}#partners::after{bottom:0}
-.partners-desc{text-align:center;max-width:560px;margin:0 auto 44px;font-family:'Cormorant Garamond',serif;font-size:1rem;color:var(--text-muted);font-style:italic}
-.partners-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:13px}
-.partner-item{padding:22px 12px;border:1px solid var(--border);display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center;transition:all var(--tr);background:var(--bg3)}
-.partner-item:hover{border-color:var(--border-hover)}
-.partner-item i{font-size:1.35rem;color:var(--gold)}
-.partner-item span{font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-dim);font-weight:500}
+/* ── CLIENTS ── */
+#clients{padding:96px 0;background:var(--bg2);position:relative}
+#clients::before,#clients::after{content:'';position:absolute;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+#clients::before{top:0}#clients::after{bottom:0}
+.clients-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.cli-card{padding:28px 16px;background:var(--bg3);border:1px solid var(--border);text-align:center;transition:all var(--tr);position:relative;overflow:hidden}
+.cli-card::before{content:'';position:absolute;bottom:0;left:0;right:0;height:0;background:linear-gradient(to top,rgba(201,160,61,0.06),transparent);transition:height .4s}
+.cli-card:hover{border-color:var(--border-h);transform:translateY(-3px)}
+.cli-card:hover::before{height:100%}
+.cli-img{width:62px;height:62px;border-radius:50%;overflow:hidden;margin:0 auto 12px;border:1px solid var(--border);transition:border-color var(--tr)}
+.cli-card:hover .cli-img{border-color:var(--gold)}
+.cli-img img{width:100%;height:100%;object-fit:cover;filter:brightness(.7) saturate(.4) grayscale(.3);transition:filter .4s;display:block}
+.cli-card:hover .cli-img img{filter:brightness(.85) saturate(.75)}
+.cli-card h4{font-size:.77rem;letter-spacing:.05em;color:var(--text);margin-bottom:5px;font-family:'Playfair Display',serif;font-weight:500}
+.cli-card p{font-size:.69rem;color:var(--text-dim);line-height:1.55}
 
-/* WHY — крупные символы доверия */
-#why{padding:100px 0;background:var(--bg)}
+/* ── REVIEWS ── */
+#reviews{padding:96px 0;background:var(--bg)}
+.reviews-slider{position:relative;overflow:hidden}
+.reviews-track{display:flex;transition:transform .6s cubic-bezier(0.25,0.46,0.45,0.94)}
+.review-slide{min-width:100%;padding:0 40px}
+.review-inner{max-width:780px;margin:0 auto;text-align:center;padding:48px 40px;background:var(--bg2);border:1px solid var(--border);position:relative}
+.review-inner::before{content:'\201C';font-family:'Playfair Display',serif;font-size:6rem;color:var(--gold);opacity:0.15;position:absolute;top:-10px;left:30px;line-height:1}
+.review-text{font-family:'Cormorant Garamond',serif;font-size:1.18rem;font-style:italic;color:var(--text-muted);line-height:1.8;margin-bottom:24px;font-weight:300}
+.review-author{font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);font-weight:500}
+.review-co{font-size:0.65rem;color:var(--text-dim);margin-top:3px}
+.slider-nav{display:flex;gap:10px;justify-content:center;margin-top:24px}
+.s-dot{width:8px;height:8px;border:1px solid var(--border);cursor:pointer;transition:all var(--tr);background:transparent}
+.s-dot.active{background:var(--gold);border-color:var(--gold)}
+.s-arr{width:40px;height:40px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--text-muted);transition:all var(--tr);background:transparent;font-size:.8rem}
+.s-arr:hover{border-color:var(--gold);color:var(--gold)}
+.slider-controls{display:flex;align-items:center;gap:14px;justify-content:center;margin-top:20px}
+
+/* ── WHY ── */
+#why{padding:96px 0;background:var(--bg2);position:relative}
+#why::before,#why::after{content:'';position:absolute;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+#why::before{top:0}#why::after{bottom:0}
 .why-grid{display:grid;grid-template-columns:repeat(5,1fr);border:1px solid var(--border)}
-.why-item{padding:38px 22px;border-right:1px solid var(--border);position:relative;overflow:hidden;transition:all var(--tr)}
+.why-item{padding:36px 22px;border-right:1px solid var(--border);position:relative;overflow:hidden;transition:background var(--tr)}
 .why-item:last-child{border-right:none}
 .why-item::after{content:'';position:absolute;bottom:0;left:0;right:0;height:0;background:linear-gradient(to top,rgba(201,160,61,0.06),transparent);transition:height .4s}
 .why-item:hover::after{height:100%}
-.why-item:hover{background:var(--bg2)}
-.why-roman{font-family:'Playfair Display',serif;font-size:2.8rem;font-weight:900;background:linear-gradient(135deg,var(--gold-light),var(--gold-dark));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:block;margin-bottom:18px;line-height:1}
-/* Символ с двойной рамкой */
-.why-sym{width:54px;height:54px;border:1px solid var(--gold);display:flex;align-items:center;justify-content:center;margin-bottom:16px;position:relative;transition:all var(--tr)}
-.why-sym::before{content:'';position:absolute;inset:-5px;border:1px solid rgba(201,160,61,0.22);transition:all var(--tr)}
-.why-item:hover .why-sym{background:rgba(201,160,61,0.09);border-color:var(--gold-light)}
-.why-item:hover .why-sym::before{inset:-8px;border-color:rgba(201,160,61,0.38)}
-.why-sym svg{width:26px;height:26px;fill:none;stroke:var(--gold);stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round;transition:stroke var(--tr)}
-.why-item:hover .why-sym svg{stroke:var(--gold-light)}
-.why-item h4{font-size:.88rem;margin-bottom:9px;color:var(--text);line-height:1.3}
-.why-item p{font-size:.73rem;color:var(--text-dim);line-height:1.75}
+.why-item:hover{background:var(--bg3)}
+.why-rom{font-family:'Playfair Display',serif;font-size:2.6rem;font-weight:900;background:linear-gradient(135deg,var(--gold-light),var(--gold-dark));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:block;margin-bottom:16px;line-height:1}
+.why-sym{width:50px;height:50px;border:1px solid var(--gold);display:flex;align-items:center;justify-content:center;margin-bottom:14px;position:relative;transition:all var(--tr)}
+.why-sym::before{content:'';position:absolute;inset:-5px;border:1px solid rgba(201,160,61,0.2);transition:all var(--tr)}
+.why-item:hover .why-sym{background:rgba(201,160,61,0.09)}
+.why-item:hover .why-sym::before{inset:-8px;border-color:rgba(201,160,61,0.35)}
+.why-sym svg{width:24px;height:24px;fill:none;stroke:var(--gold);stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round}
+.why-item h4{font-size:.86rem;margin-bottom:8px;color:var(--text);line-height:1.3}
+.why-item p{font-size:.72rem;color:var(--text-dim);line-height:1.75}
 
-/* CONTACTS */
-#contacts{padding:100px 0;background:var(--bg2);position:relative}
+/* ── PARTNERS ── */
+#partners{padding:80px 0;background:var(--bg)}
+.partners-note{text-align:center;max-width:540px;margin:0 auto 40px;font-family:'Cormorant Garamond',serif;font-size:.98rem;color:var(--text-muted);font-style:italic}
+.part-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:12px}
+.part-item{padding:22px 12px;border:1px solid var(--border);display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center;transition:all var(--tr);background:var(--bg2)}
+.part-item:hover{border-color:var(--border-h)}
+.part-item i{font-size:1.3rem;color:var(--gold)}
+.part-item span{font-size:.59rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-dim);font-weight:500}
+
+/* ── CONTACTS ── */
+#contacts{padding:96px 0;background:var(--bg2);position:relative}
 #contacts::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
-.contacts-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start}
-.contacts-info h2{font-size:clamp(1.6rem,3vw,2.5rem);margin-bottom:28px}
-.contacts-info h2::after{content:'';display:block;width:56px;height:2px;background:linear-gradient(90deg,var(--gold),transparent);margin-top:14px}
-.ci{display:flex;align-items:flex-start;gap:14px;margin-bottom:22px;padding-bottom:22px;border-bottom:1px solid var(--border)}
+.contacts-wrap{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
+.ci-wrap h2{font-size:clamp(1.5rem,2.8vw,2.4rem);margin-bottom:26px}
+.ci-wrap h2::after{content:'';display:block;width:56px;height:2px;background:linear-gradient(90deg,var(--gold),transparent);margin-top:14px}
+.ci{display:flex;align-items:flex-start;gap:13px;margin-bottom:20px;padding-bottom:20px;border-bottom:1px solid var(--border)}
 .ci:last-of-type{border-bottom:none}
-.ci-ico{width:40px;height:40px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--gold);font-size:.9rem;flex-shrink:0;transition:all var(--tr);text-decoration:none}
+.ci-ico{width:38px;height:38px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--gold);font-size:.85rem;flex-shrink:0;transition:all var(--tr);text-decoration:none}
 .ci-ico:hover{border-color:var(--gold);background:rgba(201,160,61,0.08)}
-.ci-lbl{font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:var(--text-dim);margin-bottom:3px;font-weight:500}
-.ci-val{font-size:.86rem;color:var(--text)}
+.ci-lbl{font-size:.57rem;letter-spacing:.18em;text-transform:uppercase;color:var(--text-dim);margin-bottom:3px;font-weight:500}
+.ci-val{font-size:.84rem;color:var(--text)}
 .ci-val a{color:var(--text);text-decoration:none;transition:color var(--tr)}
 .ci-val a:hover{color:var(--gold)}
-.map-wrap{margin-top:24px;border:1px solid var(--border);overflow:hidden}
-.map-wrap iframe{display:block;filter:invert(.92) hue-rotate(180deg) saturate(.5) brightness(.85)}
-.contacts-form h3{font-size:1.3rem;margin-bottom:28px}
-.contacts-form h3::after{content:'';display:block;width:40px;height:2px;background:linear-gradient(90deg,var(--gold),transparent);margin-top:10px}
-.fg{margin-bottom:16px}
-.fg label{display:block;font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:var(--text-dim);margin-bottom:7px;font-weight:500}
-.fg input,.fg textarea{width:100%;padding:12px 15px;background:var(--bg3);border:1px solid var(--border);color:var(--text);font-family:inherit;font-size:16px;font-weight:300;transition:border-color var(--tr),background var(--tr);outline:none;resize:none;-webkit-appearance:none;border-radius:0;appearance:none}
-.fg input:focus,.fg textarea:focus{border-color:var(--gold);background:var(--bg4)}
-.fg input.err,.fg textarea.err{border-color:#c0392b}
-.fg textarea{height:115px}
-.form-note{font-size:.68rem;color:var(--text-dim);margin-top:9px;line-height:1.5}
-#form-status{display:none;margin-top:12px;padding:12px 15px;font-size:.79rem}
-#form-status.ok{background:rgba(201,160,61,0.09);border:1px solid var(--gold);color:var(--gold-light)}
-#form-status.er{background:rgba(192,57,43,0.1);border:1px solid #c0392b;color:#e74c3c}
+.map-box{margin-top:22px;border:1px solid var(--border);overflow:hidden}
+.map-box iframe{display:block;filter:invert(.92) hue-rotate(180deg) saturate(.5) brightness(.85)}
+.cf-wrap h3{font-size:1.25rem;margin-bottom:26px}
+.cf-wrap h3::after{content:'';display:block;width:40px;height:2px;background:linear-gradient(90deg,var(--gold),transparent);margin-top:10px}
+.fg{margin-bottom:14px}
+.fg label{display:block;font-size:.57rem;letter-spacing:.18em;text-transform:uppercase;color:var(--text-dim);margin-bottom:6px;font-weight:500}
+.fg input,.fg textarea,.fg select{width:100%;padding:12px 14px;background:var(--bg3);border:1px solid var(--border);color:var(--text);font-family:inherit;font-size:16px;font-weight:300;transition:border-color var(--tr),background var(--tr);outline:none;resize:none;-webkit-appearance:none;border-radius:0;appearance:none}
+.fg select{cursor:pointer}
+.fg select option{background:var(--bg3)}
+.fg input:focus,.fg textarea:focus,.fg select:focus{border-color:var(--gold);background:var(--bg4)}
+.fg input.err,.fg textarea.err,.fg select.err{border-color:#c0392b}
+.fg textarea{height:108px}
+.form-note{font-size:.67rem;color:var(--text-dim);margin-top:8px;line-height:1.5}
+#fst{display:none;margin-top:11px;padding:11px 14px;font-size:.77rem}
+#fst.ok{background:rgba(201,160,61,0.09);border:1px solid var(--gold);color:var(--gold-light)}
+#fst.er{background:rgba(192,57,43,0.1);border:1px solid #c0392b;color:#e74c3c}
 
-/* FOOTER */
-footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 0 24px}
-.fi{display:flex;align-items:center;justify-content:space-between;gap:20px;padding-bottom:24px;border-bottom:1px solid var(--border);margin-bottom:20px;flex-wrap:wrap}
-.fsoc{display:flex;gap:9px}
-.sb{width:34px;height:34px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--text-muted);text-decoration:none;font-size:.8rem;transition:all var(--tr)}
-.sb:hover{border-color:var(--gold);color:var(--gold)}
-.fb{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}
-.fcopy{font-size:.68rem;color:var(--text-dim)}
-.flinks{display:flex;gap:18px;flex-wrap:wrap}
-.flinks a{font-size:.68rem;color:var(--text-dim);text-decoration:none;transition:color var(--tr)}
-.flinks a:hover{color:var(--gold)}
-#btt{position:fixed;bottom:22px;right:22px;z-index:900;width:40px;height:40px;border:1px solid var(--gold);background:var(--bg);color:var(--gold);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:.8rem;opacity:0;transform:translateY(20px);transition:all var(--tr);text-decoration:none}
+/* ── FOOTER ── */
+footer{background:var(--bg);border-top:1px solid var(--border);padding:38px 0 22px}
+.f-top{display:flex;align-items:center;justify-content:space-between;gap:20px;padding-bottom:22px;border-bottom:1px solid var(--border);margin-bottom:18px;flex-wrap:wrap}
+.f-soc{display:flex;gap:8px}
+.f-s{width:32px;height:32px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--text-muted);text-decoration:none;font-size:.78rem;transition:all var(--tr)}
+.f-s:hover{border-color:var(--gold);color:var(--gold)}
+.f-bot{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.f-copy{font-size:.66rem;color:var(--text-dim)}
+.f-links{display:flex;gap:16px;flex-wrap:wrap}
+.f-links a{font-size:.66rem;color:var(--text-dim);text-decoration:none;transition:color var(--tr)}
+.f-links a:hover{color:var(--gold)}
+
+/* ── FLOATING BUTTONS ── */
+#btt{position:fixed;bottom:22px;right:22px;z-index:900;width:38px;height:38px;border:1px solid var(--gold);background:var(--bg);color:var(--gold);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:.78rem;opacity:0;transform:translateY(18px);transition:all var(--tr);text-decoration:none}
 #btt.on{opacity:1;transform:none}
 #btt:hover{background:var(--gold);color:#000}
+.float-tg{position:fixed;bottom:70px;right:22px;z-index:900;width:38px;height:38px;background:#229ED9;color:#fff;display:flex;align-items:center;justify-content:center;border-radius:50%;font-size:.9rem;text-decoration:none;box-shadow:0 4px 16px rgba(34,158,217,0.4);transition:transform var(--tr)}
+.float-tg:hover{transform:scale(1.1)}
+.float-wa{position:fixed;bottom:118px;right:22px;z-index:900;width:38px;height:38px;background:#25D366;color:#fff;display:flex;align-items:center;justify-content:center;border-radius:50%;font-size:.9rem;text-decoration:none;box-shadow:0 4px 16px rgba(37,211,102,0.4);transition:transform var(--tr)}
+.float-wa:hover{transform:scale(1.1)}
 
-/* ═══════════════════════════════
-   RESPONSIVE — MOBILE FIRST
-═══════════════════════════════ */
+/* ══════════════ RESPONSIVE ══════════════ */
 @media(max-width:1100px){
   .why-grid{grid-template-columns:repeat(3,1fr)}
   .why-item:nth-child(3){border-right:none}
   .why-item:nth-child(n+4){border-top:1px solid var(--border)}
   .why-item:nth-child(5){border-right:none}
-  .partners-grid{grid-template-columns:repeat(3,1fr)}
+  .part-grid{grid-template-columns:repeat(3,1fr)}
   .clients-grid{grid-template-columns:repeat(2,1fr)}
+  .team-grid{grid-template-columns:repeat(2,1fr)}
+  .pf-grid{grid-template-columns:repeat(2,1fr)}
 }
 @media(max-width:900px){
   .container{padding:0 20px}
-  nav,.btn-outline-nav{display:none}
+  nav,.h-cta{display:none}
   .hamburger{display:flex}
-  .hero-content{padding:90px 20px 120px}
-  .hero-line{display:none}
-  .scroll-ind{bottom:115px}
-  .stats-inner{padding:12px 20px;justify-content:center}
-  .stat-item{flex:1 1 44%;border-bottom:1px solid var(--border)}
-  .stat-item:nth-child(2n){border-right:none}
-  .stat-item:last-child{border-bottom:none}
-  .stat-num{font-size:1.5rem}
-  #services,#about,#clients,#why,#contacts{padding:70px 0}
-  #partners{padding:60px 0}
-  .services-grid{grid-template-columns:repeat(2,1fr)}
-  .service-card:nth-child(2n){border-right:none}
-  .service-card:nth-child(3){border-right:1px solid var(--border)}
-  .service-card:nth-child(n+5){border-bottom:none}
-  .about-inner{grid-template-columns:1fr;gap:40px}
-  .why-grid{grid-template-columns:repeat(2,1fr)}
-  .why-item:nth-child(2n){border-right:none}
-  .why-item:nth-child(3){border-right:1px solid var(--border)}
-  .why-item:nth-child(n+3){border-top:1px solid var(--border)}
-  .why-item:nth-child(5){border-right:none;grid-column:span 2}
-  .contacts-grid{grid-template-columns:1fr;gap:40px}
-  .section-header{margin-bottom:40px}
-  .fi{justify-content:center;text-align:center}
-  .fb{justify-content:center;text-align:center}
+  .hero-content{padding:88px 20px 130px}
+  .hero-ring{display:none}
+  .scroll-hint{display:none}
+  .stats-row{padding:12px 20px}
+  .si{flex:1 1 44%;border-bottom:1px solid var(--border)}
+  .si:nth-child(2n){border-right:none}
+  .si:last-child{border-bottom:none}
+  .si-n{font-size:1.4rem}
+  #services,#portfolio,#about,#team,#clients,#reviews,#why,#contacts,#process,#partners{padding:68px 0}
+  .svc-grid{grid-template-columns:repeat(2,1fr)}
+  .svc-card:nth-child(2n){border-right:none}
+  .svc-card:nth-child(3){border-right:1px solid var(--border)}
+  .svc-card:nth-child(n+5){border-bottom:none}
+  .process-grid{grid-template-columns:repeat(2,1fr)}
+  .proc-item:nth-child(2n){border-right:none}
+  .proc-item:nth-child(n+3){border-top:1px solid var(--border)}
+  .proc-arrow{display:none}
+  .about-wrap{grid-template-columns:1fr;gap:36px}
+  .contacts-wrap{grid-template-columns:1fr;gap:36px}
+  .sec-hd{margin-bottom:36px}
+  .f-top{justify-content:center;text-align:center}
+  .f-bot{justify-content:center;text-align:center}
 }
 @media(max-width:640px){
   .container{padding:0 16px}
-  h1.hero-title{font-size:1.8rem}
-  .hero-subtitle{font-size:.94rem}
-  .hero-cta{flex-direction:column;gap:10px}
-  .btn-gold,.btn-ghost{width:100%;text-align:center}
-  .stats-inner{flex-direction:column;gap:0}
-  .stat-item{width:100%;border-right:none;border-bottom:1px solid var(--border);padding:10px 16px}
-  .stat-item:last-child{border-bottom:none}
-  .services-grid{grid-template-columns:1fr}
-  .service-card{border-right:none!important}
-  .service-card:not(:last-child){border-bottom:1px solid var(--border)!important}
-  .service-card:last-child{border-bottom:none!important}
-  .svc-photo{height:155px}
+  h1.ht{font-size:1.75rem}
+  .hero-sub{font-size:.9rem}
+  .hero-btns{flex-direction:column;gap:9px}
+  .btn-g,.btn-o{width:100%;text-align:center}
+  .stats-row{flex-direction:column;gap:0}
+  .si{width:100%;border-right:none;border-bottom:1px solid var(--border);padding:9px 14px}
+  .si:last-child{border-bottom:none}
+  .svc-grid{grid-template-columns:1fr}
+  .svc-card{border-right:none!important}
+  .svc-card:not(:last-child){border-bottom:1px solid var(--border)!important}
+  .svc-card:last-child{border-bottom:none!important}
+  .svc-img{height:150px}
+  .pf-grid{grid-template-columns:1fr}
   .clients-grid{grid-template-columns:1fr 1fr}
-  .partners-grid{grid-template-columns:repeat(2,1fr)}
+  .team-grid{grid-template-columns:1fr 1fr}
+  .part-grid{grid-template-columns:repeat(2,1fr)}
   .why-grid{grid-template-columns:1fr}
   .why-item{border-right:none!important;border-top:none!important}
   .why-item:not(:last-child){border-bottom:1px solid var(--border)!important}
   .why-item:nth-child(5){grid-column:auto}
-  .why-roman{font-size:2.2rem}
-  .section-header .section-title{font-size:1.5rem}
-  .section-header p{font-size:.9rem}
-  #btt{bottom:14px;right:14px;width:36px;height:36px}
+  .why-rom{font-size:2rem}
+  .process-grid{grid-template-columns:1fr}
+  .proc-item{border-right:none!important}
+  .proc-item:not(:last-child){border-bottom:1px solid var(--border)!important}
+  .review-slide{padding:0 12px}
+  .review-inner{padding:32px 20px}
+  .review-text{font-size:1rem}
+  .sec-hd .section-title{font-size:1.45rem}
+  .sec-hd p{font-size:.87rem}
+  #btt{bottom:14px;right:14px}
+  .float-tg{bottom:60px;right:14px}
+  .float-wa{bottom:106px;right:14px}
 }
 @media(max-width:400px){
-  .clients-grid{grid-template-columns:1fr}
+  .clients-grid,.team-grid{grid-template-columns:1fr}
   .logo-name{font-size:1.2rem}
-  h1.hero-title{font-size:1.6rem}
+  h1.ht{font-size:1.6rem}
 }
 @media(max-width:320px){
   .container{padding:0 12px}
-  .partners-grid{grid-template-columns:1fr}
+  .part-grid{grid-template-columns:1fr}
 }
 @media(hover:none){
-  .service-card:hover,.client-card:hover,.btn-gold:hover,.btn-ghost:hover{transform:none}
+  .svc-card:hover,.cli-card:hover,.team-card:hover,.btn-g:hover,.btn-o:hover{transform:none}
 }
 </style>
 </head>
 <body>
 
-<div class="mobile-menu" id="mob" role="dialog" aria-label="Навигация">
+<!-- MOBILE MENU -->
+<div class="mob-menu" id="mob" role="dialog" aria-label="Навигация">
   <a href="#services" class="ml">Услуги</a>
+  <a href="#process" class="ml">Как мы работаем</a>
+  <a href="#portfolio" class="ml">Портфолио</a>
   <a href="#about" class="ml">О нас</a>
-  <a href="#clients" class="ml">Клиенты</a>
+  <a href="#reviews" class="ml">Отзывы</a>
   <a href="#contacts" class="ml">Контакты</a>
 </div>
 
+<!-- HEADER -->
 <header id="hdr">
   <div class="container">
     <a href="#hero" class="logo"><span class="logo-name">IMPERIONA</span><span class="logo-sub">Event Management Studio</span></a>
     <nav>
-      <a href="#services">Услуги</a><a href="#about">О нас</a><a href="#clients">Клиенты</a><a href="#contacts">Контакты</a>
+      <a href="#services">Услуги</a>
+      <a href="#process">Процесс</a>
+      <a href="#portfolio">Портфолио</a>
+      <a href="#about">О нас</a>
+      <a href="#reviews">Отзывы</a>
+      <a href="#contacts">Контакты</a>
     </nav>
-    <button class="btn-outline btn-outline-nav" onclick="document.getElementById('contacts').scrollIntoView({behavior:'smooth'})">Обсудить проект</button>
+    <button class="h-cta" onclick="document.getElementById('contacts').scrollIntoView({behavior:'smooth'})">Обсудить проект</button>
     <button class="hamburger" id="hbg" aria-label="Меню" aria-expanded="false"><span></span><span></span><span></span></button>
   </div>
 </header>
 
+<!-- HERO -->
 <section id="hero">
-  <div class="hero-bg"><div class="hero-line"></div><div class="hero-line"></div><div class="hero-line"></div></div>
-  <div class="particles" id="ptcl"></div>
+  <div class="hero-bg"><div class="hero-ring"></div><div class="hero-ring"></div><div class="hero-ring"></div></div>
+  <div class="ptcl" id="ptcl"></div>
   <div class="hero-content">
-    <div class="hero-eyebrow">Event Management Studio</div>
-    <h1 class="hero-title"><span>IMPERIONA</span> — Режиссура момента, который становится историей</h1>
-    <p class="hero-subtitle">Организуем корпоративные события, частные церемонии, спортивные мероприятия, концерты и форумы любого масштаба. Каждое событие — произведение.</p>
-    <div class="hero-cta">
-      <button class="btn-gold" onclick="document.getElementById('contacts').scrollIntoView({behavior:'smooth'})"><span>Обсудить проект</span></button>
-      <button class="btn-ghost" onclick="alert('Шоурил доступен по запросу. Свяжитесь: +7 925 766 4998')"><i class="fa-solid fa-play" style="margin-right:7px"></i>Смотреть шоурил</button>
+    <div class="hero-tag">Event Management Studio — Москва</div>
+    <h1 class="ht"><span>IMPERIONA</span> — Режиссура момента, который становится историей</h1>
+    <p class="hero-sub">Организуем корпоративные события, boutique-свадьбы, спортивные мероприятия, концерты и международные форумы. Каждый проект — единственный в своём роде.</p>
+    <div class="hero-btns">
+      <button class="btn-g" onclick="document.getElementById('contacts').scrollIntoView({behavior:'smooth'})"><span>Обсудить проект</span></button>
+      <button class="btn-o" onclick="document.getElementById('portfolio').scrollIntoView({behavior:'smooth'})"><i class="fa-regular fa-images" style="margin-right:7px"></i>Посмотреть работы</button>
     </div>
   </div>
-  <div class="scroll-ind" aria-hidden="true"><span>Листать вниз</span><i class="fa-solid fa-chevron-down"></i></div>
+  <div class="scroll-hint" aria-hidden="true"><span>Листать вниз</span><i class="fa-solid fa-chevron-down"></i></div>
   <div class="hero-stats">
-    <div class="stats-inner">
-      <div class="stat-item fade-up"><span class="stat-num">200+</span><span class="stat-label">Реализованных проектов</span></div>
-      <div class="stat-item fade-up"><span class="stat-num">15+</span><span class="stat-label">Лет совокупного опыта</span></div>
-      <div class="stat-item fade-up"><span class="stat-num">50 000+</span><span class="stat-label">Гостей на мероприятиях</span></div>
-      <div class="stat-item fade-up"><span class="stat-num">8</span><span class="stat-label">Федеральных проектов</span></div>
+    <div class="stats-row">
+      <div class="si fade-up"><span class="si-n" data-target="200">0</span><span class="si-l">Реализованных проектов</span></div>
+      <div class="si fade-up"><span class="si-n" data-target="15">0</span><span class="si-l">Лет совокупного опыта</span></div>
+      <div class="si fade-up"><span class="si-n" data-target="50000">0</span><span class="si-l">Гостей на мероприятиях</span></div>
+      <div class="si fade-up"><span class="si-n" data-target="8">0</span><span class="si-l">Федеральных проектов</span></div>
     </div>
   </div>
 </section>
 
+<!-- TICKER -->
+<div class="ticker-wrap" aria-hidden="true">
+  <div class="ticker-inner">
+    <span class="ticker-item">Корпоративные события</span>
+    <span class="ticker-item">Boutique-свадьбы</span>
+    <span class="ticker-item">Концерты в Кремле</span>
+    <span class="ticker-item">Крокус Сити Холл</span>
+    <span class="ticker-item">Волга Форум</span>
+    <span class="ticker-item">Сабантуй Дружбы</span>
+    <span class="ticker-item">VIP-события</span>
+    <span class="ticker-item">Спортивные мероприятия</span>
+    <span class="ticker-item">Международные форумы</span>
+    <span class="ticker-item">Phygital-форматы</span>
+    <span class="ticker-item">Корпоративные события</span>
+    <span class="ticker-item">Boutique-свадьбы</span>
+    <span class="ticker-item">Концерты в Кремле</span>
+    <span class="ticker-item">Крокус Сити Холл</span>
+    <span class="ticker-item">Волга Форум</span>
+    <span class="ticker-item">Сабантуй Дружбы</span>
+    <span class="ticker-item">VIP-события</span>
+    <span class="ticker-item">Спортивные мероприятия</span>
+    <span class="ticker-item">Международные форумы</span>
+    <span class="ticker-item">Phygital-форматы</span>
+  </div>
+</div>
+
+<!-- SERVICES -->
 <section id="services">
   <div class="container">
-    <div class="section-header fade-up">
-      <h2 class="section-title">Наши услуги</h2>
-      <p>Полный цикл создания события — от концепции до финального аккорда. Без компромиссов.</p>
+    <div class="sec-hd fade-up"><h2 class="section-title">Наши услуги</h2><p>Полный цикл создания события — от концепции до финального аккорда.</p></div>
+    <div class="svc-grid">
+      <div class="svc-card fade-up"><div class="svc-img"><img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=700&q=80&auto=format&fit=crop" alt="Корпоративные мероприятия" loading="lazy"/><div class="svc-ov"></div><div class="svc-ico"><i class="fa-solid fa-chess-king"></i></div></div><div class="svc-body"><h3>Корпоративные мероприятия</h3><p>Концепт под ДНК вашей компании. Стратегические сессии, тимбилдинги, корпоративы — с точным попаданием в ценности бренда и WOW-эффектом.</p></div></div>
+      <div class="svc-card fade-up"><div class="svc-img"><img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=700&q=80&auto=format&fit=crop" alt="VIP" loading="lazy"/><div class="svc-ov"></div><div class="svc-ico"><i class="fa-solid fa-crown"></i></div></div><div class="svc-body"><h3>VIP-вечеринки и юбилеи</h3><p>Закрытые события для взыскательной аудитории. Эксклюзивные локации, haute cuisine, авторские шоу. Ограниченное число проектов в год.</p></div></div>
+      <div class="svc-card fade-up"><div class="svc-img"><img src="https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=700&q=80&auto=format&fit=crop" alt="Свадьбы" loading="lazy"/><div class="svc-ov"></div><div class="svc-ico"><i class="fa-solid fa-rings-wedding"></i></div></div><div class="svc-body"><h3>Boutique-свадьбы</h3><p>Индивидуальный режиссёрский сценарий. Абсолютная конфиденциальность, безупречная эстетика. Ваша история — наша премьера.</p></div></div>
+      <div class="svc-card fade-up"><div class="svc-img"><img src="https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?w=700&q=80&auto=format&fit=crop" alt="Форумы" loading="lazy"/><div class="svc-ov"></div><div class="svc-ico"><i class="fa-solid fa-microphone-lines"></i></div></div><div class="svc-body"><h3>Конференции и форумы</h3><p>Phygital и hybrid-форматы. Онлайн- и офлайн-аудитории в едином пространстве. Опыт форумов с тысячами участников.</p></div></div>
+      <div class="svc-card fade-up"><div class="svc-img"><img src="https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=700&q=80&auto=format&fit=crop" alt="Спорт" loading="lazy"/><div class="svc-ov"></div><div class="svc-ico"><i class="fa-solid fa-trophy"></i></div></div><div class="svc-body"><h3>Спортивные мероприятия</h3><p>Федеральные соревнования, турниры, фестивали. Полная ивент-инфраструктура: от разметки арены до церемонии награждения.</p></div></div>
+      <div class="svc-card fade-up"><div class="svc-img"><img src="https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=700&q=80&auto=format&fit=crop" alt="Концерты" loading="lazy"/><div class="svc-ov"></div><div class="svc-ico"><i class="fa-solid fa-music"></i></div></div><div class="svc-body"><h3>Концерты и шоу-программы</h3><p>От камерных площадок до ГКД и Крокус Сити Холла. Полный цикл: концепт, райдер, свет, звук, безопасность, логистика.</p></div></div>
     </div>
-    <div class="services-grid">
-      <div class="service-card fade-up">
-        <div class="svc-photo"><img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=700&q=80&auto=format&fit=crop" alt="Корпоративные мероприятия" loading="lazy"/><div class="svc-overlay"></div><div class="svc-badge"><i class="fa-solid fa-chess-king"></i></div></div>
-        <div class="svc-body"><h3>Корпоративные мероприятия</h3><p>Разрабатываем уникальный концепт, созвучный ДНК вашей компании. Стратегические сессии, тимбилдинги и корпоративы — с точным попаданием в ценности бренда.</p></div>
+  </div>
+</section>
+
+<!-- HOW WE WORK -->
+<section id="process">
+  <div class="container">
+    <div class="sec-hd fade-up"><h2 class="section-title">Как мы работаем</h2><p>Прозрачный процесс от первого звонка до финального аккорда.</p></div>
+    <div class="process-grid">
+      <div class="proc-item fade-up">
+        <span class="proc-num">01</span>
+        <div class="proc-ico"><i class="fa-solid fa-comments"></i></div>
+        <h4>Брифинг и погружение</h4>
+        <p>Изучаем ваши цели, аудиторию, бюджет. Задаём правильные вопросы — находим нужные ответы. Результат: чёткое техническое задание.</p>
+        <div class="proc-arrow"></div>
       </div>
-      <div class="service-card fade-up">
-        <div class="svc-photo"><img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=700&q=80&auto=format&fit=crop" alt="VIP" loading="lazy"/><div class="svc-overlay"></div><div class="svc-badge"><i class="fa-solid fa-crown"></i></div></div>
-        <div class="svc-body"><h3>VIP-вечеринки и юбилеи</h3><p>Закрытые события для взыскательной аудитории. Эксклюзивные локации, haute cuisine, авторские шоу-программы. Каждая деталь — на уровне world-class.</p></div>
+      <div class="proc-item fade-up">
+        <span class="proc-num">02</span>
+        <div class="proc-ico"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+        <h4>Концепция и сценарий</h4>
+        <p>Разрабатываем уникальный концепт события. Создаём сценарий, подбираем площадку, формируем команду и подрядчиков.</p>
+        <div class="proc-arrow"></div>
       </div>
-      <div class="service-card fade-up">
-        <div class="svc-photo"><img src="https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=700&q=80&auto=format&fit=crop" alt="Свадьбы" loading="lazy"/><div class="svc-overlay"></div><div class="svc-badge"><i class="fa-solid fa-rings-wedding"></i></div></div>
-        <div class="svc-body"><h3>Boutique-свадьбы</h3><p>Индивидуальный режиссёрский сценарий для каждой пары. Абсолютная конфиденциальность, безупречная эстетика. Ваша история — наша премьера.</p></div>
+      <div class="proc-item fade-up">
+        <span class="proc-num">03</span>
+        <div class="proc-ico"><i class="fa-solid fa-gears"></i></div>
+        <h4>Продакшн и подготовка</h4>
+        <p>Координируем все процессы: декор, техника, кейтеринг, артисты. Репетиция, тайминг, контроль качества на каждом этапе.</p>
+        <div class="proc-arrow"></div>
       </div>
-      <div class="service-card fade-up">
-        <div class="svc-photo"><img src="https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?w=700&q=80&auto=format&fit=crop" alt="Форумы" loading="lazy"/><div class="svc-overlay"></div><div class="svc-badge"><i class="fa-solid fa-microphone-lines"></i></div></div>
-        <div class="svc-body"><h3>Конференции и форумы</h3><p>Комплексные решения для phygital и hybrid-форматов. Синхронизируем онлайн- и офлайн-аудитории в единое пространство событийного масштаба.</p></div>
-      </div>
-      <div class="service-card fade-up">
-        <div class="svc-photo"><img src="https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=700&q=80&auto=format&fit=crop" alt="Спорт" loading="lazy"/><div class="svc-overlay"></div><div class="svc-badge"><i class="fa-solid fa-trophy"></i></div></div>
-        <div class="svc-body"><h3>Спортивные мероприятия</h3><p>Организация федеральных соревнований, турниров и масштабных фестивалей. Полная ивент-инфраструктура: от разметки арены до церемонии награждения.</p></div>
-      </div>
-      <div class="service-card fade-up">
-        <div class="svc-photo"><img src="https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=700&q=80&auto=format&fit=crop" alt="Концерты" loading="lazy"/><div class="svc-overlay"></div><div class="svc-badge"><i class="fa-solid fa-music"></i></div></div>
-        <div class="svc-body"><h3>Концерты и шоу-программы</h3><p>Продакшн от камерных площадок до Государственного Кремлёвского Дворца и Крокус Сити Холла. Полный цикл: концепт, райдер, свет, звук, безопасность.</p></div>
+      <div class="proc-item fade-up">
+        <span class="proc-num">04</span>
+        <div class="proc-ico"><i class="fa-solid fa-star"></i></div>
+        <h4>День события и отчёт</h4>
+        <p>Работаем на площадке от монтажа до демонтажа. После — детальный отчёт с аналитикой, фото и видеоматериалами.</p>
       </div>
     </div>
   </div>
 </section>
 
+<!-- PORTFOLIO -->
+<section id="portfolio">
+  <div class="container">
+    <div class="sec-hd fade-up"><h2 class="section-title">Портфолио</h2><p>Избранные проекты студии — каждый уникален.</p></div>
+    <div class="pf-filters fade-up">
+      <button class="pf-btn active" data-filter="all">Все проекты</button>
+      <button class="pf-btn" data-filter="corporate">Корпоративные</button>
+      <button class="pf-btn" data-filter="concert">Концерты</button>
+      <button class="pf-btn" data-filter="forum">Форумы</button>
+      <button class="pf-btn" data-filter="sport">Спортивные</button>
+      <button class="pf-btn" data-filter="wedding">Свадьбы</button>
+    </div>
+    <div class="pf-grid">
+      <div class="pf-item fade-up" data-cat="concert"><img src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=700&q=80&auto=format&fit=crop" alt="ГКД" loading="lazy"/><div class="pf-overlay"><div class="pf-cat">Концерты</div><div class="pf-title">Государственный Кремлёвский Дворец</div></div></div>
+      <div class="pf-item fade-up" data-cat="forum"><img src="https://images.unsplash.com/photo-1559223607-a43c990c692c?w=800&q=80&auto=format&fit=crop" alt="Волга Форум" loading="lazy"/><div class="pf-overlay"><div class="pf-cat">Форумы</div><div class="pf-title">Волга Форум — 5000+ участников</div></div></div>
+      <div class="pf-item fade-up" data-cat="sport"><img src="https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=700&q=80&auto=format&fit=crop" alt="Спорт" loading="lazy"/><div class="pf-overlay"><div class="pf-cat">Спортивные</div><div class="pf-title">Спорт. Путь к единству</div></div></div>
+      <div class="pf-item fade-up" data-cat="corporate"><img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=700&q=80&auto=format&fit=crop" alt="Корпоратив" loading="lazy"/><div class="pf-overlay"><div class="pf-cat">Корпоративные</div><div class="pf-title">Стратегическая сессия федерального уровня</div></div></div>
+      <div class="pf-item fade-up" data-cat="concert"><img src="https://images.unsplash.com/photo-1531685250784-7569952593d2?w=800&q=80&auto=format&fit=crop" alt="Сабантуй" loading="lazy"/><div class="pf-overlay"><div class="pf-cat">Концерты</div><div class="pf-title">Сабантуй Дружбы и Единства, Москва</div></div></div>
+      <div class="pf-item fade-up" data-cat="wedding"><img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=700&q=80&auto=format&fit=crop" alt="Свадьба" loading="lazy"/><div class="pf-overlay"><div class="pf-cat">Свадьбы</div><div class="pf-title">Boutique-свадьба в загородной резиденции</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
 <section id="about">
   <div class="container">
-    <div class="about-inner">
-      <div class="about-text fade-up">
+    <div class="about-wrap">
+      <div class="ab-text fade-up">
         <h2>О компании</h2>
-        <p>IMPERIONA — студия event-режиссуры, созданная командой экспертов с многолетним опытом в ведущих event-агентствах и проектных командах страны. Каждый из нас прошёл путь от ассистента до арт-директора знаковых федеральных событий.</p>
-        <div class="tagline">«Мы не организуем мероприятия. Мы ставим спектакли, в которых ваши гости — главные герои.»</div>
-        <p>В основе нашей работы — авторская методология WOW-эффекта: точное попадание в эмоцию, выверенная режиссура каждого момента и виральный контент, который остаётся в памяти ещё долгие годы после события.</p>
-        <h4 style="font-family:'Playfair Display',serif;font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin:24px 0 12px">Ключевые проекты</h4>
+        <p>IMPERIONA — студия event-режиссуры, созданная командой экспертов с многолетним опытом в ведущих агентствах и проектных командах страны. Каждый из нас прошёл путь от ассистента до арт-директора знаковых федеральных событий.</p>
+        <div class="ab-quote">«Мы не организуем мероприятия. Мы ставим спектакли, в которых ваши гости — главные герои.»</div>
+        <p>В основе нашей работы — авторская методология WOW-эффекта: точное попадание в эмоцию, выверенная режиссура каждого момента и виральный контент, который остаётся в памяти ещё долгие годы.</p>
+        <h4 style="font-family:'Playfair Display',serif;font-size:.78rem;letter-spacing:.13em;text-transform:uppercase;color:var(--gold);margin:22px 0 11px">Ключевые проекты</h4>
         <ul class="proj-list">
           <li>Концерты в Государственном Кремлёвском Дворце</li>
           <li>Концерты в Крокус Сити Холле</li>
@@ -390,142 +553,179 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 0 24
           <li>Форум «Волга Форум»</li>
           <li>Петербургский межрелигиозный международный форум</li>
           <li>Московский международный Сабантуй Дружбы и Единства</li>
-          <li>Региональные национальные праздники «Сабантуй»</li>
           <li>Частные VIP-события и boutique-свадьбы</li>
-          <li>Съёмки музыкальных клипов</li>
         </ul>
       </div>
       <div class="fade-up">
-        <div class="port-grid">
-          <!-- ГКД: ночной концерт, огни сцены, архитектура -->
-          <div class="port-item">
-            <img src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=800&q=80&auto=format&fit=crop" alt="Концерт ГКД" loading="lazy"/>
-            <div class="port-cap"><i class="fa-solid fa-location-dot"></i>Государственный Кремлёвский Дворец</div>
-          </div>
-          <!-- Волга Форум: деловой зал, флаги, делегаты -->
-          <div class="port-item">
-            <img src="https://images.unsplash.com/photo-1559223607-a43c990c692c?w=800&q=80&auto=format&fit=crop" alt="Волга Форум" loading="lazy"/>
-            <div class="port-cap"><i class="fa-solid fa-location-dot"></i>Форум «Волга Форум» — 5000+ участников</div>
-          </div>
-          <!-- Сабантуй: яркий народный праздник, национальный колорит -->
-          <div class="port-item">
-            <img src="https://images.unsplash.com/photo-1531685250784-7569952593d2?w=800&q=80&auto=format&fit=crop" alt="Сабантуй" loading="lazy"/>
-            <div class="port-cap"><i class="fa-solid fa-location-dot"></i>Сабантуй Дружбы и Единства, Москва</div>
-          </div>
+        <div class="counters">
+          <div class="counter-item"><span class="c-num" data-target="200">0</span><span class="c-lbl">Проектов реализовано</span></div>
+          <div class="counter-item"><span class="c-num" data-target="15">0</span><span class="c-lbl">Лет опыта команды</span></div>
+          <div class="counter-item"><span class="c-num" data-target="50000">0</span><span class="c-lbl">Гостей на событиях</span></div>
+          <div class="counter-item"><span class="c-num" data-target="98">0</span><span class="c-lbl">% повторных обращений</span></div>
         </div>
-        <p style="font-size:.68rem;color:var(--text-dim);margin-top:11px;text-align:center;letter-spacing:.05em"><i class="fa-regular fa-image" style="margin-right:5px;color:var(--gold-dark)"></i>Полное портфолио предоставляется по запросу</p>
+        <div style="background:var(--bg3);border:1px solid var(--border);padding:28px;margin-top:2px">
+          <div style="font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:12px;font-weight:500">Методология</div>
+          <p style="font-family:'Cormorant Garamond',serif;font-size:1.05rem;color:var(--text-muted);font-style:italic;line-height:1.7;font-weight:300">Принцип «режиссура момента» означает управление не только программой, но и восприятием: светом, звуком, ритмом, паузой, неожиданностью. Так момент становится историей.</p>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
+<!-- TEAM -->
+<section id="team">
+  <div class="container">
+    <div class="sec-hd fade-up"><h2 class="section-title">Команда</h2><p>Эксперты с опытом в крупнейших event-агентствах и федеральных проектах страны.</p></div>
+    <div class="team-grid">
+      <div class="team-card fade-up">
+        <div class="team-photo"><img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&q=80&auto=format&fit=crop&face" alt="Арт-директор" loading="lazy"/></div>
+        <div class="team-info"><div class="team-name">Хуснидин А.</div><div class="team-role">Основатель & Арт-директор</div></div>
+      </div>
+      <div class="team-card fade-up">
+        <div class="team-photo"><img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&q=80&auto=format&fit=crop&face" alt="Креативный директор" loading="lazy"/></div>
+        <div class="team-info"><div class="team-name">Анастасия К.</div><div class="team-role">Креативный директор</div></div>
+      </div>
+      <div class="team-card fade-up">
+        <div class="team-photo"><img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400&q=80&auto=format&fit=crop&face" alt="Продюсер" loading="lazy"/></div>
+        <div class="team-info"><div class="team-name">Дмитрий В.</div><div class="team-role">Продюсер мероприятий</div></div>
+      </div>
+      <div class="team-card fade-up">
+        <div class="team-photo"><img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&q=80&auto=format&fit=crop&face" alt="Event-менеджер" loading="lazy"/></div>
+        <div class="team-info"><div class="team-name">Мария Л.</div><div class="team-role">Senior Event Manager</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CLIENTS -->
 <section id="clients">
   <div class="container">
-    <div class="section-header fade-up">
-      <h2 class="section-title">Наши клиенты</h2>
-      <p>Работаем с государственными структурами, крупным бизнесом и частными лицами — один стандарт: безупречность.</p>
-    </div>
+    <div class="sec-hd fade-up"><h2 class="section-title">Наши клиенты</h2><p>Работаем с государственными структурами, крупным бизнесом и частными лицами.</p></div>
     <div class="clients-grid">
-      <div class="client-card fade-up"><div class="cli-img"><img src="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=200&q=80&auto=format&fit=crop" alt="" loading="lazy"/></div><h4>Государственные структуры</h4><p>Федеральные органы власти. Протокольные события, национальные праздники, форумы.</p></div>
-      <div class="client-card fade-up"><div class="cli-img"><img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=200&q=80&auto=format&fit=crop" alt="" loading="lazy"/></div><h4>Частные компании</h4><p>FinTech, корпоративный B2B. Корпоративные события, конференции, презентации.</p></div>
-      <div class="client-card fade-up"><div class="cli-img"><img src="https://images.unsplash.com/photo-1501167786227-4cba60f6d58f?w=200&q=80&auto=format&fit=crop" alt="" loading="lazy"/></div><h4>Банки и финансовые институты</h4><p>Деловые форумы, VIP-приёмы. Высочайшие требования к безопасности и репутации.</p></div>
-      <div class="client-card fade-up"><div class="cli-img"><img src="https://images.unsplash.com/photo-1552674605-db6ffd4facb5?w=200&q=80&auto=format&fit=crop" alt="" loading="lazy"/></div><h4>Спортивные организации</h4><p>Федерации, лиги, комитеты. Соревнования федерального уровня.</p></div>
-      <div class="client-card fade-up"><div class="cli-img"><img src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=200&q=80&auto=format&fit=crop" alt="" loading="lazy"/></div><h4>Частные лица (VIP)</h4><p>Состоятельные клиенты, публичные персоны. Boutique-события с абсолютной конфиденциальностью.</p></div>
-      <div class="client-card fade-up"><div class="cli-img"><img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=200&q=80&auto=format&fit=crop" alt="" loading="lazy"/></div><h4>Молодёжь и студенты</h4><p>Форумы, фестивали, активации. Форматы с максимальным вовлечением.</p></div>
-      <div class="client-card fade-up"><div class="cli-img"><img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?w=200&q=80&auto=format&fit=crop" alt="" loading="lazy"/></div><h4>НКО и фонды</h4><p>Смысловые события с ESG-повесткой. Благотворительные гала, межкультурный диалог.</p></div>
-      <div class="client-card fade-up"><div class="cli-img"><img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=200&q=80&auto=format&fit=crop" alt="" loading="lazy"/></div><h4>Международные организации</h4><p>Дипломатические приёмы, межкультурные конференции. Мультиязычный протокол.</p></div>
+      <div class="cli-card fade-up"><div class="cli-img"><img src="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=200&q=80&auto=format&fit=crop" alt="" loading="lazy"/></div><h4>Государственные структуры</h4><p>Протокольные события, национальные праздники, межрелигиозные форумы.</p></div>
+      <div class="cli-card fade-up"><div class="cli-img"><img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=200&q=80&auto=format&fit=crop" alt="" loading="lazy"/></div><h4>Частные компании</h4><p>FinTech, корпоративный B2B. Конференции, презентации, корпоративы.</p></div>
+      <div class="cli-card fade-up"><div class="cli-img"><img src="https://images.unsplash.com/photo-1501167786227-4cba60f6d58f?w=200&q=80&auto=format&fit=crop" alt="" loading="lazy"/></div><h4>Банки и финансовые институты</h4><p>Деловые форумы, VIP-приёмы. Высочайшие требования к безопасности.</p></div>
+      <div class="cli-card fade-up"><div class="cli-img"><img src="https://images.unsplash.com/photo-1552674605-db6ffd4facb5?w=200&q=80&auto=format&fit=crop" alt="" loading="lazy"/></div><h4>Спортивные организации</h4><p>Федерации, лиги, комитеты. Соревнования федерального уровня.</p></div>
+      <div class="cli-card fade-up"><div class="cli-img"><img src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=200&q=80&auto=format&fit=crop" alt="" loading="lazy"/></div><h4>Частные лица (VIP)</h4><p>Boutique-свадьбы и юбилеи с абсолютной конфиденциальностью.</p></div>
+      <div class="cli-card fade-up"><div class="cli-img"><img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=200&q=80&auto=format&fit=crop" alt="" loading="lazy"/></div><h4>Молодёжь и студенты</h4><p>Форумы, фестивали, активации. Максимальное вовлечение.</p></div>
+      <div class="cli-card fade-up"><div class="cli-img"><img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?w=200&q=80&auto=format&fit=crop" alt="" loading="lazy"/></div><h4>НКО и фонды</h4><p>ESG-события, благотворительные гала, межкультурный диалог.</p></div>
+      <div class="cli-card fade-up"><div class="cli-img"><img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=200&q=80&auto=format&fit=crop" alt="" loading="lazy"/></div><h4>Международные организации</h4><p>Дипломатические приёмы, мультиязычные конференции.</p></div>
     </div>
   </div>
 </section>
 
-<section id="partners">
+<!-- REVIEWS -->
+<section id="reviews">
   <div class="container">
-    <div class="section-header fade-up"><h2 class="section-title">Надёжные партнёры и площадки</h2></div>
-    <p class="partners-desc fade-up">IMPERIONA сотрудничает исключительно с партнёрами, прошедшими строгий отбор по стандартам качества, надёжности и профессиональной репутации.</p>
-    <div class="partners-grid">
-      <div class="partner-item fade-up"><i class="fa-solid fa-landmark-flag"></i><span>Госструктуры</span></div>
-      <div class="partner-item fade-up"><i class="fa-solid fa-building-columns"></i><span>Банки</span></div>
-      <div class="partner-item fade-up"><i class="fa-solid fa-trophy"></i><span>Спортивные федерации</span></div>
-      <div class="partner-item fade-up"><i class="fa-solid fa-location-pin"></i><span>Площадки Москвы</span></div>
-      <div class="partner-item fade-up"><i class="fa-solid fa-utensils"></i><span>Кейтеринг</span></div>
-      <div class="partner-item fade-up"><i class="fa-solid fa-camera"></i><span>Фото / видео студии</span></div>
+    <div class="sec-hd fade-up"><h2 class="section-title">Отзывы клиентов</h2><p>То, что говорят о нас партнёры и заказчики.</p></div>
+    <div class="reviews-slider fade-up">
+      <div class="reviews-track" id="rtrack">
+        <div class="review-slide">
+          <div class="review-inner">
+            <p class="review-text">IMPERIONA превзошла все ожидания. Форум на 3000 участников был организован безупречно — от логистики до шоу-программы. Ни одного сбоя за три дня. Это называется профессионализм высшего уровня.</p>
+            <div class="review-author">Алексей Морозов</div>
+            <div class="review-co">Директор по коммуникациям, крупная госструктура</div>
+          </div>
+        </div>
+        <div class="review-slide">
+          <div class="review-inner">
+            <p class="review-text">Наша свадьба стала тем самым моментом, который останется историей. Команда IMPERIONA не просто организовала праздник — они поставили спектакль, где мы были главными героями. Рекомендую без оговорок.</p>
+            <div class="review-author">Дарья и Артём Соловьёвы</div>
+            <div class="review-co">Частные клиенты, boutique-свадьба</div>
+          </div>
+        </div>
+        <div class="review-slide">
+          <div class="review-inner">
+            <p class="review-text">Работали вместе на федеральном спортивном турнире. IMPERIONA — это команда, которая не паникует даже в форс-мажорных ситуациях. Всё под контролем, всё в срок. Теперь только с ними.</p>
+            <div class="review-author">Игорь Ковалёв</div>
+            <div class="review-co">Президент спортивной федерации</div>
+          </div>
+        </div>
+        <div class="review-slide">
+          <div class="review-inner">
+            <p class="review-text">Корпоратив на 500 человек с тематической шоу-программой. Гости до сих пор вспоминают — это лучшее событие в истории компании. IMPERIONA понимают бизнес-задачи, а не просто украшают зал.</p>
+            <div class="review-author">Наталья Громова</div>
+            <div class="review-co">HR-директор, FinTech компания, Москва</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="slider-controls fade-up">
+      <button class="s-arr" id="sprev" aria-label="Назад"><i class="fa-solid fa-chevron-left"></i></button>
+      <div class="slider-nav" id="sdots">
+        <div class="s-dot active" data-idx="0"></div>
+        <div class="s-dot" data-idx="1"></div>
+        <div class="s-dot" data-idx="2"></div>
+        <div class="s-dot" data-idx="3"></div>
+      </div>
+      <button class="s-arr" id="snext" aria-label="Вперёд"><i class="fa-solid fa-chevron-right"></i></button>
     </div>
   </div>
 </section>
 
+<!-- WHY -->
 <section id="why">
   <div class="container">
-    <div class="section-header fade-up">
-      <h2 class="section-title">Почему IMPERIONA</h2>
-      <p>Пять принципов, по которым нас выбирают для самых значимых событий.</p>
-    </div>
+    <div class="sec-hd fade-up"><h2 class="section-title">Почему IMPERIONA</h2><p>Пять принципов, по которым нас выбирают для самых значимых событий.</p></div>
     <div class="why-grid">
-      <div class="why-item fade-up">
-        <span class="why-roman">I</span>
-        <div class="why-sym">
-          <svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="3"/><path d="M16 7a9 9 0 0 1 9 9"/><path d="M16 5a11 11 0 0 1 11 11"/><path d="M16 3a13 13 0 0 1 13 13"/><path d="M7 16a9 9 0 0 1 9-9"/><path d="M5 16a11 11 0 0 1 11-11"/><path d="M16 25a9 9 0 0 1-9-9"/><path d="M20 22c0 2.5-1.8 4-4 4s-4-1.5-4-4"/></svg>
-        </div>
-        <h4>Гиперперсонализация</h4>
-        <p>Каждый проект создаётся с нуля под ДНК клиента. Никаких шаблонов — только авторская режиссура, отражающая уникальность вашего события.</p>
-      </div>
-      <div class="why-item fade-up">
-        <span class="why-roman">II</span>
-        <div class="why-sym">
-          <svg viewBox="0 0 32 32"><polygon points="16,4 28,10 16,16 4,10"/><polyline points="4,16 16,22 28,16"/><polyline points="4,22 16,28 28,22"/></svg>
-        </div>
-        <h4>Phygital-форматы</h4>
-        <p>Интеграция онлайн и офлайн в единое пространство: +15–25% к вовлечённости и расширение аудитории без потери качества.</p>
-      </div>
-      <div class="why-item fade-up">
-        <span class="why-roman">III</span>
-        <div class="why-sym">
-          <svg viewBox="0 0 32 32"><polygon points="16,3 19.5,12.5 30,12.5 21.5,18.5 24.5,29 16,23 7.5,29 10.5,18.5 2,12.5 12.5,12.5"/></svg>
-        </div>
-        <h4>WOW-эффект и виральность</h4>
-        <p>Авторская методология создания моментов, которые гости фиксируют и транслируют сами. Органическое распространение с каждого события.</p>
-      </div>
-      <div class="why-item fade-up">
-        <span class="why-roman">IV</span>
-        <div class="why-sym">
-          <svg viewBox="0 0 32 32"><path d="M6 26C6 26 8 14 20 10C28 7 28 7 28 7C28 7 26 18 16 22C10 25 6 26 6 26Z"/><path d="M6 26L14 18"/></svg>
-        </div>
-        <h4>ESG и смысловые форматы</h4>
-        <p>Создаём события с устойчивым смыслом: экологичные решения, социальные послания, культурный диалог. Ваш бренд получает глубину.</p>
-      </div>
-      <div class="why-item fade-up">
-        <span class="why-roman">V</span>
-        <div class="why-sym">
-          <svg viewBox="0 0 32 32"><path d="M16 3L28 8L28 17C28 23 22 28 16 30C10 28 4 23 4 17L4 8Z"/><polyline points="11,16 15,20 21,13"/></svg>
-        </div>
-        <h4>Опыт сложных объектов</h4>
-        <p>Кремль, Крокус Сити Холл, федеральные соревнования. Там, где цена ошибки — репутация. Безупречная логистика под любым давлением.</p>
-      </div>
+      <div class="why-item fade-up"><span class="why-rom">I</span><div class="why-sym"><svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="3"/><path d="M16 7a9 9 0 0 1 9 9"/><path d="M16 5a11 11 0 0 1 11 11"/><path d="M16 3a13 13 0 0 1 13 13"/><path d="M7 16a9 9 0 0 1 9-9"/><path d="M5 16a11 11 0 0 1 11-11"/><path d="M16 25a9 9 0 0 1-9-9"/><path d="M20 22c0 2.5-1.8 4-4 4s-4-1.5-4-4"/></svg></div><h4>Гиперперсонализация</h4><p>Каждый проект создаётся с нуля под ДНК клиента. Никаких шаблонов.</p></div>
+      <div class="why-item fade-up"><span class="why-rom">II</span><div class="why-sym"><svg viewBox="0 0 32 32"><polygon points="16,4 28,10 16,16 4,10"/><polyline points="4,16 16,22 28,16"/><polyline points="4,22 16,28 28,22"/></svg></div><h4>Phygital-форматы</h4><p>+15–25% к вовлечённости. Онлайн и офлайн в едином пространстве.</p></div>
+      <div class="why-item fade-up"><span class="why-rom">III</span><div class="why-sym"><svg viewBox="0 0 32 32"><polygon points="16,3 19.5,12.5 30,12.5 21.5,18.5 24.5,29 16,23 7.5,29 10.5,18.5 2,12.5 12.5,12.5"/></svg></div><h4>WOW-эффект и виральность</h4><p>Моменты, которые гости фиксируют и транслируют сами. Органический охват.</p></div>
+      <div class="why-item fade-up"><span class="why-rom">IV</span><div class="why-sym"><svg viewBox="0 0 32 32"><path d="M6 26C6 26 8 14 20 10C28 7 28 7 28 7C28 7 26 18 16 22C10 25 6 26 6 26Z"/><path d="M6 26L14 18"/></svg></div><h4>ESG и смысловые форматы</h4><p>Экологичные решения, социальные послания, культурный диалог.</p></div>
+      <div class="why-item fade-up"><span class="why-rom">V</span><div class="why-sym"><svg viewBox="0 0 32 32"><path d="M16 3L28 8L28 17C28 23 22 28 16 30C10 28 4 23 4 17L4 8Z"/><polyline points="11,16 15,20 21,13"/></svg></div><h4>Опыт сложных объектов</h4><p>Кремль, Крокус Сити Холл, федеральные соревнования. Там, где нет права на ошибку.</p></div>
     </div>
   </div>
 </section>
 
+<!-- PARTNERS -->
+<section id="partners">
+  <div class="container">
+    <div class="sec-hd fade-up"><h2 class="section-title">Партнёры и площадки</h2></div>
+    <p class="partners-note fade-up">Сотрудничаем исключительно с проверенными партнёрами — строгий отбор по качеству, надёжности и репутации.</p>
+    <div class="part-grid">
+      <div class="part-item fade-up"><i class="fa-solid fa-landmark-flag"></i><span>Госструктуры</span></div>
+      <div class="part-item fade-up"><i class="fa-solid fa-building-columns"></i><span>Банки</span></div>
+      <div class="part-item fade-up"><i class="fa-solid fa-trophy"></i><span>Спортивные федерации</span></div>
+      <div class="part-item fade-up"><i class="fa-solid fa-location-pin"></i><span>Площадки Москвы</span></div>
+      <div class="part-item fade-up"><i class="fa-solid fa-utensils"></i><span>Кейтеринг</span></div>
+      <div class="part-item fade-up"><i class="fa-solid fa-camera"></i><span>Фото / видео студии</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACTS -->
 <section id="contacts">
   <div class="container">
-    <div class="section-header fade-up">
-      <h2 class="section-title">Обсудить проект</h2>
-      <p>Оставьте заявку — мы свяжемся в течение рабочего дня и подготовим первичную концепцию.</p>
-    </div>
-    <div class="contacts-grid">
-      <div class="contacts-info fade-up">
+    <div class="sec-hd fade-up"><h2 class="section-title">Обсудить проект</h2><p>Оставьте заявку — свяжемся в течение рабочего дня.</p></div>
+    <div class="contacts-wrap">
+      <div class="ci-wrap fade-up">
         <h2>Контакты</h2>
         <div class="ci"><a href="tel:+79257664998" class="ci-ico"><i class="fa-solid fa-phone"></i></a><div><div class="ci-lbl">Телефон</div><div class="ci-val"><a href="tel:+79257664998">+7 925 766 4998</a></div></div></div>
         <div class="ci"><a href="mailto:khus-ab@yandex.ru" class="ci-ico"><i class="fa-solid fa-envelope"></i></a><div><div class="ci-lbl">Электронная почта</div><div class="ci-val"><a href="mailto:khus-ab@yandex.ru">khus-ab@yandex.ru</a></div></div></div>
         <div class="ci"><div class="ci-ico"><i class="fa-solid fa-location-dot"></i></div><div><div class="ci-lbl">Адрес</div><div class="ci-val">Москва, ул. Ракетный бульвар 16</div></div></div>
-        <div class="map-wrap"><iframe src="https://yandex.ru/map-widget/v1/?ll=37.640%2C55.835&z=16&pt=37.640%2C55.835,pm2rdm" width="100%" height="210" frameborder="0" allowfullscreen title="Карта" loading="lazy"></iframe></div>
+        <div class="map-box"><iframe src="https://yandex.ru/map-widget/v1/?ll=37.640%2C55.835&z=16&pt=37.640%2C55.835,pm2rdm" width="100%" height="200" frameborder="0" allowfullscreen title="Карта" loading="lazy"></iframe></div>
       </div>
-      <div class="contacts-form fade-up">
+      <div class="cf-wrap fade-up">
         <h3>Оставить заявку</h3>
         <form id="cf" novalidate>
           <div class="fg"><label for="fn">Ваше имя *</label><input type="text" id="fn" name="from_name" placeholder="Александр Иванов" autocomplete="name"/></div>
           <div class="fg"><label for="fc">Телефон или Email *</label><input type="text" id="fc" name="reply_to" placeholder="+7 900 000 0000 или name@mail.ru" autocomplete="email"/></div>
-          <div class="fg"><label for="fm">Расскажите о вашем проекте *</label><textarea id="fm" name="message" placeholder="Тип мероприятия, дата, количество гостей, ваши ожидания..."></textarea></div>
-          <button type="submit" id="sb" class="btn-gold" style="width:100%"><span id="st">Отправить заявку</span><i class="fa-solid fa-paper-plane"></i></button>
-          <div id="form-status"></div>
+          <div class="fg">
+            <label for="ftype">Тип мероприятия</label>
+            <select id="ftype" name="event_type">
+              <option value="">Выберите тип мероприятия</option>
+              <option>Корпоративное мероприятие</option>
+              <option>VIP-вечеринка / юбилей</option>
+              <option>Boutique-свадьба</option>
+              <option>Конференция / форум</option>
+              <option>Спортивное мероприятие</option>
+              <option>Концерт / шоу-программа</option>
+              <option>Другое</option>
+            </select>
+          </div>
+          <div class="fg"><label for="fm">Сообщение *</label><textarea id="fm" name="message" placeholder="Дата, количество гостей, площадка, ваши ожидания..."></textarea></div>
+          <button type="submit" id="sb" class="btn-g" style="width:100%"><span id="st">Отправить заявку</span><i class="fa-solid fa-paper-plane"></i></button>
+          <div id="fst"></div>
           <p class="form-note">Нажимая кнопку, вы соглашаетесь на обработку персональных данных в соответствии с <a href="#" style="color:var(--gold-dark)">политикой конфиденциальности</a>.</p>
         </form>
       </div>
@@ -533,89 +733,139 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 0 24
   </div>
 </section>
 
+<!-- FOOTER -->
 <footer>
   <div class="container">
-    <div class="fi">
+    <div class="f-top">
       <a href="#hero" class="logo"><span class="logo-name">IMPERIONA</span><span class="logo-sub">Event Management Studio</span></a>
-      <div class="fsoc">
-        <a href="#" class="sb2" aria-label="ВКонтакте" style="width:34px;height:34px;border:1px solid rgba(201,160,61,0.18);display:flex;align-items:center;justify-content:center;color:#9a9080;text-decoration:none;font-size:.8rem;transition:all .35s"><i class="fa-brands fa-vk"></i></a>
-        <a href="#" class="sb2" aria-label="Telegram" style="width:34px;height:34px;border:1px solid rgba(201,160,61,0.18);display:flex;align-items:center;justify-content:center;color:#9a9080;text-decoration:none;font-size:.8rem;transition:all .35s"><i class="fa-brands fa-telegram"></i></a>
-        <a href="#" class="sb2" aria-label="Instagram" style="width:34px;height:34px;border:1px solid rgba(201,160,61,0.18);display:flex;align-items:center;justify-content:center;color:#9a9080;text-decoration:none;font-size:.8rem;transition:all .35s"><i class="fa-brands fa-instagram"></i></a>
-        <a href="#" class="sb2" aria-label="YouTube" style="width:34px;height:34px;border:1px solid rgba(201,160,61,0.18);display:flex;align-items:center;justify-content:center;color:#9a9080;text-decoration:none;font-size:.8rem;transition:all .35s"><i class="fa-brands fa-youtube"></i></a>
+      <div class="f-soc">
+        <a href="#" class="f-s" aria-label="ВКонтакте"><i class="fa-brands fa-vk"></i></a>
+        <a href="#" class="f-s" aria-label="Telegram"><i class="fa-brands fa-telegram"></i></a>
+        <a href="#" class="f-s" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+        <a href="#" class="f-s" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
       </div>
     </div>
-    <div class="fb"><p class="fcopy">&#169; 2025 IMPERIONA. Все права защищены.</p><div class="flinks"><a href="#">Политика конфиденциальности</a><a href="#">Реквизиты</a></div></div>
+    <div class="f-bot">
+      <p class="f-copy">&#169; 2025 IMPERIONA. Все права защищены.</p>
+      <div class="f-links"><a href="#">Политика конфиденциальности</a><a href="#">Реквизиты</a></div>
+    </div>
   </div>
 </footer>
 
+<!-- FLOATING -->
+<a href="https://t.me/imperiona_events" class="float-tg" aria-label="Telegram"><i class="fa-brands fa-telegram"></i></a>
+<a href="https://wa.me/79257664998" class="float-wa" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
 <a href="#hero" id="btt" aria-label="Наверх"><i class="fa-solid fa-chevron-up"></i></a>
 
 <script>
+/* ── EmailJS ── */
 const EJS_KEY='YOUR_PUBLIC_KEY',EJS_SVC='YOUR_SERVICE_ID',EJS_TPL='YOUR_TEMPLATE_ID';
 if(EJS_KEY!=='YOUR_PUBLIC_KEY') emailjs.init(EJS_KEY);
 
-/* Particles */
-(function(){const c=document.getElementById('ptcl');for(let i=0;i<18;i++){const p=document.createElement('div');p.className='particle';p.style.cssText=`left:${Math.random()*100}%;animation-duration:${9+Math.random()*16}s;animation-delay:${-Math.random()*20}s;width:${1+Math.random()*2}px;height:${1+Math.random()*2}px`;c.appendChild(p);}})();
+/* ── Particles ── */
+(function(){const c=document.getElementById('ptcl');for(let i=0;i<16;i++){const p=document.createElement('div');p.style.cssText=`position:absolute;border-radius:50%;background:#c9a03d;opacity:0;animation:fup linear infinite;left:${Math.random()*100}%;animation-duration:${9+Math.random()*16}s;animation-delay:${-Math.random()*20}s;width:${1+Math.random()*2}px;height:${1+Math.random()*2}px`;c.appendChild(p);}})();
 
-/* Header */
+/* ── Header ── */
 const hdr=document.getElementById('hdr');
 window.addEventListener('scroll',()=>hdr.classList.toggle('scrolled',scrollY>60),{passive:true});
 
-/* Hamburger */
+/* ── Hamburger ── */
 const hbg=document.getElementById('hbg'),mob=document.getElementById('mob');
-function close_menu(){mob.classList.remove('open');hbg.classList.remove('open');hbg.setAttribute('aria-expanded','false');document.body.style.overflow='';}
+function cm(){mob.classList.remove('open');hbg.classList.remove('open');hbg.setAttribute('aria-expanded','false');document.body.style.overflow='';}
 hbg.addEventListener('click',()=>{const o=mob.classList.toggle('open');hbg.classList.toggle('open',o);hbg.setAttribute('aria-expanded',o);document.body.style.overflow=o?'hidden':'';});
-document.querySelectorAll('.ml').forEach(a=>a.addEventListener('click',close_menu));
-mob.addEventListener('click',e=>{if(e.target===mob)close_menu();});
+document.querySelectorAll('.ml').forEach(a=>a.addEventListener('click',cm));
+mob.addEventListener('click',e=>{if(e.target===mob)cm();});
 
-/* Intersection Observer */
-const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target);}});},{threshold:0.08,rootMargin:'0px 0px -20px 0px'});
+/* ── Intersection Observer ── */
+const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target);}});},{threshold:0.07,rootMargin:'0px 0px -20px 0px'});
 document.querySelectorAll('.fade-up').forEach(el=>io.observe(el));
 
-/* Back to top */
+/* ── Animated counters ── */
+function animCount(el){
+  const target=+el.dataset.target;
+  const dur=1800;
+  const step=dur/60;
+  let current=0;
+  const inc=target/60;
+  const t=setInterval(()=>{
+    current+=inc;
+    if(current>=target){current=target;clearInterval(t);}
+    el.textContent=target>=1000?Math.round(current).toLocaleString('ru-RU'):Math.round(current)+(el.dataset.target==='98'?'%':'+');
+  },step);
+}
+const cio=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){animCount(e.target);cio.unobserve(e.target);}});},{threshold:0.5});
+document.querySelectorAll('[data-target]').forEach(el=>{
+  el.textContent='0';
+  cio.observe(el);
+});
+
+/* ── Portfolio filter ── */
+document.querySelectorAll('.pf-btn').forEach(btn=>{
+  btn.addEventListener('click',function(){
+    document.querySelectorAll('.pf-btn').forEach(b=>b.classList.remove('active'));
+    this.classList.add('active');
+    const f=this.dataset.filter;
+    document.querySelectorAll('.pf-item').forEach(item=>{
+      item.classList.toggle('hidden',f!=='all'&&item.dataset.cat!==f);
+    });
+  });
+});
+
+/* ── Reviews slider ── */
+let cur=0;
+const slides=document.querySelectorAll('.review-slide');
+const dots=document.querySelectorAll('.s-dot');
+const track=document.getElementById('rtrack');
+function goTo(n){
+  cur=(n+slides.length)%slides.length;
+  track.style.transform=`translateX(-${cur*100}%)`;
+  dots.forEach((d,i)=>d.classList.toggle('active',i===cur));
+}
+document.getElementById('snext').addEventListener('click',()=>goTo(cur+1));
+document.getElementById('sprev').addEventListener('click',()=>goTo(cur-1));
+dots.forEach(d=>d.addEventListener('click',()=>goTo(+d.dataset.idx)));
+let autoSlide=setInterval(()=>goTo(cur+1),5000);
+track.parentElement.addEventListener('mouseenter',()=>clearInterval(autoSlide));
+track.parentElement.addEventListener('mouseleave',()=>{autoSlide=setInterval(()=>goTo(cur+1),5000);});
+
+/* ── Back to top ── */
 const btt=document.getElementById('btt');
 window.addEventListener('scroll',()=>btt.classList.toggle('on',scrollY>400),{passive:true});
 
-/* Smooth scroll */
+/* ── Smooth scroll ── */
 document.querySelectorAll('a[href^="#"]').forEach(a=>{
   a.addEventListener('click',function(e){const id=this.getAttribute('href');if(!id||id==='#')return;const t=document.querySelector(id);if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'});}});
 });
 
-/* Social hover */
-document.querySelectorAll('.sb2').forEach(b=>{
-  b.addEventListener('mouseenter',()=>{b.style.borderColor='var(--gold)';b.style.color='var(--gold)';});
-  b.addEventListener('mouseleave',()=>{b.style.borderColor='rgba(201,160,61,0.18)';b.style.color='#9a9080';});
-});
-
-/* Form */
+/* ── Form ── */
 document.getElementById('cf').addEventListener('submit',async function(e){
   e.preventDefault();
   const fn=document.getElementById('fn'),fc=document.getElementById('fc'),fm=document.getElementById('fm');
-  const st=document.getElementById('form-status'),sb=document.getElementById('sb'),stxt=document.getElementById('st');
+  const fst=document.getElementById('fst'),sb=document.getElementById('sb'),st=document.getElementById('st');
   [fn,fc,fm].forEach(f=>f.classList.remove('err'));
   let ok=true;
   if(!fn.value.trim()){fn.classList.add('err');ok=false;}
   if(!fc.value.trim()||fc.value.trim().length<5){fc.classList.add('err');ok=false;}
   if(!fm.value.trim()){fm.classList.add('err');ok=false;}
-  if(!ok){st.style.display='block';st.className='er';st.textContent='Пожалуйста, заполните все обязательные поля.';return;}
+  if(!ok){fst.style.display='block';fst.className='er';fst.textContent='Пожалуйста, заполните все обязательные поля.';return;}
   const v=fc.value.trim();
-  if(!v.includes('@')&&!/\d{5,}/.test(v)){fc.classList.add('err');st.style.display='block';st.className='er';st.textContent='Укажите корректный телефон или email.';return;}
-  sb.disabled=true;stxt.textContent='Отправка...';st.style.display='none';
+  if(!v.includes('@')&&!/\d{5,}/.test(v)){fc.classList.add('err');fst.style.display='block';fst.className='er';fst.textContent='Укажите корректный телефон или email.';return;}
+  sb.disabled=true;st.textContent='Отправка...';fst.style.display='none';
   if(EJS_KEY==='YOUR_PUBLIC_KEY'){
     await new Promise(r=>setTimeout(r,800));
-    st.style.display='block';st.className='ok';
-    st.textContent='✦ Спасибо! Ваша заявка принята. Мы свяжемся с вами в ближайшее время.';
-    this.reset();sb.disabled=false;stxt.textContent='Отправить заявку';return;
+    fst.style.display='block';fst.className='ok';
+    fst.textContent='✦ Спасибо! Ваша заявка принята. Мы свяжемся с вами в ближайшее время.';
+    this.reset();sb.disabled=false;st.textContent='Отправить заявку';return;
   }
   try{
     await emailjs.sendForm(EJS_SVC,EJS_TPL,this);
-    st.style.display='block';st.className='ok';
-    st.textContent='✦ Спасибо! Ваша заявка отправлена. Мы свяжемся с вами в ближайшее время.';
+    fst.style.display='block';fst.className='ok';
+    fst.textContent='✦ Спасибо! Ваша заявка отправлена. Мы свяжемся с вами в ближайшее время.';
     this.reset();
   }catch(err){
-    st.style.display='block';st.className='er';
-    st.textContent='Ошибка отправки. Позвоните: +7 925 766 4998';
-  }finally{sb.disabled=false;stxt.textContent='Отправить заявку';}
+    fst.style.display='block';fst.className='er';
+    fst.textContent='Ошибка отправки. Позвоните: +7 925 766 4998';
+  }finally{sb.disabled=false;st.textContent='Отправить заявку';}
 });
 </script>
 </body>
