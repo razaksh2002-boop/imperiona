@@ -640,6 +640,8 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:38px 0 22
   #calcWrap{grid-template-columns:1fr!important}
   #calcWrap > div:first-child{border-right:none!important;border-bottom:1px solid var(--border)}
   #afishaGrid{grid-template-columns:1fr!important}
+  #afishaGrid > div[style*='grid-column:span 2']{grid-column:auto!important}
+  #afishaGrid > div[style*='grid-column:span 2'] > div[style*='grid-template-columns']{grid-template-columns:1fr!important}
   #blog > .container > div[style*="grid-template-columns:repeat(3"]{grid-template-columns:1fr!important}
   #calGrid{grid-template-columns:repeat(7,1fr)!important}
 }
@@ -1202,40 +1204,167 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:38px 0 22
     </div>
     <!-- Events grid -->
     <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px" class="fade-up" id="afishaGrid">
-      <div style="background:var(--bg3);border:1px solid var(--border);overflow:hidden;transition:border-color .3s" onmouseenter="this.style.borderColor='rgba(201,160,61,0.55)'" onmouseleave="this.style.borderColor='rgba(201,160,61,0.18)'">
-        <div style="height:160px;overflow:hidden;position:relative"><img src="https://images.unsplash.com/photo-1531685250784-7569952593d2?w=600&q=80&auto=format&fit=crop" alt="Сабантуй" style="width:100%;height:100%;object-fit:cover;filter:brightness(.6);display:block"/><div style="position:absolute;top:12px;left:12px;background:var(--gold);color:#000;font-size:.56rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;padding:4px 10px">Открытый доступ</div></div>
+
+      <!-- 1. Июнь — VIP -->
+      <div style="background:var(--bg3);border:1px solid var(--border);overflow:hidden;transition:border-color .3s,transform .3s" onmouseenter="this.style.borderColor='rgba(201,160,61,0.55)';this.style.transform='translateY(-3px)'" onmouseleave="this.style.borderColor='rgba(201,160,61,0.18)';this.style.transform='none'">
+        <div style="height:170px;overflow:hidden;position:relative">
+          <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=600&q=80&auto=format&fit=crop" alt="" style="width:100%;height:100%;object-fit:cover;filter:brightness(.55);display:block"/>
+          <div style="position:absolute;top:12px;left:12px;background:var(--gold);color:#000;font-size:.54rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:4px 10px">VIP · Закрытое</div>
+          <div style="position:absolute;bottom:12px;right:12px;font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:900;color:rgba(255,255,255,0.12)">VI</div>
+        </div>
         <div style="padding:20px">
-          <div style="font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:6px;font-weight:500">Народный праздник</div>
-          <div style="font-family:'Playfair Display',serif;font-size:1rem;color:var(--text);margin-bottom:8px">Сабантуй Дружбы и Единства</div>
-          <div style="font-size:.72rem;color:var(--text-dim);margin-bottom:14px"><i class="fa-regular fa-calendar" style="margin-right:5px;color:var(--gold)"></i>Июль 2025 · <i class="fa-solid fa-location-dot" style="margin-left:6px;margin-right:4px;color:var(--gold)"></i>Москва, Лужники</div>
-          <button onclick="document.getElementById('contacts').scrollIntoView({behavior:'smooth'})" style="padding:8px 18px;border:1px solid var(--gold);background:transparent;color:var(--gold);font-family:inherit;font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;transition:all .3s;width:100%" onmouseenter="this.style.background='var(--gold)';this.style.color='#000'" onmouseleave="this.style.background='transparent';this.style.color='var(--gold)'">Участвовать</button>
+          <div style="font-size:.56rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:6px;font-weight:500">Июнь 2026</div>
+          <div style="font-family:'Playfair Display',serif;font-size:.98rem;color:var(--text);margin-bottom:8px;line-height:1.3">Летний VIP-вечер в загородной резиденции</div>
+          <div style="font-size:.7rem;color:var(--text-dim);margin-bottom:14px;display:flex;flex-direction:column;gap:3px">
+            <span><i class="fa-regular fa-calendar" style="color:var(--gold);margin-right:5px;width:12px"></i>14 июня 2026</span>
+            <span><i class="fa-solid fa-location-dot" style="color:var(--gold);margin-right:5px;width:12px"></i>Подмосковье · Закрытая локация</span>
+            <span><i class="fa-solid fa-users" style="color:var(--gold);margin-right:5px;width:12px"></i>до 80 гостей</span>
+          </div>
+          <button onclick="document.getElementById('contacts').scrollIntoView({behavior:'smooth'})" style="padding:8px 0;border:none;border-bottom:1px solid var(--gold);background:transparent;color:var(--gold);font-family:inherit;font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;display:flex;align-items:center;gap:6px">Запрос на участие <i class="fa-solid fa-arrow-right"></i></button>
         </div>
       </div>
-      <div style="background:var(--bg3);border:1px solid var(--border);overflow:hidden;transition:border-color .3s" onmouseenter="this.style.borderColor='rgba(201,160,61,0.55)'" onmouseleave="this.style.borderColor='rgba(201,160,61,0.18)'">
-        <div style="height:160px;overflow:hidden;position:relative"><img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=600&q=80&auto=format&fit=crop" alt="Корпоратив" style="width:100%;height:100%;object-fit:cover;filter:brightness(.6);display:block"/><div style="position:absolute;top:12px;left:12px;background:var(--bg3);border:1px solid var(--gold);color:var(--gold);font-size:.56rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;padding:4px 10px">Корпоративный</div></div>
+
+      <!-- 2. Июль — Спортивный фестиваль -->
+      <div style="background:var(--bg3);border:1px solid var(--border);overflow:hidden;transition:border-color .3s,transform .3s" onmouseenter="this.style.borderColor='rgba(201,160,61,0.55)';this.style.transform='translateY(-3px)'" onmouseleave="this.style.borderColor='rgba(201,160,61,0.18)';this.style.transform='none'">
+        <div style="height:170px;overflow:hidden;position:relative">
+          <img src="https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=600&q=80&auto=format&fit=crop" alt="" style="width:100%;height:100%;object-fit:cover;filter:brightness(.55);display:block"/>
+          <div style="position:absolute;top:12px;left:12px;background:var(--bg3);border:1px solid var(--gold);color:var(--gold);font-size:.54rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:4px 10px">Открытый</div>
+          <div style="position:absolute;bottom:12px;right:12px;font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:900;color:rgba(255,255,255,0.12)">VII</div>
+        </div>
         <div style="padding:20px">
-          <div style="font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:6px;font-weight:500">Закрытое событие</div>
-          <div style="font-family:'Playfair Display',serif;font-size:1rem;color:var(--text);margin-bottom:8px">Стратегическая сессия — финальный сезон</div>
-          <div style="font-size:.72rem;color:var(--text-dim);margin-bottom:14px"><i class="fa-regular fa-calendar" style="margin-right:5px;color:var(--gold)"></i>Август 2025 · <i class="fa-solid fa-location-dot" style="margin-left:6px;margin-right:4px;color:var(--gold)"></i>Москва, закрытая локация</div>
-          <button onclick="document.getElementById('contacts').scrollIntoView({behavior:'smooth'})" style="padding:8px 18px;border:1px solid var(--border);background:transparent;color:var(--text-muted);font-family:inherit;font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;width:100%;transition:all .3s" onmouseenter="this.style.borderColor='var(--gold)';this.style.color='var(--gold)'" onmouseleave="this.style.borderColor='rgba(201,160,61,0.18)';this.style.color='var(--text-muted)'">Узнать подробнее</button>
+          <div style="font-size:.56rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:6px;font-weight:500">Июль 2026</div>
+          <div style="font-family:'Playfair Display',serif;font-size:.98rem;color:var(--text);margin-bottom:8px;line-height:1.3">Летний спортивный фестиваль «Движение»</div>
+          <div style="font-size:.7rem;color:var(--text-dim);margin-bottom:14px;display:flex;flex-direction:column;gap:3px">
+            <span><i class="fa-regular fa-calendar" style="color:var(--gold);margin-right:5px;width:12px"></i>5–6 июля 2026</span>
+            <span><i class="fa-solid fa-location-dot" style="color:var(--gold);margin-right:5px;width:12px"></i>Москва · Лужники</span>
+            <span><i class="fa-solid fa-users" style="color:var(--gold);margin-right:5px;width:12px"></i>5000+ участников</span>
+          </div>
+          <button onclick="document.getElementById('contacts').scrollIntoView({behavior:'smooth'})" style="padding:8px 0;border:none;border-bottom:1px solid var(--gold);background:transparent;color:var(--gold);font-family:inherit;font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;display:flex;align-items:center;gap:6px">Стать участником <i class="fa-solid fa-arrow-right"></i></button>
         </div>
       </div>
-      <div style="background:var(--bg3);border:1px solid var(--border);overflow:hidden;transition:border-color .3s" onmouseenter="this.style.borderColor='rgba(201,160,61,0.55)'" onmouseleave="this.style.borderColor='rgba(201,160,61,0.18)'">
-        <div style="height:160px;overflow:hidden;position:relative"><img src="https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=600&q=80&auto=format&fit=crop" alt="Концерт" style="width:100%;height:100%;object-fit:cover;filter:brightness(.6);display:block"/><div style="position:absolute;top:12px;left:12px;background:var(--bg3);border:1px solid var(--gold);color:var(--gold);font-size:.56rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;padding:4px 10px">Концерт</div></div>
+
+      <!-- 3. Июль — Арт-выставка -->
+      <div style="background:var(--bg3);border:1px solid var(--border);overflow:hidden;transition:border-color .3s,transform .3s" onmouseenter="this.style.borderColor='rgba(201,160,61,0.55)';this.style.transform='translateY(-3px)'" onmouseleave="this.style.borderColor='rgba(201,160,61,0.18)';this.style.transform='none'">
+        <div style="height:170px;overflow:hidden;position:relative">
+          <img src="https://images.unsplash.com/photo-1578926288207-a90a5366759d?w=600&q=80&auto=format&fit=crop" alt="" style="width:100%;height:100%;object-fit:cover;filter:brightness(.55);display:block"/>
+          <div style="position:absolute;top:12px;left:12px;background:var(--bg3);border:1px solid var(--gold);color:var(--gold);font-size:.54rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:4px 10px">Арт-проект</div>
+          <div style="position:absolute;bottom:12px;right:12px;font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:900;color:rgba(255,255,255,0.12)">VII</div>
+        </div>
         <div style="padding:20px">
-          <div style="font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:6px;font-weight:500">Шоу-программа</div>
-          <div style="font-family:'Playfair Display',serif;font-size:1rem;color:var(--text);margin-bottom:8px">Гала-концерт народных артистов</div>
-          <div style="font-size:.72rem;color:var(--text-dim);margin-bottom:14px"><i class="fa-regular fa-calendar" style="margin-right:5px;color:var(--gold)"></i>Сентябрь 2025 · <i class="fa-solid fa-location-dot" style="margin-left:6px;margin-right:4px;color:var(--gold)"></i>Крокус Сити Холл</div>
-          <button onclick="document.getElementById('contacts').scrollIntoView({behavior:'smooth'})" style="padding:8px 18px;border:1px solid var(--border);background:transparent;color:var(--text-muted);font-family:inherit;font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;width:100%;transition:all .3s" onmouseenter="this.style.borderColor='var(--gold)';this.style.color='var(--gold)'" onmouseleave="this.style.borderColor='rgba(201,160,61,0.18)';this.style.color='var(--text-muted)'">Узнать подробнее</button>
+          <div style="font-size:.56rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:6px;font-weight:500">Июль 2026</div>
+          <div style="font-family:'Playfair Display',serif;font-size:.98rem;color:var(--text);margin-bottom:8px;line-height:1.3">Выставка «Диалог эпох» — современное искусство</div>
+          <div style="font-size:.7rem;color:var(--text-dim);margin-bottom:14px;display:flex;flex-direction:column;gap:3px">
+            <span><i class="fa-regular fa-calendar" style="color:var(--gold);margin-right:5px;width:12px"></i>18–31 июля 2026</span>
+            <span><i class="fa-solid fa-location-dot" style="color:var(--gold);margin-right:5px;width:12px"></i>Москва · Центральный Дом Художника</span>
+            <span><i class="fa-solid fa-users" style="color:var(--gold);margin-right:5px;width:12px"></i>Свободный вход</span>
+          </div>
+          <button onclick="document.getElementById('contacts').scrollIntoView({behavior:'smooth'})" style="padding:8px 0;border:none;border-bottom:1px solid var(--gold);background:transparent;color:var(--gold);font-family:inherit;font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;display:flex;align-items:center;gap:6px">Узнать подробнее <i class="fa-solid fa-arrow-right"></i></button>
         </div>
       </div>
+
+      <!-- 4. Август — Гала-вечер -->
+      <div style="background:var(--bg3);border:1px solid var(--border);overflow:hidden;transition:border-color .3s,transform .3s;position:relative" onmouseenter="this.style.borderColor='rgba(201,160,61,0.55)';this.style.transform='translateY(-3px)'" onmouseleave="this.style.borderColor='rgba(201,160,61,0.18)';this.style.transform='none'">
+        <div style="height:170px;overflow:hidden;position:relative">
+          <img src="https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=600&q=80&auto=format&fit=crop" alt="" style="width:100%;height:100%;object-fit:cover;filter:brightness(.55);display:block"/>
+          <div style="position:absolute;top:12px;left:12px;background:var(--gold);color:#000;font-size:.54rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:4px 10px">Главное событие</div>
+          <div style="position:absolute;bottom:12px;right:12px;font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:900;color:rgba(255,255,255,0.12)">VIII</div>
+        </div>
+        <div style="padding:20px">
+          <div style="font-size:.56rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:6px;font-weight:500">Август 2026 · Флагман сезона</div>
+          <div style="font-family:'Playfair Display',serif;font-size:.98rem;color:var(--text);margin-bottom:8px;line-height:1.3">Гала-вечер IMPERIONA — Закрытый сезон 2026</div>
+          <div style="font-size:.7rem;color:var(--text-dim);margin-bottom:14px;display:flex;flex-direction:column;gap:3px">
+            <span><i class="fa-regular fa-calendar" style="color:var(--gold);margin-right:5px;width:12px"></i>22 августа 2026</span>
+            <span><i class="fa-solid fa-location-dot" style="color:var(--gold);margin-right:5px;width:12px"></i>Крокус Сити Холл</span>
+            <span><i class="fa-solid fa-users" style="color:var(--gold);margin-right:5px;width:12px"></i>1000+ гостей</span>
+          </div>
+          <button onclick="document.getElementById('contacts').scrollIntoView({behavior:'smooth'})" style="padding:8px 0;border:none;border-bottom:1px solid var(--gold);background:transparent;color:var(--gold);font-family:inherit;font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;display:flex;align-items:center;gap:6px">Получить приглашение <i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+      </div>
+
+      <!-- 5. Сентябрь — Форум -->
+      <div style="background:var(--bg3);border:1px solid var(--border);overflow:hidden;transition:border-color .3s,transform .3s" onmouseenter="this.style.borderColor='rgba(201,160,61,0.55)';this.style.transform='translateY(-3px)'" onmouseleave="this.style.borderColor='rgba(201,160,61,0.18)';this.style.transform='none'">
+        <div style="height:170px;overflow:hidden;position:relative">
+          <img src="https://images.unsplash.com/photo-1559223607-a43c990c692c?w=600&q=80&auto=format&fit=crop" alt="" style="width:100%;height:100%;object-fit:cover;filter:brightness(.55);display:block"/>
+          <div style="position:absolute;top:12px;left:12px;background:var(--bg3);border:1px solid var(--gold);color:var(--gold);font-size:.54rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:4px 10px">Деловой форум</div>
+          <div style="position:absolute;bottom:12px;right:12px;font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:900;color:rgba(255,255,255,0.12)">IX</div>
+        </div>
+        <div style="padding:20px">
+          <div style="font-size:.56rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:6px;font-weight:500">Сентябрь 2026</div>
+          <div style="font-family:'Playfair Display',serif;font-size:.98rem;color:var(--text);margin-bottom:8px;line-height:1.3">Бизнес-форум «Новые горизонты» — осенний сезон</div>
+          <div style="font-size:.7rem;color:var(--text-dim);margin-bottom:14px;display:flex;flex-direction:column;gap:3px">
+            <span><i class="fa-regular fa-calendar" style="color:var(--gold);margin-right:5px;width:12px"></i>10–12 сентября 2026</span>
+            <span><i class="fa-solid fa-location-dot" style="color:var(--gold);margin-right:5px;width:12px"></i>Москва · Экспоцентр</span>
+            <span><i class="fa-solid fa-users" style="color:var(--gold);margin-right:5px;width:12px"></i>2000+ участников</span>
+          </div>
+          <button onclick="document.getElementById('contacts').scrollIntoView({behavior:'smooth'})" style="padding:8px 0;border:none;border-bottom:1px solid var(--gold);background:transparent;color:var(--gold);font-family:inherit;font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;display:flex;align-items:center;gap:6px">Зарегистрироваться <i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+      </div>
+
+      <!-- 6. Октябрь — Концерт -->
+      <div style="background:var(--bg3);border:1px solid var(--border);overflow:hidden;transition:border-color .3s,transform .3s" onmouseenter="this.style.borderColor='rgba(201,160,61,0.55)';this.style.transform='translateY(-3px)'" onmouseleave="this.style.borderColor='rgba(201,160,61,0.18)';this.style.transform='none'">
+        <div style="height:170px;overflow:hidden;position:relative">
+          <img src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=600&q=80&auto=format&fit=crop" alt="" style="width:100%;height:100%;object-fit:cover;filter:brightness(.55);display:block"/>
+          <div style="position:absolute;top:12px;left:12px;background:var(--bg3);border:1px solid var(--gold);color:var(--gold);font-size:.54rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:4px 10px">Концерт</div>
+          <div style="position:absolute;bottom:12px;right:12px;font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:900;color:rgba(255,255,255,0.12)">X</div>
+        </div>
+        <div style="padding:20px">
+          <div style="font-size:.56rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:6px;font-weight:500">Октябрь 2026</div>
+          <div style="font-family:'Playfair Display',serif;font-size:.98rem;color:var(--text);margin-bottom:8px;line-height:1.3">Концерт народных артистов России — осенний гала</div>
+          <div style="font-size:.7rem;color:var(--text-dim);margin-bottom:14px;display:flex;flex-direction:column;gap:3px">
+            <span><i class="fa-regular fa-calendar" style="color:var(--gold);margin-right:5px;width:12px"></i>3 октября 2026</span>
+            <span><i class="fa-solid fa-location-dot" style="color:var(--gold);margin-right:5px;width:12px"></i>Государственный Кремлёвский Дворец</span>
+            <span><i class="fa-solid fa-users" style="color:var(--gold);margin-right:5px;width:12px"></i>6000 мест</span>
+          </div>
+          <button onclick="document.getElementById('contacts').scrollIntoView({behavior:'smooth'})" style="padding:8px 0;border:none;border-bottom:1px solid var(--gold);background:transparent;color:var(--gold);font-family:inherit;font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;display:flex;align-items:center;gap:6px">Приобрести билет <i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+      </div>
+
+      <!-- 7. Ноябрь — Корпоратив -->
+      <div style="background:var(--bg3);border:1px solid var(--border);overflow:hidden;transition:border-color .3s,transform .3s" onmouseenter="this.style.borderColor='rgba(201,160,61,0.55)';this.style.transform='translateY(-3px)'" onmouseleave="this.style.borderColor='rgba(201,160,61,0.18)';this.style.transform='none'">
+        <div style="height:170px;overflow:hidden;position:relative">
+          <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=600&q=80&auto=format&fit=crop" alt="" style="width:100%;height:100%;object-fit:cover;filter:brightness(.55);display:block"/>
+          <div style="position:absolute;top:12px;left:12px;background:var(--bg3);border:1px solid var(--border);color:var(--text-dim);font-size:.54rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;padding:4px 10px">Бронирование открыто</div>
+          <div style="position:absolute;bottom:12px;right:12px;font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:900;color:rgba(255,255,255,0.12)">XI</div>
+        </div>
+        <div style="padding:20px">
+          <div style="font-size:.56rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:6px;font-weight:500">Ноябрь 2026 · Корпоративный сезон</div>
+          <div style="font-family:'Playfair Display',serif;font-size:.98rem;color:var(--text);margin-bottom:8px;line-height:1.3">Сезон корпоративных мероприятий — свободные даты</div>
+          <div style="font-size:.7rem;color:var(--text-dim);margin-bottom:14px;display:flex;flex-direction:column;gap:3px">
+            <span><i class="fa-regular fa-calendar" style="color:var(--gold);margin-right:5px;width:12px"></i>Ноябрь — декабрь 2026</span>
+            <span><i class="fa-solid fa-location-dot" style="color:var(--gold);margin-right:5px;width:12px"></i>Москва и регионы</span>
+            <span><i class="fa-solid fa-users" style="color:var(--gold);margin-right:5px;width:12px"></i>от 50 до 3000 гостей</span>
+          </div>
+          <button onclick="document.getElementById('contacts').scrollIntoView({behavior:'smooth'})" style="padding:8px 0;border:none;border-bottom:1px solid var(--gold);background:transparent;color:var(--gold);font-family:inherit;font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;display:flex;align-items:center;gap:6px">Забронировать дату <i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+      </div>
+
+      <!-- 8. Декабрь — Новогодний -->
+      <div style="background:var(--bg3);border:1px solid var(--border);overflow:hidden;transition:border-color .3s,transform .3s;grid-column:span 2" onmouseenter="this.style.borderColor='rgba(201,160,61,0.55)';this.style.transform='translateY(-3px)'" onmouseleave="this.style.borderColor='rgba(201,160,61,0.18)';this.style.transform='none'">
+        <div style="display:grid;grid-template-columns:1fr 1fr;height:100%">
+          <div style="height:100%;min-height:180px;overflow:hidden;position:relative">
+            <img src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=600&q=80&auto=format&fit=crop" alt="" style="width:100%;height:100%;object-fit:cover;filter:brightness(.5);display:block"/>
+            <div style="position:absolute;top:12px;left:12px;background:var(--gold);color:#000;font-size:.54rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:4px 10px">Финал года</div>
+          </div>
+          <div style="padding:24px">
+            <div style="font-size:.56rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:6px;font-weight:500">Декабрь 2026 · Новогодний сезон</div>
+            <div style="font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--text);margin-bottom:10px;line-height:1.3">«Ночь IMPERIONA» — грандиозный Новогодний гала-вечер</div>
+            <div style="font-size:.7rem;color:var(--text-muted);line-height:1.7;margin-bottom:14px">Торжественное завершение года в премиальном формате. Живая музыка, шеф-повар, шоу-программа с участием народных артистов и незабываемый countdown.</div>
+            <div style="font-size:.7rem;color:var(--text-dim);margin-bottom:16px;display:flex;flex-direction:column;gap:3px">
+              <span><i class="fa-regular fa-calendar" style="color:var(--gold);margin-right:5px;width:12px"></i>27 декабря 2026</span>
+              <span><i class="fa-solid fa-location-dot" style="color:var(--gold);margin-right:5px;width:12px"></i>Москва · Площадка будет объявлена</span>
+            </div>
+            <button onclick="document.getElementById('contacts').scrollIntoView({behavior:'smooth'})" style="padding:10px 22px;background:linear-gradient(135deg,var(--gold-light),var(--gold));color:#000;font-family:inherit;font-size:.62rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;border:none;display:inline-flex;align-items:center;gap:7px">Получить приглашение <i class="fa-solid fa-arrow-right"></i></button>
+          </div>
+        </div>
+      </div>
+
     </div>
     <!-- Free dates calendar -->
     <div class="fade-up" style="margin-top:40px;border:1px solid var(--border);background:var(--bg3);padding:32px 36px">
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;flex-wrap:wrap;gap:12px">
         <div>
           <div style="font-size:.58rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:6px;font-weight:500">Доступность</div>
-          <div style="font-family:'Playfair Display',serif;font-size:1.3rem;color:var(--text)">Свободные даты</div>
+          <div style="font-family:'Playfair Display',serif;font-size:1.3rem;color:var(--text)">Свободные даты — август 2026</div>
         </div>
         <div style="display:flex;gap:16px;font-size:.64rem;color:var(--text-dim)">
           <span style="display:flex;align-items:center;gap:6px"><span style="width:10px;height:10px;background:rgba(201,160,61,0.3);border:1px solid var(--gold);display:inline-block"></span>Свободно</span>
@@ -1432,7 +1561,7 @@ function calcUpdate(){
 
 /* ── COUNTDOWN ── */
 function updateCountdown(){
-  const target = new Date('2025-07-15T12:00:00');
+  const target = new Date('2026-08-22T18:00:00');
   const now = new Date();
   const diff = target - now;
   if(diff <= 0){document.getElementById('cdDays').textContent='0';document.getElementById('cdHours').textContent='0';document.getElementById('cdMins').textContent='0';return;}
@@ -1445,7 +1574,7 @@ setInterval(updateCountdown, 60000);
 
 /* ── CALENDAR ── */
 (function(){
-  const busy = [3,4,8,12,19,20,24,28];
+  const busy = [5,6,10,14,18,19,22,25,26,30,31];
   const grid = document.getElementById('calGrid');
   if(!grid) return;
   const days = ['Пн','Вт','Ср','Чт','Пт','Сб','Вс'];
