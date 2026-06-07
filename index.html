@@ -635,6 +635,21 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:38px 0 22
   .logo-name{font-size:1.2rem}
   h1.ht{font-size:1.6rem}
 }
+
+@media(max-width:900px){
+  #calcWrap{grid-template-columns:1fr!important}
+  #calcWrap > div:first-child{border-right:none!important;border-bottom:1px solid var(--border)}
+  #afishaGrid{grid-template-columns:1fr!important}
+  #blog > .container > div[style*="grid-template-columns:repeat(3"]{grid-template-columns:1fr!important}
+  #calGrid{grid-template-columns:repeat(7,1fr)!important}
+}
+@media(max-width:640px){
+  #countdown{gap:8px!important}
+  #countdown > div{padding:10px 10px!important;min-width:56px!important}
+  #countdown span:first-child{font-size:1.5rem!important}
+  #blog .fade-up[style*="grid"]{grid-template-columns:1fr!important}
+}
+
 @media(max-width:320px){
   .container{padding:0 12px}
   .part-grid{grid-template-columns:1fr}
@@ -653,6 +668,9 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:38px 0 22
   <a href="#portfolio" class="ml">Портфолио</a>
   <a href="#about" class="ml">О нас</a>
   <a href="#reviews" class="ml">Отзывы</a>
+  <a href="#calculator" class="ml">Калькулятор</a>
+  <a href="#afisha" class="ml">Афиша</a>
+  <a href="#blog" class="ml">Блог</a>
   <a href="#contacts" class="ml">Контакты</a>
 </div>
 
@@ -666,6 +684,9 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:38px 0 22
       <a href="#portfolio">Портфолио</a>
       <a href="#about">О нас</a>
       <a href="#reviews">Отзывы</a>
+      <a href="#calculator">Калькулятор</a>
+      <a href="#afisha">Афиша</a>
+      <a href="#blog">Блог</a>
       <a href="#contacts">Контакты</a>
     </nav>
     <button class="h-cta" onclick="document.getElementById('contacts').scrollIntoView({behavior:'smooth'})">Обсудить проект</button>
@@ -1089,6 +1110,198 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:38px 0 22
 </section>
 
 
+<!-- CALCULATOR -->
+<section id="calculator" style="padding:96px 0;background:var(--bg);position:relative">
+  <div style="position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent)"></div>
+  <div class="container">
+    <div class="sec-hd fade-up">
+      <h2 class="section-title">Калькулятор стоимости</h2>
+      <p>Получите предварительный расчёт за 30 секунд — без звонков и ожидания.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:2px;border:1px solid var(--border)" class="fade-up" id="calcWrap">
+      <!-- Left: form -->
+      <div style="background:var(--bg2);padding:40px 36px;border-right:1px solid var(--border)">
+        <div style="margin-bottom:20px">
+          <label style="display:block;font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:var(--text-dim);margin-bottom:8px;font-weight:500">Тип мероприятия</label>
+          <select id="cType" onchange="calcUpdate()" style="width:100%;padding:12px 14px;background:var(--bg3);border:1px solid var(--border);color:var(--text);font-family:inherit;font-size:15px;outline:none;appearance:none;-webkit-appearance:none;border-radius:0;cursor:pointer">
+            <option value="0">Выберите тип</option>
+            <option value="150000">Корпоративное мероприятие</option>
+            <option value="200000">VIP-вечеринка / юбилей</option>
+            <option value="300000">Boutique-свадьба</option>
+            <option value="250000">Конференция / форум</option>
+            <option value="180000">Спортивное мероприятие</option>
+            <option value="350000">Концерт / шоу-программа</option>
+            <option value="120000">Кейтеринг и фуршет</option>
+          </select>
+        </div>
+        <div style="margin-bottom:20px">
+          <label style="display:block;font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:var(--text-dim);margin-bottom:8px;font-weight:500">Количество гостей: <span id="guestVal" style="color:var(--gold)">100</span></label>
+          <input type="range" id="cGuests" min="10" max="5000" value="100" step="10" oninput="calcUpdate()" style="width:100%;accent-color:var(--gold);height:2px;outline:none;background:var(--border);cursor:pointer"/>
+          <div style="display:flex;justify-content:space-between;font-size:.58rem;color:var(--text-dim);margin-top:4px"><span>10</span><span>5000+</span></div>
+        </div>
+        <div style="margin-bottom:20px">
+          <label style="display:block;font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:var(--text-dim);margin-bottom:8px;font-weight:500">Продолжительность</label>
+          <div style="display:flex;gap:8px;flex-wrap:wrap" id="durBtns">
+            <button onclick="selectDur(this,1)" style="padding:8px 16px;border:1px solid var(--border);background:transparent;color:var(--text-muted);font-family:inherit;font-size:.7rem;cursor:pointer;transition:all .3s" class="dur-btn active-dur">1 день</button>
+            <button onclick="selectDur(this,2)" style="padding:8px 16px;border:1px solid var(--border);background:transparent;color:var(--text-muted);font-family:inherit;font-size:.7rem;cursor:pointer;transition:all .3s" class="dur-btn">2 дня</button>
+            <button onclick="selectDur(this,3)" style="padding:8px 16px;border:1px solid var(--border);background:transparent;color:var(--text-muted);font-family:inherit;font-size:.7rem;cursor:pointer;transition:all .3s" class="dur-btn">3 дня</button>
+          </div>
+        </div>
+        <div style="margin-bottom:24px">
+          <label style="display:block;font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:var(--text-dim);margin-bottom:10px;font-weight:500">Дополнительные услуги</label>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <label style="display:flex;align-items:center;gap:10px;font-size:.76rem;color:var(--text-muted);cursor:pointer"><input type="checkbox" value="80000" onchange="calcUpdate()" style="accent-color:var(--gold);width:14px;height:14px"/> Фото и видеосъёмка</label>
+            <label style="display:flex;align-items:center;gap:10px;font-size:.76rem;color:var(--text-muted);cursor:pointer"><input type="checkbox" value="60000" onchange="calcUpdate()" style="accent-color:var(--gold);width:14px;height:14px"/> Ведущий мероприятия</label>
+            <label style="display:flex;align-items:center;gap:10px;font-size:.76rem;color:var(--text-muted);cursor:pointer"><input type="checkbox" value="120000" onchange="calcUpdate()" style="accent-color:var(--gold);width:14px;height:14px"/> Живая музыка / артисты</label>
+            <label style="display:flex;align-items:center;gap:10px;font-size:.76rem;color:var(--text-muted);cursor:pointer"><input type="checkbox" value="90000" onchange="calcUpdate()" style="accent-color:var(--gold);width:14px;height:14px"/> Декор и флористика</label>
+            <label style="display:flex;align-items:center;gap:10px;font-size:.76rem;color:var(--text-muted);cursor:pointer"><input type="checkbox" value="50000" onchange="calcUpdate()" style="accent-color:var(--gold);width:14px;height:14px"/> Онлайн-трансляция</label>
+          </div>
+        </div>
+        <button onclick="document.getElementById('contacts').scrollIntoView({behavior:'smooth'})" class="btn-g" style="width:100%;justify-content:center"><span>Получить точный расчёт</span></button>
+      </div>
+      <!-- Right: result -->
+      <div style="background:var(--bg3);padding:40px 36px;display:flex;flex-direction:column;justify-content:center">
+        <div style="font-size:.58rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:16px;font-weight:500">Предварительная стоимость</div>
+        <div id="calcResult" style="font-family:'Playfair Display',serif;font-size:2.8rem;font-weight:900;background:linear-gradient(135deg,var(--gold-light),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;margin-bottom:8px">—</div>
+        <div id="calcSub" style="font-size:.72rem;color:var(--text-dim);margin-bottom:32px">Выберите параметры слева</div>
+        <div style="border:1px solid var(--border);padding:20px;background:var(--bg4);margin-bottom:24px">
+          <div style="font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-bottom:12px;font-weight:500">Входит в стоимость</div>
+          <div id="calcIncludes" style="font-size:.74rem;color:var(--text-muted);line-height:1.9">
+            Выберите тип мероприятия для отображения состава услуг
+          </div>
+        </div>
+        <div style="font-size:.68rem;color:var(--text-dim);line-height:1.6;font-style:italic">
+          * Расчёт предварительный. Точная стоимость определяется после брифинга с учётом всех деталей вашего события.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AFISHA -->
+<section id="afisha" style="padding:96px 0;background:var(--bg2);position:relative">
+  <div style="position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent)"></div>
+  <div style="position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent)"></div>
+  <div class="container">
+    <div class="sec-hd fade-up">
+      <h2 class="section-title">Афиша событий</h2>
+      <p>Ближайшие мероприятия IMPERIONA — будьте в курсе наших проектов.</p>
+    </div>
+    <!-- Countdown timer -->
+    <div class="fade-up" style="border:1px solid var(--border);background:var(--bg3);padding:28px 36px;margin-bottom:40px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap">
+      <div>
+        <div style="font-size:.58rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:6px;font-weight:500">Следующее мероприятие</div>
+        <div style="font-family:'Playfair Display',serif;font-size:1.2rem;color:var(--text)">Московский Сабантуй Дружбы и Единства</div>
+        <div style="font-size:.72rem;color:var(--text-dim);margin-top:4px"><i class="fa-solid fa-location-dot" style="color:var(--gold);margin-right:5px"></i>Москва · Лужники</div>
+      </div>
+      <div style="display:flex;gap:16px;text-align:center" id="countdown">
+        <div style="background:var(--bg4);border:1px solid var(--border);padding:14px 18px;min-width:70px"><span id="cdDays" style="font-family:'Playfair Display',serif;font-size:2rem;font-weight:900;color:var(--gold);display:block">—</span><span style="font-size:.54rem;letter-spacing:.14em;text-transform:uppercase;color:var(--text-dim)">дней</span></div>
+        <div style="background:var(--bg4);border:1px solid var(--border);padding:14px 18px;min-width:70px"><span id="cdHours" style="font-family:'Playfair Display',serif;font-size:2rem;font-weight:900;color:var(--gold);display:block">—</span><span style="font-size:.54rem;letter-spacing:.14em;text-transform:uppercase;color:var(--text-dim)">часов</span></div>
+        <div style="background:var(--bg4);border:1px solid var(--border);padding:14px 18px;min-width:70px"><span id="cdMins" style="font-family:'Playfair Display',serif;font-size:2rem;font-weight:900;color:var(--gold);display:block">—</span><span style="font-size:.54rem;letter-spacing:.14em;text-transform:uppercase;color:var(--text-dim)">минут</span></div>
+      </div>
+    </div>
+    <!-- Events grid -->
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px" class="fade-up" id="afishaGrid">
+      <div style="background:var(--bg3);border:1px solid var(--border);overflow:hidden;transition:border-color .3s" onmouseenter="this.style.borderColor='rgba(201,160,61,0.55)'" onmouseleave="this.style.borderColor='rgba(201,160,61,0.18)'">
+        <div style="height:160px;overflow:hidden;position:relative"><img src="https://images.unsplash.com/photo-1531685250784-7569952593d2?w=600&q=80&auto=format&fit=crop" alt="Сабантуй" style="width:100%;height:100%;object-fit:cover;filter:brightness(.6);display:block"/><div style="position:absolute;top:12px;left:12px;background:var(--gold);color:#000;font-size:.56rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;padding:4px 10px">Открытый доступ</div></div>
+        <div style="padding:20px">
+          <div style="font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:6px;font-weight:500">Народный праздник</div>
+          <div style="font-family:'Playfair Display',serif;font-size:1rem;color:var(--text);margin-bottom:8px">Сабантуй Дружбы и Единства</div>
+          <div style="font-size:.72rem;color:var(--text-dim);margin-bottom:14px"><i class="fa-regular fa-calendar" style="margin-right:5px;color:var(--gold)"></i>Июль 2025 · <i class="fa-solid fa-location-dot" style="margin-left:6px;margin-right:4px;color:var(--gold)"></i>Москва, Лужники</div>
+          <button onclick="document.getElementById('contacts').scrollIntoView({behavior:'smooth'})" style="padding:8px 18px;border:1px solid var(--gold);background:transparent;color:var(--gold);font-family:inherit;font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;transition:all .3s;width:100%" onmouseenter="this.style.background='var(--gold)';this.style.color='#000'" onmouseleave="this.style.background='transparent';this.style.color='var(--gold)'">Участвовать</button>
+        </div>
+      </div>
+      <div style="background:var(--bg3);border:1px solid var(--border);overflow:hidden;transition:border-color .3s" onmouseenter="this.style.borderColor='rgba(201,160,61,0.55)'" onmouseleave="this.style.borderColor='rgba(201,160,61,0.18)'">
+        <div style="height:160px;overflow:hidden;position:relative"><img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=600&q=80&auto=format&fit=crop" alt="Корпоратив" style="width:100%;height:100%;object-fit:cover;filter:brightness(.6);display:block"/><div style="position:absolute;top:12px;left:12px;background:var(--bg3);border:1px solid var(--gold);color:var(--gold);font-size:.56rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;padding:4px 10px">Корпоративный</div></div>
+        <div style="padding:20px">
+          <div style="font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:6px;font-weight:500">Закрытое событие</div>
+          <div style="font-family:'Playfair Display',serif;font-size:1rem;color:var(--text);margin-bottom:8px">Стратегическая сессия — финальный сезон</div>
+          <div style="font-size:.72rem;color:var(--text-dim);margin-bottom:14px"><i class="fa-regular fa-calendar" style="margin-right:5px;color:var(--gold)"></i>Август 2025 · <i class="fa-solid fa-location-dot" style="margin-left:6px;margin-right:4px;color:var(--gold)"></i>Москва, закрытая локация</div>
+          <button onclick="document.getElementById('contacts').scrollIntoView({behavior:'smooth'})" style="padding:8px 18px;border:1px solid var(--border);background:transparent;color:var(--text-muted);font-family:inherit;font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;width:100%;transition:all .3s" onmouseenter="this.style.borderColor='var(--gold)';this.style.color='var(--gold)'" onmouseleave="this.style.borderColor='rgba(201,160,61,0.18)';this.style.color='var(--text-muted)'">Узнать подробнее</button>
+        </div>
+      </div>
+      <div style="background:var(--bg3);border:1px solid var(--border);overflow:hidden;transition:border-color .3s" onmouseenter="this.style.borderColor='rgba(201,160,61,0.55)'" onmouseleave="this.style.borderColor='rgba(201,160,61,0.18)'">
+        <div style="height:160px;overflow:hidden;position:relative"><img src="https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=600&q=80&auto=format&fit=crop" alt="Концерт" style="width:100%;height:100%;object-fit:cover;filter:brightness(.6);display:block"/><div style="position:absolute;top:12px;left:12px;background:var(--bg3);border:1px solid var(--gold);color:var(--gold);font-size:.56rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;padding:4px 10px">Концерт</div></div>
+        <div style="padding:20px">
+          <div style="font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:6px;font-weight:500">Шоу-программа</div>
+          <div style="font-family:'Playfair Display',serif;font-size:1rem;color:var(--text);margin-bottom:8px">Гала-концерт народных артистов</div>
+          <div style="font-size:.72rem;color:var(--text-dim);margin-bottom:14px"><i class="fa-regular fa-calendar" style="margin-right:5px;color:var(--gold)"></i>Сентябрь 2025 · <i class="fa-solid fa-location-dot" style="margin-left:6px;margin-right:4px;color:var(--gold)"></i>Крокус Сити Холл</div>
+          <button onclick="document.getElementById('contacts').scrollIntoView({behavior:'smooth'})" style="padding:8px 18px;border:1px solid var(--border);background:transparent;color:var(--text-muted);font-family:inherit;font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;width:100%;transition:all .3s" onmouseenter="this.style.borderColor='var(--gold)';this.style.color='var(--gold)'" onmouseleave="this.style.borderColor='rgba(201,160,61,0.18)';this.style.color='var(--text-muted)'">Узнать подробнее</button>
+        </div>
+      </div>
+    </div>
+    <!-- Free dates calendar -->
+    <div class="fade-up" style="margin-top:40px;border:1px solid var(--border);background:var(--bg3);padding:32px 36px">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;flex-wrap:wrap;gap:12px">
+        <div>
+          <div style="font-size:.58rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:6px;font-weight:500">Доступность</div>
+          <div style="font-family:'Playfair Display',serif;font-size:1.3rem;color:var(--text)">Свободные даты</div>
+        </div>
+        <div style="display:flex;gap:16px;font-size:.64rem;color:var(--text-dim)">
+          <span style="display:flex;align-items:center;gap:6px"><span style="width:10px;height:10px;background:rgba(201,160,61,0.3);border:1px solid var(--gold);display:inline-block"></span>Свободно</span>
+          <span style="display:flex;align-items:center;gap:6px"><span style="width:10px;height:10px;background:rgba(192,57,43,0.3);border:1px solid #c0392b;display:inline-block"></span>Занято</span>
+        </div>
+      </div>
+      <div id="calGrid" style="display:grid;grid-template-columns:repeat(7,1fr);gap:4px;text-align:center"></div>
+      <p style="font-size:.64rem;color:var(--text-dim);margin-top:14px;font-style:italic">* Для бронирования даты — свяжитесь с нами. Календарь обновляется вручную.</p>
+    </div>
+  </div>
+</section>
+
+<!-- BLOG -->
+<section id="blog" style="padding:96px 0;background:var(--bg);position:relative">
+  <div style="position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent)"></div>
+  <div class="container">
+    <div class="sec-hd fade-up">
+      <h2 class="section-title">Блог и новости</h2>
+      <p>Полезные материалы об организации мероприятий, трендах и кейсах IMPERIONA.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px" class="fade-up">
+      <!-- Article 1 -->
+      <article style="background:var(--bg2);border:1px solid var(--border);overflow:hidden;transition:all .3s;cursor:pointer" onmouseenter="this.style.borderColor='rgba(201,160,61,0.55)';this.style.transform='translateY(-3px)'" onmouseleave="this.style.borderColor='rgba(201,160,61,0.18)';this.style.transform='none'">
+        <div style="height:180px;overflow:hidden"><img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=600&q=80&auto=format&fit=crop" alt="" style="width:100%;height:100%;object-fit:cover;filter:brightness(.65);display:block;transition:transform .6s" onmouseenter="this.style.transform='scale(1.05)'" onmouseleave="this.style.transform='none'"/></div>
+        <div style="padding:22px 20px">
+          <div style="font-size:.54rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:8px;font-weight:500">Корпоративные события · 5 мин</div>
+          <div style="font-family:'Playfair Display',serif;font-size:1rem;color:var(--text);margin-bottom:10px;line-height:1.3">Как организовать корпоратив на 500 человек: полный чеклист</div>
+          <div style="font-size:.74rem;color:var(--text-muted);line-height:1.7;margin-bottom:16px">От выбора площадки до финального аккорда — разбираем каждый этап подготовки крупного корпоративного события...</div>
+          <button onclick="document.getElementById('contacts').scrollIntoView({behavior:'smooth'})" style="font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);background:none;border:none;cursor:pointer;font-family:inherit;padding:0;display:flex;align-items:center;gap:6px">Читать далее <i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+      </article>
+      <!-- Article 2 -->
+      <article style="background:var(--bg2);border:1px solid var(--border);overflow:hidden;transition:all .3s;cursor:pointer" onmouseenter="this.style.borderColor='rgba(201,160,61,0.55)';this.style.transform='translateY(-3px)'" onmouseleave="this.style.borderColor='rgba(201,160,61,0.18)';this.style.transform='none'">
+        <div style="height:180px;overflow:hidden"><img src="https://images.unsplash.com/photo-1578926288207-a90a5366759d?w=600&q=80&auto=format&fit=crop" alt="" style="width:100%;height:100%;object-fit:cover;filter:brightness(.65);display:block;transition:transform .6s" onmouseenter="this.style.transform='scale(1.05)'" onmouseleave="this.style.transform='none'"/></div>
+        <div style="padding:22px 20px">
+          <div style="font-size:.54rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:8px;font-weight:500">Тренды · 4 мин</div>
+          <div style="font-family:'Playfair Display',serif;font-size:1rem;color:var(--text);margin-bottom:10px;line-height:1.3">Phygital-события 2025: как объединить онлайн и офлайн аудитории</div>
+          <div style="font-size:.74rem;color:var(--text-muted);line-height:1.7;margin-bottom:16px">Гибридный формат перестал быть вынужденной мерой — сегодня это конкурентное преимущество, которое даёт +25% к охвату...</div>
+          <button onclick="document.getElementById('contacts').scrollIntoView({behavior:'smooth'})" style="font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);background:none;border:none;cursor:pointer;font-family:inherit;padding:0;display:flex;align-items:center;gap:6px">Читать далее <i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+      </article>
+      <!-- Article 3 -->
+      <article style="background:var(--bg2);border:1px solid var(--border);overflow:hidden;transition:all .3s;cursor:pointer" onmouseenter="this.style.borderColor='rgba(201,160,61,0.55)';this.style.transform='translateY(-3px)'" onmouseleave="this.style.borderColor='rgba(201,160,61,0.18)';this.style.transform='none'">
+        <div style="height:180px;overflow:hidden"><img src="https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?w=600&q=80&auto=format&fit=crop" alt="" style="width:100%;height:100%;object-fit:cover;filter:brightness(.65);display:block;transition:transform .6s" onmouseenter="this.style.transform='scale(1.05)'" onmouseleave="this.style.transform='none'"/></div>
+        <div style="padding:22px 20px">
+          <div style="font-size:.54rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:8px;font-weight:500">Кейс IMPERIONA · 6 мин</div>
+          <div style="font-family:'Playfair Display',serif;font-size:1rem;color:var(--text);margin-bottom:10px;line-height:1.3">Волга Форум: как мы провели событие на 5000 участников без единого сбоя</div>
+          <div style="font-size:.74rem;color:var(--text-muted);line-height:1.7;margin-bottom:16px">Разбираем изнутри: логистика, команда, технические решения и неожиданные вызовы, с которыми мы справились за 72 часа...</div>
+          <button onclick="document.getElementById('contacts').scrollIntoView({behavior:'smooth'})" style="font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);background:none;border:none;cursor:pointer;font-family:inherit;padding:0;display:flex;align-items:center;gap:6px">Читать далее <i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+      </article>
+    </div>
+    <!-- Telegram CTA -->
+    <div class="fade-up" style="margin-top:32px;border:1px solid var(--border);background:var(--bg2);padding:28px 36px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap">
+      <div style="display:flex;align-items:center;gap:16px">
+        <div style="width:48px;height:48px;background:#229ED9;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.3rem;color:#fff;flex-shrink:0"><i class="fa-brands fa-telegram"></i></div>
+        <div>
+          <div style="font-family:'Playfair Display',serif;font-size:1rem;color:var(--text);margin-bottom:3px">Подписывайтесь на Telegram-канал</div>
+          <div style="font-size:.72rem;color:var(--text-dim)">Анонсы событий, закулисье проектов и полезные материалы — каждую неделю</div>
+        </div>
+      </div>
+      <a href="https://t.me/imperiona_events" target="_blank" style="padding:11px 24px;background:#229ED9;color:#fff;text-decoration:none;font-family:inherit;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;font-weight:500;transition:opacity .3s;white-space:nowrap" onmouseenter="this.style.opacity='.8'" onmouseleave="this.style.opacity='1'"><i class="fa-brands fa-telegram" style="margin-right:7px"></i>Подписаться</a>
+    </div>
+  </div>
+</section>
+
 <!-- CONTACTS -->
 <section id="contacts">
   <div class="container">
@@ -1181,6 +1394,76 @@ function dpSetPhoto(thumb, src){
   document.querySelectorAll('.dp-thumb').forEach(t=>t.classList.remove('active'));
   thumb.classList.add('active');
 }
+
+
+/* ── CALCULATOR ── */
+let calcDur = 1;
+const calcIncludes = {
+  "150000": "Концепция и сценарий · Координация команды · Декор базовый · Тайминг · Контроль качества",
+  "200000": "Концепция VIP-уровня · Подбор закрытой локации · Шоу-программа · Личный координатор · Безопасность",
+  "300000": "Авторский сценарий · Выездная церемония · Декор premium · Фуршет · Координатор в день свадьбы",
+  "250000": "Phygital-продакшн · Техническое оснащение · Синхронный перевод · Модерация · Медиасопровождение",
+  "180000": "Разметка арены · Церемония награждения · Ведущий · Техника · Логистика участников",
+  "350000": "Продакшн полный цикл · Звук и свет · Технический райдер · Безопасность · Трансляция",
+  "120000": "Меню от шеф-повара · Сервировка · Персонал · Доставка · Уборка после"
+};
+function selectDur(btn, days){
+  calcDur = days;
+  document.querySelectorAll('.dur-btn').forEach(b=>{
+    b.style.borderColor='rgba(201,160,61,0.18)';b.style.color='var(--text-muted)';b.style.background='transparent';
+  });
+  btn.style.borderColor='var(--gold)';btn.style.color='var(--gold)';btn.style.background='rgba(201,160,61,0.08)';
+  calcUpdate();
+}
+function calcUpdate(){
+  const type = +document.getElementById('cType').value;
+  const guests = +document.getElementById('cGuests').value;
+  document.getElementById('guestVal').textContent = guests >= 1000 ? (guests/1000).toFixed(1)+'к' : guests;
+  if(!type){document.getElementById('calcResult').textContent='—';document.getElementById('calcSub').textContent='Выберите параметры слева';return;}
+  let extra = 0;
+  document.querySelectorAll('#calcWrap input[type=checkbox]:checked').forEach(cb=>extra+=+cb.value);
+  const guestMult = guests <= 50 ? 0.7 : guests <= 200 ? 1 : guests <= 500 ? 1.4 : guests <= 1000 ? 1.9 : 2.8;
+  const total = Math.round((type * guestMult * calcDur + extra) / 1000) * 1000;
+  const max = Math.round(total * 1.3 / 1000) * 1000;
+  document.getElementById('calcResult').textContent = total.toLocaleString('ru-RU') + ' ₽';
+  document.getElementById('calcSub').textContent = 'до ' + max.toLocaleString('ru-RU') + ' ₽ · ' + guests + ' гостей · ' + calcDur + ' ' + (calcDur===1?'день':calcDur<5?'дня':'дней');
+  document.getElementById('calcIncludes').innerHTML = (calcIncludes[String(type)] || '').split(' · ').map(s=>'<div style="display:flex;align-items:center;gap:8px;margin-bottom:4px"><i class="fa-solid fa-diamond" style="color:var(--gold);font-size:.45rem;flex-shrink:0"></i><span>'+s+'</span></div>').join('');
+}
+
+/* ── COUNTDOWN ── */
+function updateCountdown(){
+  const target = new Date('2025-07-15T12:00:00');
+  const now = new Date();
+  const diff = target - now;
+  if(diff <= 0){document.getElementById('cdDays').textContent='0';document.getElementById('cdHours').textContent='0';document.getElementById('cdMins').textContent='0';return;}
+  document.getElementById('cdDays').textContent = Math.floor(diff/86400000);
+  document.getElementById('cdHours').textContent = Math.floor((diff%86400000)/3600000);
+  document.getElementById('cdMins').textContent = Math.floor((diff%3600000)/60000);
+}
+updateCountdown();
+setInterval(updateCountdown, 60000);
+
+/* ── CALENDAR ── */
+(function(){
+  const busy = [3,4,8,12,19,20,24,28];
+  const grid = document.getElementById('calGrid');
+  if(!grid) return;
+  const days = ['Пн','Вт','Ср','Чт','Пт','Сб','Вс'];
+  days.forEach(d=>{
+    const el=document.createElement('div');
+    el.textContent=d;
+    el.style.cssText='font-size:.54rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-dim);padding:6px 2px;font-weight:500';
+    grid.appendChild(el);
+  });
+  for(let i=1;i<=31;i++){
+    const el=document.createElement('div');
+    el.textContent=i;
+    const isBusy=busy.includes(i);
+    el.style.cssText='padding:8px 4px;font-size:.78rem;font-weight:500;cursor:default;transition:all .2s;border:1px solid '+(isBusy?'rgba(192,57,43,0.4)':'rgba(201,160,61,0.2)')+';background:'+(isBusy?'rgba(192,57,43,0.1)':'rgba(201,160,61,0.05)')+';color:'+(isBusy?'#e74c3c':'var(--gold)')+';text-align:center';
+    if(!isBusy){el.title='Свободно — нажмите чтобы забронировать';el.style.cursor='pointer';el.addEventListener('click',()=>document.getElementById('contacts').scrollIntoView({behavior:'smooth'}));}
+    grid.appendChild(el);
+  }
+})();
 
 /* ── EmailJS ── */
 const EJS_KEY='YOUR_PUBLIC_KEY',EJS_SVC='YOUR_SERVICE_ID',EJS_TPL='YOUR_TEMPLATE_ID';
